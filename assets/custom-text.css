@@ -1,0 +1,504 @@
+.ctxtinner{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 15px;
+}
+.ctxtinner_sub.banner__box {
+  max-width: 100%;
+}
+.ctxtinner_sub {
+  border-radius: var(--text-boxes-radius);
+  padding: 25px;
+  max-width: unset;
+  min-width: unset;
+}
+.ctxtinner_sub h3{
+  font-size: calc(var(--font-body-scale) * 22px);
+  font-weight: var(--font-heading-weight);
+  margin-bottom: 15px;
+}
+.ctxtinner_sub h3 strong,.ctxtinner_sub h3 b{
+  display: block;
+  font-weight: var(--font-heading-weight);
+}
+.ctxtinner .ctxtdesc p{ 
+  font-size: calc(var(--font-body-scale) * 16px);
+  color: rgba(var(--color-foreground),.9);
+}
+.ctxtinner a.button {
+  display: inline-flex;
+}
+.ctxtinner.ctxt-wrapper{
+  display: block;
+}
+@media (max-width: 991px){
+  .ctxtinner .banner__box{
+    margin: 0 auto;
+  }
+  .ctxtinner{
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 991px) {
+  .ctxtinner_sub h3{
+    font-size: calc(var(--font-body-scale) * 16px);
+  }
+  .ctxtinner .ctxtdesc p{
+    font-size: calc(var(--font-body-scale) * 14px);
+  }
+}
+@media (max-width: 575px){
+  .ctxtinner{
+    grid-template-columns: auto;
+  }
+}
+
+/* ===========================
+   Unboxed: 2-line variant pills
+   =========================== */
+
+/* Make the text pills big + rounded */
+.product-form__input input[type=radio]+label.unboxed-pill{
+  display:inline-flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+  padding:16px 22px!important;
+  min-height:64px!important;
+  border-radius:16px!important;
+  line-height:1.1!important;
+}
+
+/* Top line: option name (bold) */
+.product-form__input input[type=radio]+label.unboxed-pill::before{
+  content:attr(data-unboxed-title);
+  display:block;
+  font-weight:800;
+  font-size:17px;
+}
+
+.product-form__input input[type=radio]+label.unboxed-pill::after{
+  content:attr(data-unboxed-sub);
+  display:block;
+  margin-top:3px;
+  font-weight:400;
+  font-size:12.5px;
+  opacity:.7;
+}
+
+
+
+/* Hide second line if empty */
+.product-form__input input[type=radio]+label.unboxed-pill[data-unboxed-sub=""]::after{
+  content:"";
+}
+
+/* Make the option summary (e.g. "Condition : Good") ~20% bigger */
+.product-form__input .form__label,
+.product-form__input > label{
+  font-size:1.2em!important;
+}
+
+/* Make colour swatches ~20% bigger */
+.product-form__input .swatch,
+.product-form__input .swatch__color,
+.product-form__input .color-swatch,
+.product-form__input .variant-swatch{
+  width:34px!important;
+  height:34px!important;
+}
+
+/* Make colour swatch pills bigger to match larger swatches */
+.product-form__input input[type=radio]+label:has(.swatch),
+.product-form__input input[type=radio]+label:has(.swatch__color),
+.product-form__input input[type=radio]+label:has(.color-swatch),
+.product-form__input input[type=radio]+label:has(.variant-swatch){
+  padding:16px 18px!important;
+  min-height:64px!important;
+  border-radius:16px!important;
+}
+
+/* Make colour swatches wider */
+.product-form__input .swatch {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px;
+}
+
+/* Make colour pills wider and roomier */
+.product-form__input input[type=radio] + label:has(.swatch),
+.product-form__input input[type=radio] + label:has(.swatch__color),
+.product-form__input input[type=radio] + label:has(.color-swatch),
+.product-form__input input[type=radio] + label:has(.variant-swatch) {
+  padding: 16px 22px !important;   /* wider left/right */
+  min-width: 64px !important;      /* forces pill to be wider */
+  min-height: 64px !important;     /* keeps height consistent */
+  border-radius: 16px !important;  /* nicer curve like other pills */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wider colour pills (no :has needed) */
+.product-form__input input[type=radio]+label.unboxed-swatchpill{
+  padding:16px 22px!important;
+  min-width:72px!important;
+  min-height:64px!important;
+  border-radius:16px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+/* Bigger + wider swatch block */
+.product-form__input input[type=radio]+label.unboxed-swatchpill .swatch{
+  width:36px!important;
+  height:36px!important;
+  border-radius:8px!important;
+}
+
+/* Make the colour fill ~70% of the pill */
+.product-form__input input[type=radio]+label .swatch,
+.product-form__input input[type=radio]+label .swatch__color,
+.product-form__input input[type=radio]+label .color-swatch,
+.product-form__input input[type=radio]+label .variant-swatch{
+  width:44px!important;   /* wider "bar" */
+  height:34px!important;  /* keeps it chunky */
+  border-radius:8px!important;
+}
+
+/* If Veena renders colour using a pseudo element, force that wider too */
+.product-form__input input[type=radio]+label .swatch:before,
+.product-form__input input[type=radio]+label .swatch::before,
+.product-form__input input[type=radio]+label .swatch__color::before,
+.product-form__input input[type=radio]+label .color-swatch::before,
+.product-form__input input[type=radio]+label .variant-swatch::before{
+  width:44px!important;
+  height:34px!important;
+  border-radius:8px!important;
+}
+
+/* Make the colour bar fill most of the pill */
+.product-form__input input[type=radio]+label{
+  overflow:hidden;
+}
+
+.product-form__input input[type=radio]+label .swatch,
+.product-form__input input[type=radio]+label .swatch__color,
+.product-form__input input[type=radio]+label .color-swatch,
+.product-form__input input[type=radio]+label .variant-swatch{
+  display:block!important;
+  width:52px!important;        /* MUCH wider */
+  height:34px!important;
+  border-radius:10px!important;
+  margin:0 auto!important;
+}
+
+/* If theme draws the colour using a pseudo element, force that too */
+.product-form__input input[type=radio]+label .swatch::before,
+.product-form__input input[type=radio]+label .swatch__color::before,
+.product-form__input input[type=radio]+label .color-swatch::before,
+.product-form__input input[type=radio]+label .variant-swatch::before{
+  display:block!important;
+  width:52px!important;
+  height:34px!important;
+  border-radius:10px!important;
+}
+
+/* Widen the swatch container if it exists */
+.product-form__input input[type=radio]+label .swatch-wrapper,
+.product-form__input input[type=radio]+label .swatch__wrapper,
+.product-form__input input[type=radio]+label .color-swatch-wrapper{
+  width:52px!important;
+}
+
+/* FORCE colour bar to fill most of the pill */
+.product-form__input input[type=radio]+label{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+/* Make any swatch element expand */
+.product-form__input input[type=radio]+label .swatch,
+.product-form__input input[type=radio]+label .swatch__color,
+.product-form__input input[type=radio]+label .color-swatch,
+.product-form__input input[type=radio]+label .variant-swatch{
+  width:100%!important;           /* key */
+  max-width:56px!important;       /* bar width cap */
+  height:34px!important;
+  border-radius:10px!important;
+}
+
+/* If the colour is painted by a pseudo-element, force that too */
+.product-form__input input[type=radio]+label .swatch::before,
+.product-form__input input[type=radio]+label .swatch::after,
+.product-form__input input[type=radio]+label .swatch__color::before,
+.product-form__input input[type=radio]+label .swatch__color::after,
+.product-form__input input[type=radio]+label .color-swatch::before,
+.product-form__input input[type=radio]+label .color-swatch::after,
+.product-form__input input[type=radio]+label .variant-swatch::before,
+.product-form__input input[type=radio]+label .variant-swatch::after{
+  width:100%!important;
+  max-width:56px!important;
+  height:34px!important;
+  border-radius:10px!important;
+  display:block!important;
+  content:""!important;
+}
+
+.product-form__input input[type=radio]+label:has(.swatch)::before,
+.product-form__input input[type=radio]+label:has(.swatch)::after{
+  width:64px!important;height:34px!important;border-radius:10px!important;
+}
+
+/* ===========================
+   Unboxed: Colour pills with 70% colour bar
+   =========================== */
+
+/* Ensure colour pills match your big pill sizing */
+.product-form__input input[type=radio]+label.unboxed-colorpill{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:16px 22px!important;
+  min-height:64px!important;
+  min-width:72px!important;       /* keeps pill nicely sized */
+  border-radius:16px!important;
+}
+
+/* Our wide colour bar (the thing you actually want) */
+.product-form__input input[type=radio]+label.unboxed-colorpill .unboxed-colorbar{
+  width:70%!important;            /* the key requirement */
+  height:36px!important;
+  border-radius:10px!important;
+  display:block!important;
+}
+
+/* Hide the theme’s original swatch */
+.product-form__input input[type=radio]+label .unboxed-hide-swatch{
+  display:none!important;
+}
+
+/* FORCE Veena swatches to be a wide bar inside the pill */
+.product-form__input input[type=radio]+label .swatch{
+  width:60px!important;
+  height:36px!important;
+  border-radius:10px!important;
+  display:block!important;
+  margin:0 auto!important;
+}
+
+/* Ensure the colour pill stays nicely sized to frame the bar */
+.product-form__input input[type=radio]+label:has(.swatch){
+  padding:16px 22px!important;
+  min-height:64px!important;
+  min-width:84px!important;
+  border-radius:16px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+/* Remove the stray vertical colour line / duplicate swatch render */
+.product-form__input input[type=radio]+label .swatch{
+  box-shadow:none!important;
+  outline:0!important;
+  border:0!important;
+}
+
+/* If Veena draws colour using pseudo-elements, disable them */
+.product-form__input input[type=radio]+label .swatch::before,
+.product-form__input input[type=radio]+label .swatch::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Also stop label pseudo-elements from creating a coloured edge (some themes do this) */
+.product-form__input input[type=radio]+label:before,
+.product-form__input input[type=radio]+label:after{
+  box-shadow:none!important;
+}
+
+.product-form__input input[type=radio]+label .swatch{border-left:0!important}
+
+/* Remove the coloured stripe: Veena draws it via label pseudo-elements on swatches */
+.product-form__input input[type=radio]+label.unboxed-swatch-label::before,
+.product-form__input input[type=radio]+label.unboxed-swatch-label::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+
+/* Keep your wide bar */
+.product-form__input input[type=radio]+label.unboxed-swatch-label .swatch{
+  width:60px!important;
+  height:36px!important;
+  border-radius:10px!important;
+  margin:0 auto!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+
+/* Kill the left stripe: remove any gradient/shadow on the colour bar */
+.product-form__input label.unboxed-colorpill .unboxed-colorbar{
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  outline:0!important;
+  border:0!important;
+}
+
+/* Also hard-disable any pseudo-elements that might be drawing a strip */
+.product-form__input label.unboxed-colorpill .unboxed-colorbar:before,
+.product-form__input label.unboxed-colorpill .unboxed-colorbar:after{
+  content:none!important;
+  display:none!important;
+}
+
+.product-form__input label.unboxed-colorpill:before,
+.product-form__input label.unboxed-colorpill:after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+
+/* FIX: colour bar is only 2px wide — force it to a proper swatch block */
+.product-form__input label.unboxed-colorpill{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.product-form__input label.unboxed-colorpill .unboxed-colorbar{
+  width:70%!important;
+  min-width:70%!important;
+  height:70%!important;
+  max-height:70%!important;
+  aspect-ratio:auto!important;
+  margin:0 auto!important;
+  border-radius:12px!important;
+}
+
+/* Remove duplicate swatch blob: hide any extra swatch elements inside the colour pill */
+.product-form__input label.unboxed-colorpill .swatch,
+.product-form__input label.unboxed-colorpill .swatch__color,
+.product-form__input label.unboxed-colorpill .color-swatch,
+.product-form__input label.unboxed-colorpill .variant-swatch{
+  display:none!important;
+}
+
+/* Also disable pseudo-element blobs some themes use for swatches */
+.product-form__input label.unboxed-colorpill:before,
+.product-form__input label.unboxed-colorpill:after{
+  content:none!important;
+  display:none!important;
+}
+.product-form__input label.unboxed-colorpill .unboxed-colorbar:before,
+.product-form__input label.unboxed-colorpill .unboxed-colorbar:after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Keep only our big colour bar */
+.product-form__input label.unboxed-colorpill{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.product-form__input label.unboxed-colorpill .unboxed-colorbar{
+  display:block!important;
+  width:70%!important;
+  height:70%!important;
+  border-radius:12px!important;
+  margin:0 auto!important;
+}
+
+/* Remove the duplicate dot inside colour pills */
+.product-form__input label.unboxed-colorpill .swatch.unboxed-hide-swatch{
+  display:none!important;
+}
+
+/* Keep bar centred and wide */
+.product-form__input label.unboxed-colorpill{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.product-form__input label.unboxed-colorpill .unboxed-colorbar{
+  width:70%!important;
+  height:70%!important;
+  margin:0 auto!important;
+  border-radius:12px!important;
+  display:block!important;
+}
+
+/* Make colour swatch bigger inside the pill */
+.product-form__input input[type=radio]+label.unboxed-colorpill .unboxed-colorbar{
+  width: 70% !important;
+  height: 70% !important;
+  border-radius: 10px !important; /* rounded rectangle, not a circle */
+}
+
+/* Ensure the pill itself stays the same layout */
+.product-form__input input[type=radio]+label.unboxed-colorpill{
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make the colour pill bigger */
+.product-form__input input[type=radio]+label.unboxed-colorpill{
+  min-width: 64px;
+  min-height: 64px;
+  padding: 10px;
+}
+
+/* Make the colour fill most of the pill */
+.product-form__input input[type=radio]+label.unboxed-colorpill .unboxed-colorbar{
+  width: 80% !important;
+  height: 80% !important;
+  border-radius: 12px !important; /* rounded rectangle, not circle */
+}
+
+/* Stop theme swatch rules from shrinking it */
+.product-form__input .swatch{
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Bigger colour swab WITHOUT changing pill size */
+.product-form__input input[type=radio]+label.unboxed-colorpill .unboxed-colorbar{
+  width:44px !important;
+  height:38px !important;
+  max-width:none !important;
+  max-height:none !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  border-radius:12px !important; /* rounded square */
+}
+
+/* Make sure nothing else inside the colour pill is shrinking it */
+.product-form__input input[type=radio]+label.unboxed-colorpill .swatch{
+  width:auto !important;
+  height:auto !important;
+}
+
+/* Slightly reduce pill text size */
+.product-form__input input[type="radio"] + label {
+  font-size: 0.6em !important;
+}
+
+/* Slightly reduce variant titles (Condition, Colour, Storage) */
+.product-form__input .form__label {
+  font-size: 0.95em !important;
+}
+
+
+
+
+
+
+
+

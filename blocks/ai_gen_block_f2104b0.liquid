@@ -1,0 +1,710 @@
+{% doc %}
+  @prompt
+    Create a clean, premium-looking content section for a refurbishment process page titled “Jewellery Restoration & Authentication”. The section should visually match the style of the tech refurbishment process section above but feel slightly more refined and luxury-focused. Include a short introductory paragraph explaining that every piece of jewellery sold by Unboxed is professionally inspected, authenticated, cleaned, and restored before being listed for sale. Display four clear process steps in cards or columns with simple icons and concise titles: Authentication & Hallmark Verification, Professional Cleaning & Polishing, Stone & Setting Inspection, Final Quality Control. The tone should build trust and craftsmanship, reassure customers about authenticity and quality, and position Unboxed as a safe and reliable place to buy refurbished jewellery. Keep the layout minimal, easy to read, and premium, with good spacing and strong typography.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-jewellery-restoration-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-jewellery-restoration__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-jewellery-restoration__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-jewellery-restoration__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_margin_bottom }}px;
+    letter-spacing: {{ block.settings.title_letter_spacing }}px;
+    line-height: 1.2;
+  }
+
+  .ai-jewellery-restoration__intro-{{ ai_gen_id }} {
+    font-size: {{ block.settings.intro_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.intro_color }};
+    max-width: {{ block.settings.intro_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-jewellery-restoration__steps-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: {{ block.settings.card_gap }}px;
+    margin-top: {{ block.settings.steps_margin_top }}px;
+  }
+
+  .ai-jewellery-restoration__step-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    text-align: {{ block.settings.card_text_alignment }};
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ai-jewellery-restoration__step-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .ai-jewellery-restoration__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto {{ block.settings.icon_margin_bottom }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_background }};
+    border-radius: {{ block.settings.icon_border_radius }}px;
+  }
+
+  .ai-jewellery-restoration__icon-{{ ai_gen_id }} svg {
+    width: {{ block.settings.icon_svg_size }}px;
+    height: {{ block.settings.icon_svg_size }}px;
+    stroke: {{ block.settings.icon_color }};
+    fill: none;
+  }
+
+  .ai-jewellery-restoration__step-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.step_title_size }}px;
+    font-weight: {{ block.settings.step_title_weight }};
+    color: {{ block.settings.step_title_color }};
+    margin: 0 0 {{ block.settings.step_title_margin_bottom }}px;
+    line-height: 1.3;
+  }
+
+  .ai-jewellery-restoration__step-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.step_description_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.step_description_color }};
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-jewellery-restoration__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-jewellery-restoration__intro-{{ ai_gen_id }} {
+      font-size: {{ block.settings.intro_size | times: 0.9 }}px;
+    }
+
+    .ai-jewellery-restoration__steps-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.card_gap | times: 0.75 }}px;
+    }
+
+    .ai-jewellery-restoration__step-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-jewellery-restoration-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-jewellery-restoration__container-{{ ai_gen_id }}">
+    <div class="ai-jewellery-restoration__header-{{ ai_gen_id }}">
+      {% if block.settings.section_title != blank %}
+        <h2 class="ai-jewellery-restoration__title-{{ ai_gen_id }}">
+          {{ block.settings.section_title }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.intro_text != blank %}
+        <div class="ai-jewellery-restoration__intro-{{ ai_gen_id }}">
+          {{ block.settings.intro_text }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-jewellery-restoration__steps-{{ ai_gen_id }}">
+      {% if block.settings.step_1_enabled %}
+        <div class="ai-jewellery-restoration__step-{{ ai_gen_id }}">
+          <div class="ai-jewellery-restoration__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+            </svg>
+          </div>
+          <h3 class="ai-jewellery-restoration__step-title-{{ ai_gen_id }}">
+            {{ block.settings.step_1_title }}
+          </h3>
+          <p class="ai-jewellery-restoration__step-description-{{ ai_gen_id }}">
+            {{ block.settings.step_1_description }}
+          </p>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_2_enabled %}
+        <div class="ai-jewellery-restoration__step-{{ ai_gen_id }}">
+          <div class="ai-jewellery-restoration__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <h3 class="ai-jewellery-restoration__step-title-{{ ai_gen_id }}">
+            {{ block.settings.step_2_title }}
+          </h3>
+          <p class="ai-jewellery-restoration__step-description-{{ ai_gen_id }}">
+            {{ block.settings.step_2_description }}
+          </p>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_3_enabled %}
+        <div class="ai-jewellery-restoration__step-{{ ai_gen_id }}">
+          <div class="ai-jewellery-restoration__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <h3 class="ai-jewellery-restoration__step-title-{{ ai_gen_id }}">
+            {{ block.settings.step_3_title }}
+          </h3>
+          <p class="ai-jewellery-restoration__step-description-{{ ai_gen_id }}">
+            {{ block.settings.step_3_description }}
+          </p>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_4_enabled %}
+        <div class="ai-jewellery-restoration__step-{{ ai_gen_id }}">
+          <div class="ai-jewellery-restoration__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h3 class="ai-jewellery-restoration__step-title-{{ ai_gen_id }}">
+            {{ block.settings.step_4_title }}
+          </h3>
+          <p class="ai-jewellery-restoration__step-description-{{ ai_gen_id }}">
+            {{ block.settings.step_4_description }}
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Jewellery restoration",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Header content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Jewellery Restoration & Authentication"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introduction",
+      "default": "<p>Every piece of jewellery sold by Unboxed is professionally inspected, authenticated, cleaned, and restored before being listed for sale. Our expert team ensures each item meets the highest standards of quality and craftsmanship.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Title style"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "label": "Bottom margin",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Introduction style"
+    },
+    {
+      "type": "range",
+      "id": "intro_size",
+      "label": "Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "intro_max_width",
+      "label": "Max width",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Process steps"
+    },
+    {
+      "type": "range",
+      "id": "steps_margin_top",
+      "label": "Top margin",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#fafafa"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "card_text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Icon style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Container size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "icon_svg_size",
+      "label": "Icon size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "icon_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "icon_margin_bottom",
+      "label": "Bottom margin",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Step text style"
+    },
+    {
+      "type": "range",
+      "id": "step_title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "step_title_weight",
+      "label": "Title weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "step_title_margin_bottom",
+      "label": "Title bottom margin",
+      "min": 5,
+      "max": 25,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "step_description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "step_description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_1_enabled",
+      "label": "Enable step 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Title",
+      "default": "Authentication & Hallmark Verification"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_description",
+      "label": "Description",
+      "default": "Each piece is carefully examined by our experts to verify authenticity, hallmarks, and precious metal content."
+    },
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_2_enabled",
+      "label": "Enable step 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Title",
+      "default": "Professional Cleaning & Polishing"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_description",
+      "label": "Description",
+      "default": "Using specialist techniques and equipment, we restore the original lustre and brilliance to every piece."
+    },
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_3_enabled",
+      "label": "Enable step 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Title",
+      "default": "Stone & Setting Inspection"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_description",
+      "label": "Description",
+      "default": "All gemstones and settings are thoroughly checked and secured to ensure they meet our exacting standards."
+    },
+    {
+      "type": "header",
+      "content": "Step 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_4_enabled",
+      "label": "Enable step 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Title",
+      "default": "Final Quality Control"
+    },
+    {
+      "type": "textarea",
+      "id": "step_4_description",
+      "label": "Description",
+      "default": "A comprehensive final inspection ensures every piece meets our premium quality standards before listing."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Jewellery restoration"
+    }
+  ]
+}
+{% endschema %}

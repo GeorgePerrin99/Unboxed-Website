@@ -1,0 +1,263 @@
+{% comment %}
+  Unboxed - Refurbishment Guarantee Icons
+  Add to collection pages (or anywhere) as a trust/guarantee icon row.
+  Mobile: becomes a swipe row (scroll-snap) instead of stacked.
+{% endcomment %}
+
+<section
+  class="ub-guarantee section"
+  style="
+    --ub-bg: {{ section.settings.bg }};
+    --ub-text: {{ section.settings.text }};
+    --ub-muted: {{ section.settings.muted }};
+    --ub-border: {{ section.settings.border }};
+    --ub-radius: {{ section.settings.radius }}px;
+    --ub-pad: {{ section.settings.padding }}px;
+    --ub-icon: {{ section.settings.icon_size }}px;
+  "
+  {{ section.shopify_attributes }}
+>
+  <div class="page-width">
+    {% if section.settings.heading != blank or section.settings.subheading != blank %}
+      <header class="ub-guarantee__head">
+        {% if section.settings.heading != blank %}
+          <h2 class="ub-guarantee__title">{{ section.settings.heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="ub-guarantee__sub">{{ section.settings.subheading | escape }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    <div class="ub-guarantee__grid" role="list">
+      {% for block in section.blocks %}
+        <div class="ub-guarantee__item" role="listitem" {{ block.shopify_attributes }}>
+          <div class="ub-guarantee__icon" aria-hidden="true">
+            {% assign icon_type = block.settings.icon %}
+            {% if icon_type == 'custom' and block.settings.custom_icon != blank %}
+              <img
+                src="{{ block.settings.custom_icon | image_url: width: 120 }}"
+                alt=""
+                loading="lazy"
+                width="60"
+                height="60"
+              >
+            {% else %}
+              {% case icon_type %}
+                {% when 'tested' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9.2 12.9l1.9 1.9 3.8-4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 3h10v4l2 3v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V10l2-3V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+
+                {% when 'warranty' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9.5 12l1.8 1.8 3.6-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+
+                {% when 'returns' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 6H6v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 9c1.6-3.2 5.4-5 9.1-3.9C18.4 6.1 20.5 9.6 19.9 13c-.7 3.8-4.2 6.5-8 6.5-3 0-5.6-1.6-7-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+
+                {% when 'eco' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 4s-8 0-12 4-4 12-4 12 8 0 12-4 4-12 4-12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 15c1-3 4-6 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+
+                {% when 'support' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 12v3a2 2 0 0 0 2 2h1v-7H6a2 2 0 0 0-2 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M20 12v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M12 19h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+
+                {% when 'delivery' %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M3 7h11v10H3V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M14 10h4l3 3v4h-7v-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M18 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+
+                {% else %}
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+              {% endcase %}
+            {% endif %}
+          </div>
+
+          <div class="ub-guarantee__copy">
+            {% if block.settings.title != blank %}
+              <p class="ub-guarantee__item-title">{{ block.settings.title | escape }}</p>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <p class="ub-guarantee__item-text">{{ block.settings.text | escape }}</p>
+            {% endif %}
+
+            {% if block.settings.link_label != blank and block.settings.link != blank %}
+              <a class="ub-guarantee__link" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ub-guarantee { background: var(--ub-bg); color: var(--ub-text); }
+  .ub-guarantee .page-width { padding-top: var(--ub-pad); padding-bottom: var(--ub-pad); }
+
+  .ub-guarantee__head { margin-bottom: 18px; }
+  .ub-guarantee__title { margin: 0 0 6px; line-height: 1.2; }
+  .ub-guarantee__sub { margin: 0; color: var(--ub-muted); }
+
+  .ub-guarantee__grid{
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .ub-guarantee__item{
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border: 1px solid var(--ub-border);
+    border-radius: var(--ub-radius);
+    padding: 14px 14px;
+    background: rgba(255,255,255,0.0);
+  }
+
+  .ub-guarantee__icon{
+    width: calc(var(--ub-icon) + 14px);
+    height: calc(var(--ub-icon) + 14px);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ub-border);
+    flex: 0 0 auto;
+  }
+  .ub-guarantee__icon svg{
+    width: var(--ub-icon);
+    height: var(--ub-icon);
+    color: currentColor;
+  }
+  .ub-guarantee__icon img{
+    width: var(--ub-icon);
+    height: var(--ub-icon);
+    object-fit: contain;
+    display: block;
+  }
+
+  .ub-guarantee__item-title{
+    margin: 0 0 4px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .ub-guarantee__item-text{
+    margin: 0;
+    color: var(--ub-muted);
+    line-height: 1.35;
+  }
+  .ub-guarantee__link{
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: inherit;
+    opacity: .95;
+  }
+
+  /* MOBILE: swipe instead of stacked */
+  @media (max-width: 989px){
+    .ub-guarantee__grid{
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-left: -12px;
+      margin-right: -12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ub-guarantee__grid::-webkit-scrollbar{ display: none; }
+
+    .ub-guarantee__item{
+      flex: 0 0 78%;
+      scroll-snap-align: start;
+      padding: 12px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Unboxed - Guarantee icons",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Refurbished. Verified. Guaranteed." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Every device is professionally tested and backed by real support." },
+
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text colour", "default": "#111111" },
+    { "type": "color", "id": "muted", "label": "Muted text", "default": "#6B7280" },
+    { "type": "color", "id": "border", "label": "Border colour", "default": "#E5E7EB" },
+
+    { "type": "range", "id": "radius", "label": "Card corner radius", "min": 0, "max": 28, "step": 1, "default": 16 },
+    { "type": "range", "id": "padding", "label": "Section padding (top/bottom)", "min": 0, "max": 60, "step": 2, "default": 28 },
+    { "type": "range", "id": "icon_size", "label": "Icon size", "min": 16, "max": 44, "step": 2, "default": 26 },
+
+    { "type": "range", "id": "columns_desktop", "label": "Columns (desktop)", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns_mobile", "label": "Columns (mobile)", "min": 1, "max": 3, "step": 1, "default": 1 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Guarantee item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "tested",
+          "options": [
+            { "value": "tested", "label": "Fully tested" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "eco", "label": "Eco friendly" },
+            { "value": "support", "label": "Real support" },
+            { "value": "delivery", "label": "Fast delivery" },
+            { "value": "custom", "label": "Custom image" }
+          ]
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Custom icon image (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Fully tested" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Professionally inspected and verified before dispatch." },
+        { "type": "url", "id": "link", "label": "Optional link" },
+        { "type": "text", "id": "link_label", "label": "Link label" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Unboxed - Guarantee icons",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "tested", "title": "Fully tested", "text": "Multi-point inspection on every device." } },
+        { "type": "item", "settings": { "icon": "warranty", "title": "Warranty included", "text": "Peace of mind with every purchase." } },
+        { "type": "item", "settings": { "icon": "returns", "title": "30-day returns", "text": "Change your mind? Easy returns." } },
+        { "type": "item", "settings": { "icon": "eco", "title": "Better for the planet", "text": "Refurbished tech reduces waste." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

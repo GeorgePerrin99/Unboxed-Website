@@ -1,0 +1,682 @@
+{% doc %}
+  @prompt
+    Create a clean, premium comparison section titled “Our Condition Grades Explained” for a refurbishment process page. The section should use a three-column layout (or stacked cards on mobile) for the three grades: “Like New”, “Good”, and “Fair”. Each column should include an image placeholder at the top for a visual example of the condition, followed by a bold heading, a short one-line summary, and 3–4 concise bullet points describing cosmetic appearance, typical marks or wear, and who the condition is best for. Include a short intro above the columns explaining that all conditions are fully functional and professionally refurbished, with cosmetic differences only. Emphasise that performance is identical across all conditions. The design should be calm and premium, with generous spacing, minimal icons, strong typography, and image frames that feel consistent with a high-end refurbished tech and jewellery brand. Ensure the layout is responsive and that the image areas are clearly visible and balanced with the text on desktop and mobile.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-condition-grades-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-condition-grades__intro-{{ ai_gen_id }} {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto {{ block.settings.intro_spacing }}px;
+  }
+
+  .ai-condition-grades__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-condition-grades__intro-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.intro_text_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .ai-condition-grades__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+    margin: 0;
+  }
+
+  .ai-condition-grades__card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ai-condition-grades__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .ai-condition-grades__image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    margin-bottom: {{ block.settings.image_spacing }}px;
+    background-color: #f5f5f5;
+  }
+
+  .ai-condition-grades__image-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-condition-grades__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+
+  .ai-condition-grades__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-condition-grades__card-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_heading_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    letter-spacing: -0.01em;
+  }
+
+  .ai-condition-grades__card-summary-{{ ai_gen_id }} {
+    font-size: {{ block.settings.summary_text_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    opacity: 0.75;
+    margin: 0 0 {{ block.settings.summary_spacing }}px;
+    font-style: italic;
+  }
+
+  .ai-condition-grades__list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-condition-grades__list-item-{{ ai_gen_id }} {
+    font-size: {{ block.settings.list_text_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: {{ block.settings.list_item_spacing }}px;
+  }
+
+  .ai-condition-grades__list-item-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-condition-grades__list-item-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: {{ block.settings.bullet_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-condition-grades__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.card_gap_mobile }}px;
+    }
+
+    .ai-condition-grades__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-condition-grades__intro-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.intro_text_size | times: 0.9 }}px;
+    }
+
+    .ai-condition-grades__card-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_heading_size | times: 0.9 }}px;
+    }
+
+    .ai-condition-grades-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 16px {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-condition-grades-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-condition-grades__intro-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank %}
+      <h2 class="ai-condition-grades__title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+    {% endif %}
+    {% if block.settings.intro_text != blank %}
+      <div class="ai-condition-grades__intro-text-{{ ai_gen_id }}">{{ block.settings.intro_text }}</div>
+    {% endif %}
+  </div>
+
+  <div class="ai-condition-grades__grid-{{ ai_gen_id }}">
+    {% for i in (1..3) %}
+      {% liquid
+        assign grade_enabled_key = 'grade_' | append: i | append: '_enabled'
+        assign grade_image_key = 'grade_' | append: i | append: '_image'
+        assign grade_heading_key = 'grade_' | append: i | append: '_heading'
+        assign grade_summary_key = 'grade_' | append: i | append: '_summary'
+        assign grade_point_1_key = 'grade_' | append: i | append: '_point_1'
+        assign grade_point_2_key = 'grade_' | append: i | append: '_point_2'
+        assign grade_point_3_key = 'grade_' | append: i | append: '_point_3'
+        assign grade_point_4_key = 'grade_' | append: i | append: '_point_4'
+
+        assign grade_enabled = block.settings[grade_enabled_key]
+        assign grade_image = block.settings[grade_image_key]
+        assign grade_heading = block.settings[grade_heading_key]
+        assign grade_summary = block.settings[grade_summary_key]
+        assign grade_point_1 = block.settings[grade_point_1_key]
+        assign grade_point_2 = block.settings[grade_point_2_key]
+        assign grade_point_3 = block.settings[grade_point_3_key]
+        assign grade_point_4 = block.settings[grade_point_4_key]
+      %}
+
+      {% if grade_enabled %}
+        <div class="ai-condition-grades__card-{{ ai_gen_id }}">
+          <div class="ai-condition-grades__image-wrapper-{{ ai_gen_id }}">
+            {% if grade_image %}
+              <img
+                src="{{ grade_image | image_url: width: 800 }}"
+                alt="{{ grade_heading | escape }}"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+            {% else %}
+              <div class="ai-condition-grades__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if grade_heading != blank %}
+            <h3 class="ai-condition-grades__card-heading-{{ ai_gen_id }}">{{ grade_heading }}</h3>
+          {% endif %}
+
+          {% if grade_summary != blank %}
+            <p class="ai-condition-grades__card-summary-{{ ai_gen_id }}">{{ grade_summary }}</p>
+          {% endif %}
+
+          <ul class="ai-condition-grades__list-{{ ai_gen_id }}">
+            {% if grade_point_1 != blank %}
+              <li class="ai-condition-grades__list-item-{{ ai_gen_id }}">{{ grade_point_1 }}</li>
+            {% endif %}
+            {% if grade_point_2 != blank %}
+              <li class="ai-condition-grades__list-item-{{ ai_gen_id }}">{{ grade_point_2 }}</li>
+            {% endif %}
+            {% if grade_point_3 != blank %}
+              <li class="ai-condition-grades__list-item-{{ ai_gen_id }}">{{ grade_point_3 }}</li>
+            {% endif %}
+            {% if grade_point_4 != blank %}
+              <li class="ai-condition-grades__list-item-{{ ai_gen_id }}">{{ grade_point_4 }}</li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Condition grades",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Our Condition Grades Explained"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introduction text",
+      "default": "<p>All our refurbished products are fully functional and professionally tested. The only difference between grades is cosmetic appearance—performance is identical across all conditions.</p>"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Grade 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "grade_1_enabled",
+      "label": "Enable grade 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "grade_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_heading",
+      "label": "Heading",
+      "default": "Like New"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_summary",
+      "label": "Summary",
+      "default": "Pristine condition with minimal to no signs of use"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_point_1",
+      "label": "Point 1",
+      "default": "No visible scratches or marks on screen or body"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_point_2",
+      "label": "Point 2",
+      "default": "May have very minor micro-scratches only visible under direct light"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_point_3",
+      "label": "Point 3",
+      "default": "Perfect for those who want near-new aesthetics"
+    },
+    {
+      "type": "text",
+      "id": "grade_1_point_4",
+      "label": "Point 4",
+      "default": "Ideal for gifts or personal premium use"
+    },
+    {
+      "type": "header",
+      "content": "Grade 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "grade_2_enabled",
+      "label": "Enable grade 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "grade_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_heading",
+      "label": "Heading",
+      "default": "Good"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_summary",
+      "label": "Summary",
+      "default": "Light signs of use with excellent overall appearance"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_point_1",
+      "label": "Point 1",
+      "default": "Minor surface scratches or light scuffs on body"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_point_2",
+      "label": "Point 2",
+      "default": "Screen is clear with no noticeable marks during use"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_point_3",
+      "label": "Point 3",
+      "default": "Great balance of quality and value"
+    },
+    {
+      "type": "text",
+      "id": "grade_2_point_4",
+      "label": "Point 4",
+      "default": "Best for everyday use and practical buyers"
+    },
+    {
+      "type": "header",
+      "content": "Grade 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "grade_3_enabled",
+      "label": "Enable grade 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "grade_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_heading",
+      "label": "Heading",
+      "default": "Fair"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_summary",
+      "label": "Summary",
+      "default": "Visible wear but fully functional and reliable"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_point_1",
+      "label": "Point 1",
+      "default": "Noticeable scratches, scuffs, or dents on body"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_point_2",
+      "label": "Point 2",
+      "default": "Screen may have light scratches but remains fully usable"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_point_3",
+      "label": "Point 3",
+      "default": "Maximum value for budget-conscious buyers"
+    },
+    {
+      "type": "text",
+      "id": "grade_3_point_4",
+      "label": "Point 4",
+      "default": "Perfect for those prioritising function over appearance"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "intro_spacing",
+      "label": "Intro bottom spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap (desktop)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Card gap (mobile)",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title bottom spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "intro_text_size",
+      "label": "Intro text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_heading_size",
+      "label": "Card heading size",
+      "min": 16,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading bottom spacing",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "summary_text_size",
+      "label": "Summary text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "summary_spacing",
+      "label": "Summary bottom spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "list_text_size",
+      "label": "List text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "list_item_spacing",
+      "label": "List item spacing",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "image_spacing",
+      "label": "Image bottom spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "bullet_color",
+      "label": "Bullet point",
+      "default": "#0062ee"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Condition grades"
+    }
+  ]
+}
+{% endschema %}

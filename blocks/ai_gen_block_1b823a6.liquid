@@ -1,0 +1,901 @@
+{% doc %}
+  @prompt
+    is it possible to create a collage type layour for the mobile version only that would display pictures with writing over the top and buttons to go to specific pages or product collections? 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-collage-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-mobile-collage-{{ ai_gen_id }} {
+      display: block;
+      padding: {{ block.settings.mobile_padding }}px;
+    }
+  }
+
+  .ai-mobile-collage-grid-{{ ai_gen_id }} {
+    display: grid;
+    gap: {{ block.settings.grid_gap }}px;
+    {% if block.settings.layout == 'two-column' %}
+      grid-template-columns: 1fr 1fr;
+    {% elsif block.settings.layout == 'masonry' %}
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(150px, auto);
+    {% else %}
+      grid-template-columns: 1fr;
+    {% endif %}
+  }
+
+  .ai-mobile-collage-item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.item_border_radius }}px;
+    min-height: {{ block.settings.min_height }}px;
+    {% if block.settings.layout == 'masonry' %}
+      grid-row: span var(--ai-row-span-{{ ai_gen_id }});
+    {% endif %}
+  }
+
+  .ai-mobile-collage-item-{{ ai_gen_id }}--large {
+    {% if block.settings.layout == 'masonry' %}
+      grid-column: span 2;
+    {% endif %}
+  }
+
+  .ai-mobile-collage-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-mobile-collage-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: {{ block.settings.min_height }}px;
+  }
+
+  .ai-mobile-collage-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-mobile-collage-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+  }
+
+  .ai-mobile-collage-content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ block.settings.content_vertical_alignment }};
+    align-items: {{ block.settings.content_horizontal_alignment }};
+    padding: {{ block.settings.content_padding }}px;
+    text-align: {{ block.settings.text_alignment }};
+    z-index: 1;
+  }
+
+  .ai-mobile-collage-title-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .ai-mobile-collage-description-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.description_size }}px;
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+
+  .ai-mobile-collage-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+  }
+
+  .ai-mobile-collage-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .ai-mobile-collage-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+{% endstyle %}
+
+<mobile-collage-{{ ai_gen_id }}
+  class="ai-mobile-collage-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-mobile-collage-grid-{{ ai_gen_id }}">
+    {% for i in (1..6) %}
+      {% liquid
+        assign item_enabled_key = 'item_' | append: i | append: '_enabled'
+        assign item_image_key = 'item_' | append: i | append: '_image'
+        assign item_title_key = 'item_' | append: i | append: '_title'
+        assign item_description_key = 'item_' | append: i | append: '_description'
+        assign item_button_text_key = 'item_' | append: i | append: '_button_text'
+        assign item_link_key = 'item_' | append: i | append: '_link'
+        assign item_size_key = 'item_' | append: i | append: '_size'
+        assign item_row_span_key = 'item_' | append: i | append: '_row_span'
+
+        assign item_enabled = block.settings[item_enabled_key]
+        assign item_image = block.settings[item_image_key]
+        assign item_title = block.settings[item_title_key]
+        assign item_description = block.settings[item_description_key]
+        assign item_button_text = block.settings[item_button_text_key]
+        assign item_link = block.settings[item_link_key]
+        assign item_size = block.settings[item_size_key]
+        assign item_row_span = block.settings[item_row_span_key]
+      %}
+
+      {% if item_enabled %}
+        <div
+          class="ai-mobile-collage-item-{{ ai_gen_id }} {% if item_size == 'large' %}ai-mobile-collage-item-{{ ai_gen_id }}--large{% endif %}"
+          style="--ai-row-span-{{ ai_gen_id }}: {{ item_row_span }};"
+        >
+          {% if item_image %}
+            <img
+              src="{{ item_image | image_url: width: 800 }}"
+              alt="{{ item_image.alt | escape }}"
+              loading="lazy"
+              width="{{ item_image.width }}"
+              height="{{ item_image.height }}"
+              class="ai-mobile-collage-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-mobile-collage-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+              <div class="ai-mobile-collage-empty-state-{{ ai_gen_id }}">
+                Add image {{ i }}
+              </div>
+            </div>
+          {% endif %}
+
+          <div class="ai-mobile-collage-overlay-{{ ai_gen_id }}"></div>
+
+          <div class="ai-mobile-collage-content-{{ ai_gen_id }}">
+            {% if item_title != blank %}
+              <h3 class="ai-mobile-collage-title-{{ ai_gen_id }}">{{ item_title }}</h3>
+            {% endif %}
+
+            {% if item_description != blank %}
+              <p class="ai-mobile-collage-description-{{ ai_gen_id }}">{{ item_description }}</p>
+            {% endif %}
+
+            {% if item_button_text != blank and item_link != blank %}
+              <a
+                href="{{ item_link }}"
+                class="ai-mobile-collage-button-{{ ai_gen_id }}"
+              >
+                {{ item_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</mobile-collage-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class MobileCollage{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('mobile-collage-{{ ai_gen_id }}', MobileCollage{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile collage",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout style",
+      "options": [
+        {
+          "value": "single-column",
+          "label": "Single column"
+        },
+        {
+          "value": "two-column",
+          "label": "Two columns"
+        },
+        {
+          "value": "masonry",
+          "label": "Masonry grid"
+        }
+      ],
+      "default": "masonry"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between items",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Outer padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum item height",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Item corner radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "content_horizontal_alignment",
+      "label": "Horizontal alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_1_enabled",
+      "label": "Enable item 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_1_title",
+      "label": "Title",
+      "default": "Gaming"
+    },
+    {
+      "type": "text",
+      "id": "item_1_description",
+      "label": "Description",
+      "default": "Explore our collection"
+    },
+    {
+      "type": "text",
+      "id": "item_1_button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "item_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_1_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "large",
+      "info": "Large size spans full width in masonry layout"
+    },
+    {
+      "type": "range",
+      "id": "item_1_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 2,
+      "info": "Only applies to masonry layout"
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_2_enabled",
+      "label": "Enable item 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_2_title",
+      "label": "Title",
+      "default": "Electronics"
+    },
+    {
+      "type": "text",
+      "id": "item_2_description",
+      "label": "Description",
+      "default": "Latest tech deals"
+    },
+    {
+      "type": "text",
+      "id": "item_2_button_text",
+      "label": "Button text",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "item_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_2_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "range",
+      "id": "item_2_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 1,
+      "info": "Only applies to masonry layout"
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_3_enabled",
+      "label": "Enable item 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_3_title",
+      "label": "Title",
+      "default": "Jewellery"
+    },
+    {
+      "type": "text",
+      "id": "item_3_description",
+      "label": "Description",
+      "default": "Elegant pieces"
+    },
+    {
+      "type": "text",
+      "id": "item_3_button_text",
+      "label": "Button text",
+      "default": "Discover"
+    },
+    {
+      "type": "url",
+      "id": "item_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_3_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "range",
+      "id": "item_3_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 1,
+      "info": "Only applies to masonry layout"
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_4_enabled",
+      "label": "Enable item 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_4_title",
+      "label": "Title",
+      "default": "Audio"
+    },
+    {
+      "type": "text",
+      "id": "item_4_description",
+      "label": "Description",
+      "default": "Premium sound"
+    },
+    {
+      "type": "text",
+      "id": "item_4_button_text",
+      "label": "Button text",
+      "default": "Listen"
+    },
+    {
+      "type": "url",
+      "id": "item_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_4_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "range",
+      "id": "item_4_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 2,
+      "info": "Only applies to masonry layout"
+    },
+    {
+      "type": "header",
+      "content": "Item 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_5_enabled",
+      "label": "Enable item 5",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_5_title",
+      "label": "Title",
+      "default": "Accessories"
+    },
+    {
+      "type": "text",
+      "id": "item_5_description",
+      "label": "Description",
+      "default": "Complete your look"
+    },
+    {
+      "type": "text",
+      "id": "item_5_button_text",
+      "label": "Button text",
+      "default": "Browse"
+    },
+    {
+      "type": "url",
+      "id": "item_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_5_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "range",
+      "id": "item_5_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 1,
+      "info": "Only applies to masonry layout"
+    },
+    {
+      "type": "header",
+      "content": "Item 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_6_enabled",
+      "label": "Enable item 6",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "item_6_title",
+      "label": "Title",
+      "default": "New arrivals"
+    },
+    {
+      "type": "text",
+      "id": "item_6_description",
+      "label": "Description",
+      "default": "Fresh stock weekly"
+    },
+    {
+      "type": "text",
+      "id": "item_6_button_text",
+      "label": "Button text",
+      "default": "See what's new"
+    },
+    {
+      "type": "url",
+      "id": "item_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "item_6_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "item_6_row_span",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Height",
+      "default": 2,
+      "info": "Only applies to masonry layout"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile collage"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,460 @@
+{% doc %}
+  @prompt
+    Create a new Shopify theme section called “Smartphones – Shop by Brand” that displays a responsive grid row of clickable category tiles at the top of the Smartphones collection page.
+    
+    Requirements:
+    - Show a section heading: “Shop smartphones by brand”
+    - Under the heading, render a grid of category tiles (cards). Each tile includes:
+      1) a brand/category image (square 1:1 crop, cover fit)
+      2) the collection name as text underneath the image (centered)
+    - Entire tile is clickable and links to the chosen collection.
+    - Add section settings so I can add/edit/reorder tiles in the theme editor (repeatable blocks). Each tile block must include:
+      - Tile label (text)
+      - Tile image (image picker)
+      - Collection link (collection picker OR URL link)
+    - Default example tiles (as starter content) should be:
+      - iPhone
+      - Samsung Galaxy
+      - Google Pixel
+      - OnePlus
+      - Sony Xperia
+      - Accessories
+    - Style:
+      - Clean premium ecommerce look, minimal, Unboxed style
+      - Rounded corners on tile image/card
+      - Subtle hover effect (slight lift or shadow + image zoom)
+      - Consistent spacing, aligned row
+    - Responsive:
+      - Desktop: 6 tiles per row (or auto-fit up to 6)
+      - Tablet: 3 per row
+      - Mobile: 2 per row with horizontal swipe option if possible (optional), otherwise 2-column grid
+    - Keep it fast and lightweight (no external libraries)
+    - Ensure it only appears on the Smartphones collection template (or allow a toggle setting “Show on this collection only”)
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-brand-grid-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 0;
+  }
+
+ .ai-brand-grid__container-{{ ai_gen_id }}{
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 749px){
+  .ai-brand-grid__container-{{ ai_gen_id }}{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+
+  .ai-brand-grid__heading-{{ ai_gen_id }} {
+    font-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    font-weight: {{ settings.type_header_font.weight }};
+    font-size: calc(28px * {{ settings.heading_scale }} / 100);
+    text-align: {{ block.settings.heading_alignment }};
+    margin: 0 0 32px;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-brand-grid__tiles-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: {{ settings.spacing_grid_horizontal }}px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-brand-tile-{{ ai_gen_id }} {
+    position: relative;
+    display: block;
+  }
+
+  .ai-brand-tile__link-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-brand-tile__link-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-brand-tile__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    border-radius: {{ settings.card_corner_radius }}px;
+    background-color: #f5f5f5;
+    box-shadow: 0 {{ settings.card_shadow_vertical_offset }}px {{ settings.card_shadow_blur }}px rgba(0, 0, 0, calc({{ settings.card_shadow_opacity }} / 100));
+  }
+
+  .ai-brand-tile__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-brand-tile__link-{{ ai_gen_id }}:hover .ai-brand-tile__image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-brand-tile__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+
+  .ai-brand-tile__placeholder-{{ ai_gen_id }} svg {
+    width: 70%;
+    height: 70%;
+    opacity: 0.3;
+  }
+
+  .ai-brand-tile__label-{{ ai_gen_id }} {
+    margin-top: 12px;
+    font-family: 'Cabin', {{ settings.type_body_font.fallback_families }};
+    font-size: calc(17px * {{ settings.body_scale }} / 100);
+    font-weight: 500;
+    text-align: center;
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-brand-grid__tiles-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ai-brand-grid__heading-{{ ai_gen_id }} {
+      font-size: calc(24px * {{ settings.heading_scale }} / 100);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-brand-grid__tiles-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ settings.spacing_grid_horizontal | divided_by: 1.5 }}px;
+    }
+
+    .ai-brand-grid-{{ ai_gen_id }} {
+      padding: 30px 0;
+    }
+
+    .ai-brand-grid__heading-{{ ai_gen_id }} {
+      font-size: calc(20px * {{ settings.heading_scale }} / 100);
+      margin-bottom: 24px;
+    }
+
+    .ai-brand-grid__container-{{ ai_gen_id }} {
+      padding: 0 16px;
+    }
+  }
+{% endstyle %}
+
+<shop-by-brand-{{ ai_gen_id }} class="ai-brand-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+ <div class="page-width ai-brand-grid__container-{{ ai_gen_id }}">
+
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-brand-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <ul class="ai-brand-grid__tiles-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign label_key = 'tile_' | append: i | append: '_label'
+          assign image_key = 'tile_' | append: i | append: '_image'
+          assign collection_key = 'tile_' | append: i | append: '_collection'
+          assign url_key = 'tile_' | append: i | append: '_url'
+
+          assign tile_label = block.settings[label_key]
+          assign tile_image = block.settings[image_key]
+          assign tile_collection = block.settings[collection_key]
+          assign tile_custom_url = block.settings[url_key]
+
+          assign tile_url = tile_custom_url
+          if tile_collection != blank
+            assign tile_url = tile_collection.url
+          endif
+        %}
+
+        {% if tile_label != blank %}
+          <li class="ai-brand-tile-{{ ai_gen_id }}">
+            <a
+              href="{{ tile_url | default: '#' }}"
+              class="ai-brand-tile__link-{{ ai_gen_id }}"
+              {% if tile_url == blank or tile_url == '#' %}aria-disabled="true"{% endif %}
+            >
+              <div class="ai-brand-tile__image-wrapper-{{ ai_gen_id }}">
+                {% if tile_image != blank %}
+                  <img
+                    src="{{ tile_image | image_url: width: 400 }}"
+                    alt="{{ tile_label | escape }}"
+                    class="ai-brand-tile__image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                  >
+                {% else %}
+                  <div class="ai-brand-tile__placeholder-{{ ai_gen_id }}">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <span class="ai-brand-tile__label-{{ ai_gen_id }}">
+                {{ tile_label }}
+              </span>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</shop-by-brand-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ShopByBrand{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        const disabledLinks = this.querySelectorAll('a[aria-disabled="true"]');
+        disabledLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+          });
+        });
+      }
+    }
+
+    customElements.define('shop-by-brand-{{ ai_gen_id }}', ShopByBrand{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Shop by brand",
+  "tag": null,
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop smartphones by brand"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Tile 1"
+    },
+    {
+      "type": "text",
+      "id": "tile_1_label",
+      "label": "Label",
+      "default": "iPhone"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_1_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_1_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Tile 2"
+    },
+    {
+      "type": "text",
+      "id": "tile_2_label",
+      "label": "Label",
+      "default": "Samsung Galaxy"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_2_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_2_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Tile 3"
+    },
+    {
+      "type": "text",
+      "id": "tile_3_label",
+      "label": "Label",
+      "default": "Google Pixel"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_3_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_3_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Tile 4"
+    },
+    {
+      "type": "text",
+      "id": "tile_4_label",
+      "label": "Label",
+      "default": "OnePlus"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_4_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_4_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Tile 5"
+    },
+    {
+      "type": "text",
+      "id": "tile_5_label",
+      "label": "Label",
+      "default": "Sony Xperia"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_5_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_5_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    },
+    {
+      "type": "header",
+      "content": "Tile 6"
+    },
+    {
+      "type": "text",
+      "id": "tile_6_label",
+      "label": "Label",
+      "default": "Accessories"
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "tile_6_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "tile_6_url",
+      "label": "Custom URL",
+      "info": "Used only if collection is not selected"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by brand"
+    }
+  ]
+}
+{% endschema %}

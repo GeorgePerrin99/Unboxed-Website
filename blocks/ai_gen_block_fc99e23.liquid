@@ -1,0 +1,662 @@
+{% doc %}
+  @prompt
+    Create a new homepage section that displays four category cards in a clean, premium grid layout. Each card should have a soft, subtle background colour (very light grey or pale blue-grey), rounded corners, and a gentle shadow to create depth. Use simple, single-colour monochrome icons (muted navy or charcoal) instead of multicolour icons. Each card should include a short heading and brief supporting text. The overall design should feel minimal, modern, and premium, similar to high-end technology ecommerce websites. Keep spacing generous and typography clean so the section feels light and easy to scan. This section will be used to highlight four key categories or benefits on the homepage.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-cards-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-category-cards__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-category-cards__heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.heading_alignment }};
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-category-cards__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .ai-category-cards__card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity }});
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ai-category-cards__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | times: 1.5 }});
+  }
+
+  .ai-category-cards__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: {{ block.settings.icon_spacing }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-category-cards__icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: {{ block.settings.icon_color }};
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ai-category-cards__card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 600;
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    color: {{ block.settings.card_title_color }};
+  }
+
+  .ai-category-cards__card-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_text_size }}px;
+    line-height: 1.5;
+    margin: 0;
+    color: {{ block.settings.card_text_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-category-cards__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-category-cards__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.card_gap | times: 0.75 }}px;
+    }
+
+    .ai-category-cards__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<category-cards-{{ ai_gen_id }} class="ai-category-cards-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-cards__container-{{ ai_gen_id }}">
+    {% if block.settings.section_heading != blank %}
+      <h2 class="ai-category-cards__heading-{{ ai_gen_id }}">{{ block.settings.section_heading }}</h2>
+    {% endif %}
+
+    <div class="ai-category-cards__grid-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign card_title_key = 'card_' | append: i | append: '_title'
+          assign card_text_key = 'card_' | append: i | append: '_text'
+          assign card_link_key = 'card_' | append: i | append: '_link'
+          assign card_icon_key = 'card_' | append: i | append: '_icon'
+
+          assign card_title = block.settings[card_title_key]
+          assign card_text = block.settings[card_text_key]
+          assign card_link = block.settings[card_link_key]
+          assign card_icon = block.settings[card_icon_key]
+        %}
+
+        {% if card_link != blank %}
+          <a href="{{ card_link }}" class="ai-category-cards__card-{{ ai_gen_id }}">
+        {% else %}
+          <div class="ai-category-cards__card-{{ ai_gen_id }}">
+        {% endif %}
+
+          <div class="ai-category-cards__icon-{{ ai_gen_id }}">
+            {% if card_icon == 'box' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            {% elsif card_icon == 'truck' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            {% elsif card_icon == 'shield' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            {% elsif card_icon == 'tag' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            {% elsif card_icon == 'star' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {% elsif card_icon == 'heart' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            {% elsif card_icon == 'gift' %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            {% endif %}
+          </div>
+
+          {% if card_title != blank %}
+            <h3 class="ai-category-cards__card-title-{{ ai_gen_id }}">{{ card_title }}</h3>
+          {% endif %}
+
+          {% if card_text != blank %}
+            <p class="ai-category-cards__card-text-{{ ai_gen_id }}">{{ card_text }}</p>
+          {% endif %}
+
+        {% if card_link != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</category-cards-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategoryCards{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('category-cards-{{ ai_gen_id }}', CategoryCards{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category cards",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section heading",
+      "default": "Why shop with us"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.1,
+      "default": 0.1
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#2c3e50"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Icon spacing",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title spacing",
+      "min": 5,
+      "max": 25,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "card_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "select",
+      "id": "card_1_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "truck"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Free shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_text",
+      "label": "Text",
+      "default": "On orders over £50"
+    },
+    {
+      "type": "url",
+      "id": "card_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "select",
+      "id": "card_2_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Secure payment"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_text",
+      "label": "Text",
+      "default": "Safe and encrypted checkout"
+    },
+    {
+      "type": "url",
+      "id": "card_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "select",
+      "id": "card_3_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "star"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "Premium quality"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_text",
+      "label": "Text",
+      "default": "Carefully curated products"
+    },
+    {
+      "type": "url",
+      "id": "card_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "select",
+      "id": "card_4_icon",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "heart"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Title",
+      "default": "Customer support"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_text",
+      "label": "Text",
+      "default": "Here to help 7 days a week"
+    },
+    {
+      "type": "url",
+      "id": "card_4_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category cards"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,355 @@
+{% doc %}
+  @prompt
+    Create a Shopify theme section called “Category Page Banner” that recreates my existing collection banner exactly in layout and styling, but for regular Pages (not collection pages). I need to be able to type my own Title and Description for each page.
+    
+    Functional requirements:
+    - Add section settings so I can enter:
+      - Title (text)
+      - Description (rich text or textarea)
+    - The section must display the Title and Description from these settings (not pulled from a collection).
+    - Keep all other controls exactly like my existing banner section:
+      - Text alignment: left / center / right
+      - Colors:
+        - Background colour
+        - Title colour
+        - Description colour
+      - Typography:
+        - Title font picker
+        - Title size slider (px)
+        - Description font picker
+        - Description size slider (px)
+      - Spacing:
+        - Top spacing slider (px)
+        - Vertical padding slider (px)
+        - Horizontal padding slider (px)
+        - Title bottom spacing slider (px)
+      - Style:
+        - Corner radius slider (px)
+        - Desktop width slider (%) so the banner matches my page content width
+    - Add a setting to optionally hide the description if blank (default: auto-hide when empty).
+    
+    Layout / visual requirements (must match existing banner):
+    - Banner sits slightly under the header with top spacing control.
+    - Banner is centered and constrained to the same width as the rest of the page content, with a “Desktop width %” control.
+    - Rounded corners controlled by corner radius.
+    - Clean minimal look, no heavy shadow unless the theme already uses one.
+    - Title on top, description below, consistent spacing, responsive.
+    
+    Implementation notes:
+    - Use a wrapper container that respects theme page width (use settings.page_width if available).
+    - Output semantic HTML (h1/h2 for title + div/p for description).
+    - Ensure the section works on any regular Page template in OS 2.0.
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-page-banner-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: {{ settings.page_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ settings.spacing_grid_horizontal }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-page-banner-{{ ai_gen_id }} {
+      width: {{ block.settings.desktop_width_percent }}%;
+    }
+  }
+
+  .ai-page-banner-content-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.corner_radius }}px;
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    text-align: {{ block.settings.text_alignment }};
+    margin-top: {{ block.settings.top_spacing }}px;
+  }
+
+  .ai-page-banner-title-{{ ai_gen_id }} {
+    color: {{ block.settings.title_color }};
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
+    font-size: {{ block.settings.title_size }}px;
+    margin: 0 0 {{ block.settings.title_spacing }}px 0;
+    line-height: 1.2;
+  }
+
+  .ai-page-banner-description-{{ ai_gen_id }} {
+    color: {{ block.settings.description_color }};
+    font-family: {{ block.settings.description_font.family }}, {{ block.settings.description_font.fallback_families }};
+    font-weight: {{ block.settings.description_font.weight }};
+    font-style: {{ block.settings.description_font.style }};
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .ai-page-banner-description-{{ ai_gen_id }} p {
+    margin: 0;
+  }
+
+  /* Ensure description colour applies even if theme RTE styles override it */
+  .ai-page-banner-description-{{ ai_gen_id }} *,
+  .ai-page-banner-description-{{ ai_gen_id }} p,
+  .ai-page-banner-description-{{ ai_gen_id }} span,
+  .ai-page-banner-description-{{ ai_gen_id }} strong,
+  .ai-page-banner-description-{{ ai_gen_id }} em,
+  .ai-page-banner-description-{{ ai_gen_id }} a,
+  .ai-page-banner-description-{{ ai_gen_id }} li {
+    color: {{ block.settings.description_color }} !important;
+  }
+
+  @media screen and (max-width: 749px) {
+  .ai-page-banner-title-{{ ai_gen_id }} {
+    white-space: nowrap;
+    }
+
+
+    .ai-page-banner-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size | times: 0.9 }}px;
+    }
+
+    .ai-page-banner-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_vertical | times: 0.7 }}px {{ block.settings.padding_horizontal | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-page-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-page-banner-content-{{ ai_gen_id }}">
+    {% if block.settings.title != blank %}
+   <h2 class="ai-page-banner-title-{{ ai_gen_id }}" data-fit-title>
+  {{ block.settings.title }}
+</h2>
+
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="ai-page-banner-description-{{ ai_gen_id }}">
+        {{ block.settings.description }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    // If theme reorders nodes, fall back to querying by unique class
+    function runFit() {
+      // Only on mobile
+      if (!window.matchMedia('(max-width: 749px)').matches) return;
+
+      // Find the title inside THIS banner instance
+      var banner = root;
+      if (!banner || !banner.querySelector) {
+        banner = document.querySelector('.ai-page-banner-{{ ai_gen_id }}');
+      }
+      if (!banner) return;
+
+      var title = banner.querySelector('[data-fit-title]');
+      if (!title) return;
+
+      // Reset to desktop size first, then shrink only if needed
+      var maxPx = {{ block.settings.title_size | json }};
+      var minPx = 20; // adjust if you want (e.g. 22)
+      title.style.fontSize = maxPx + 'px';
+
+      // Available width is the content box width
+      var available = title.clientWidth;
+
+      // If it already fits, stop
+      if (title.scrollWidth <= available) return;
+
+      // Step down until it fits or hits min
+      var px = maxPx;
+      while (px > minPx && title.scrollWidth > available) {
+        px -= 1;
+        title.style.fontSize = px + 'px';
+      }
+    }
+
+    // Run on load + when viewport changes (rotate / resize)
+    function rafRun() {
+      window.requestAnimationFrame(runFit);
+    }
+
+    window.addEventListener('resize', rafRun, { passive: true });
+    rafRun();
+  })();
+</script>
+
+
+
+
+{% schema %}
+{
+  "name": "Page banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Refurbished Smartphones"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p><em>Add your page description here.</em></p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "font_picker",
+      "id": "description_font",
+      "label": "Description font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title bottom spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    { "name": "Page banner" }
+  ]
+}
+{% endschema %}
+

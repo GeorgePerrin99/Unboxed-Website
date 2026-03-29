@@ -1,0 +1,268 @@
+{% comment %}
+  Unboxed Trust Pills - modern trust tiles (light), with dividers + subtle depth
+  (Updated: adds a section setting to control text colour in the Shopify editor)
+  Mobile: swipeable row, aligned to page width with proper left indentation
+{% endcomment %}
+
+<section class="unboxed-trust-pills section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div
+      class="unboxed-trust-pills__wrap"
+      style="
+        --ub-bg: {{ section.settings.card_bg }};
+        --ub-border: {{ section.settings.border_opacity | divided_by: 100.0 }};
+        --ub-shadow: {{ section.settings.shadow_opacity | divided_by: 100.0 }};
+        --ub-divider: {{ section.settings.divider_opacity | divided_by: 100.0 }};
+        --ub-iconbg: {{ section.settings.icon_bg_opacity | divided_by: 100.0 }};
+        --ub-radius: {{ section.settings.radius }}px;
+        --ub-text: {{ section.settings.text_color }};
+      "
+    >
+      <div class="unboxed-trust-pills__grid">
+        {% for block in section.blocks %}
+          <div class="unboxed-trust-pills__item" {{ block.shopify_attributes }}>
+            <div class="unboxed-trust-pills__inner">
+              {% if block.settings.icon != blank %}
+                <div class="unboxed-trust-pills__icon">
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 96 }}"
+                    alt="{{ block.settings.text | escape }}"
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                  >
+                </div>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <div class="unboxed-trust-pills__text">{{ block.settings.text }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .unboxed-trust-pills { padding: 14px 0; }
+
+  .unboxed-trust-pills__grid{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .unboxed-trust-pills__item{
+    position: relative;
+    padding: 0 14px;
+  }
+
+  /* vertical divider between tiles (desktop) */
+  .unboxed-trust-pills__item:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    right: 0;
+    top: 22%;
+    bottom: 22%;
+    width: 1px;
+    background: rgba(var(--color-foreground), var(--ub-divider));
+  }
+
+  .unboxed-trust-pills__inner{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ub-bg);
+    border-radius: var(--ub-radius);
+    padding: 14px 16px;
+    min-height: 56px;
+    box-sizing: border-box;
+    border: 1px solid rgba(var(--color-foreground), var(--ub-border));
+    box-shadow: 0 10px 26px rgba(0,0,0,var(--ub-shadow));
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+
+  .unboxed-trust-pills__inner:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(0,0,0,calc(var(--ub-shadow) + 0.03));
+  }
+
+.unboxed-trust-pills__icon{
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(var(--color-foreground), var(--ub-iconbg));
+  flex: 0 0 52px;
+  overflow: hidden;
+}
+
+.unboxed-trust-pills__icon img{
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+
+  .unboxed-trust-pills__text{
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 500;
+    opacity: 0.92;
+    color: var(--ub-text);
+  }
+
+  /* Tablet: 2 columns, dividers off */
+  @media screen and (max-width: 989px){
+    .unboxed-trust-pills__grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .unboxed-trust-pills__item{
+      padding: 0;
+    }
+    .unboxed-trust-pills__item::after{
+      display:none;
+    }
+  }
+
+  /* Mobile: swipeable row aligned with page width */
+  @media screen and (max-width: 749px){
+    .unboxed-trust-pills__wrap{
+      overflow: hidden;
+    }
+
+    .unboxed-trust-pills__grid{
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 0 8px 0;
+      margin: 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      align-items: stretch;
+    }
+
+    .unboxed-trust-pills__grid::-webkit-scrollbar{
+      display: none;
+    }
+
+    .unboxed-trust-pills__item{
+      flex: 0 0 76%;
+      min-width: 76%;
+      padding: 0;
+      scroll-snap-align: start;
+    }
+
+    .unboxed-trust-pills__inner{
+      min-height: 72px;
+      padding: 16px;
+    }
+
+    .unboxed-trust-pills__text{
+      font-size: 13.5px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Unboxed Trust Pills",
+  "settings": [
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Tile background",
+      "default": "#F5F6F7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Tile corner radius",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "label": "Border opacity",
+      "min": 0,
+      "max": 14,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow strength",
+      "min": 0,
+      "max": 18,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "divider_opacity",
+      "label": "Divider opacity (desktop)",
+      "min": 0,
+      "max": 18,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "icon_bg_opacity",
+      "label": "Icon chip opacity",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Professionally inspected & verified"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Unboxed Trust Pills",
+      "blocks": [
+        { "type": "tile", "settings": { "text": "Professionally inspected & verified" } },
+        { "type": "tile", "settings": { "text": "Fully tested for performance and safety" } },
+        { "type": "tile", "settings": { "text": "Restored and cleaned to a high standard" } },
+        { "type": "tile", "settings": { "text": "Backed by warranty & easy returns" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

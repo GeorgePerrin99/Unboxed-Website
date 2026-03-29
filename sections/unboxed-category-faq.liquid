@@ -1,0 +1,242 @@
+{% comment %}
+  Unboxed Category FAQ
+  Reusable FAQ accordion section for collection/category pages
+{% endcomment %}
+
+<section
+  class="ub-faq section"
+  style="
+    --ub-bg: {{ section.settings.bg }};
+    --ub-text: {{ section.settings.text }};
+    --ub-muted: {{ section.settings.muted }};
+    --ub-border: {{ section.settings.border }};
+    --ub-radius: {{ section.settings.radius }}px;
+    --ub-pad: {{ section.settings.padding }}px;
+  "
+  {{ section.shopify_attributes }}
+>
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="ub-faq__title">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="ub-faq__sub">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+
+    <div class="ub-faq__list">
+      {% for block in section.blocks %}
+        <details class="ub-faq__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="ub-faq__question">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="ub-faq__icon" aria-hidden="true">+</span>
+          </summary>
+
+          {% if block.settings.answer != blank %}
+            <div class="ub-faq__answer rte">
+              {{ block.settings.answer }}
+            </div>
+          {% endif %}
+        </details>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.link != blank and section.settings.link_label != blank %}
+      <div class="ub-faq__cta">
+        <a href="{{ section.settings.link }}" class="ub-faq__link">
+          {{ section.settings.link_label | escape }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .ub-faq{
+    background: var(--ub-bg);
+    color: var(--ub-text);
+  }
+
+  .ub-faq .page-width{
+    padding-top: var(--ub-pad);
+    padding-bottom: var(--ub-pad);
+  }
+
+  .ub-faq__title{
+    margin: 0 0 8px;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .ub-faq__sub{
+    margin: 0 auto 28px;
+    max-width: 760px;
+    text-align: center;
+    color: var(--ub-muted);
+    line-height: 1.45;
+  }
+
+  .ub-faq__list{
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    gap: 14px;
+  }
+
+  .ub-faq__item{
+    border: 1px solid var(--ub-border);
+    border-radius: var(--ub-radius);
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .ub-faq__question{
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 20px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .ub-faq__question::-webkit-details-marker{
+    display: none;
+  }
+
+  .ub-faq__icon{
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ub-border);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .18s ease;
+  }
+
+  .ub-faq__item[open] .ub-faq__icon{
+    transform: rotate(45deg);
+  }
+
+  .ub-faq__answer{
+    padding: 0 20px 20px;
+    color: var(--ub-muted);
+    line-height: 1.55;
+  }
+
+  .ub-faq__answer p{
+    margin: 0;
+  }
+
+  .ub-faq__cta{
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .ub-faq__link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ub-faq__link:hover{
+    opacity: .92;
+  }
+
+  @media (max-width: 749px){
+    .ub-faq__question{
+      padding: 16px 16px;
+    }
+
+    .ub-faq__answer{
+      padding: 0 16px 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Unboxed Category FAQ",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Smartphone FAQs" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Everything you need to know before choosing your refurbished smartphone." },
+
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text colour", "default": "#111111" },
+    { "type": "color", "id": "muted", "label": "Muted text", "default": "#6B7280" },
+    { "type": "color", "id": "border", "label": "Border colour", "default": "#E5E7EB" },
+
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 28, "step": 1, "default": 16 },
+    { "type": "range", "id": "padding", "label": "Section padding", "min": 0, "max": 60, "step": 2, "default": 32 },
+
+    { "type": "url", "id": "link", "label": "Optional CTA link" },
+    { "type": "text", "id": "link_label", "label": "CTA label", "default": "Read our full refurbishment guide" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Are refurbished smartphones reliable?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes. Every refurbished smartphone we sell is professionally tested, inspected, and verified to ensure it performs as expected.</p>" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Unboxed Category FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are refurbished smartphones reliable?",
+            "answer": "<p>Yes. Every smartphone sold by Unboxed is professionally tested, inspected, and verified to make sure it is fully functional and ready for everyday use.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are refurbished phones unlocked?",
+            "answer": "<p>Yes, unless clearly stated otherwise on the product page, our refurbished smartphones are unlocked and ready to use with compatible networks.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What is the difference between Like New, Good, and Fair condition?",
+            "answer": "<p>The difference is purely cosmetic. All grades are fully tested and guaranteed to work properly, but the amount of visible wear varies depending on the condition selected.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do refurbished smartphones come with a warranty?",
+            "answer": "<p>Yes. Our refurbished smartphones are backed by warranty for added peace of mind. Full warranty details can be found on the product page or in our refurbishment information.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return a refurbished smartphone if I change my mind?",
+            "answer": "<p>Yes. We offer a return period so you can shop with confidence. Please check our returns policy page for full details and eligibility.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

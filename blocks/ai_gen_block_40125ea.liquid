@@ -1,0 +1,580 @@
+{% doc %}
+  @prompt
+    Create a clean, premium-looking hero section for a refurbishment process page. The section should include a strong headline, a short introductory paragraph, and four trust points with simple icons. The content should communicate that Unboxed professionally refurbishes both tech and jewellery, focusing on quality, testing, restoration, and trust.
+    
+    Heading: The Unboxed Standard™
+    
+    Subheading: How We Restore, Test & Certify Every Item
+    
+    Body text:
+    At Unboxed, every product we sell – from smartphones and laptops to fine jewellery – goes through a rigorous refurbishment and quality control process. We don’t simply resell pre-owned items. Each product is professionally inspected, restored, tested, and verified to meet our performance, safety, and quality standards. Only items that pass every stage of our process are approved for sale.
+    
+    Trust points:
+    • Professionally inspected & verified
+    • Fully tested for performance and safety
+    • Restored and cleaned to a high standard
+    • Backed by warranty & easy returns
+    
+    The design should feel modern, minimal, and premium, suitable for a refurbished tech and jewellery brand., Please adjust this section so that all four trust points appear on a single row on desktop, evenly spaced and aligned, instead of wrapping onto two rows. Increase the spacing between the headline and the trust points slightly so the layout feels more balanced and premium. Make the trust point cards slightly more compact in height, with consistent icon sizing, and ensure the overall section feels clean, minimal, and high-end. Keep the typography strong and modern, and maintain generous white space so the section feels calm and trustworthy rather than busy.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-refurb-hero-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-refurb-hero__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-refurb-hero__trademark-{{ ai_gen_id }} {
+    font-size: {{ block.settings.trademark_size }}px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: {{ block.settings.trademark_color }};
+    margin: 0 0 {{ block.settings.spacing_after_trademark }}px;
+    text-transform: uppercase;
+  }
+
+  .ai-refurb-hero__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.spacing_after_heading }}px;
+  }
+
+  .ai-refurb-hero__subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: {{ block.settings.subheading_color }};
+    margin: 0 0 {{ block.settings.spacing_after_subheading }}px;
+  }
+
+  .ai-refurb-hero__body-{{ ai_gen_id }} {
+    font-size: {{ block.settings.body_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.body_color }};
+    margin: 0 0 {{ block.settings.spacing_after_body }}px;
+  }
+
+  .ai-refurb-hero__trust-points-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.trust_point_gap }}px;
+    margin-top: {{ block.settings.spacing_before_trust_points }}px;
+  }
+
+  .ai-refurb-hero__trust-point-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: {{ block.settings.trust_point_padding }}px;
+    background-color: {{ block.settings.trust_point_bg }};
+    border-radius: {{ block.settings.trust_point_radius }}px;
+    text-align: left;
+  }
+
+  .ai-refurb-hero__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_bg_color }};
+    border-radius: 50%;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-refurb-hero__icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+    stroke: currentColor;
+    fill: none;
+  }
+
+  .ai-refurb-hero__trust-text-{{ ai_gen_id }} {
+    flex: 1;
+    font-size: {{ block.settings.trust_point_text_size }}px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: {{ block.settings.trust_point_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-refurb-hero__trust-points-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-refurb-hero-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top | times: 0.6 }}px 16px {{ block.settings.padding_bottom | times: 0.6 }}px;
+    }
+
+    .ai-refurb-hero__trademark-{{ ai_gen_id }} {
+      font-size: {{ block.settings.trademark_size | times: 0.8 }}px;
+    }
+
+    .ai-refurb-hero__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
+    }
+
+    .ai-refurb-hero__subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.8 }}px;
+    }
+
+    .ai-refurb-hero__body-{{ ai_gen_id }} {
+      font-size: {{ block.settings.body_size | times: 0.9 }}px;
+    }
+
+    .ai-refurb-hero__trust-points-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.trust_point_gap | times: 0.7 }}px;
+    }
+
+    .ai-refurb-hero__trust-point-{{ ai_gen_id }} {
+      padding: {{ block.settings.trust_point_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-refurb-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-refurb-hero__container-{{ ai_gen_id }}">
+    {% if block.settings.show_trademark %}
+      <div class="ai-refurb-hero__trademark-{{ ai_gen_id }}">
+        {{ block.settings.trademark_text }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.heading != blank %}
+      <h1 class="ai-refurb-hero__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h1>
+    {% endif %}
+
+    {% if block.settings.subheading != blank %}
+      <h2 class="ai-refurb-hero__subheading-{{ ai_gen_id }}">
+        {{ block.settings.subheading }}
+      </h2>
+    {% endif %}
+
+    {% if block.settings.body_text != blank %}
+      <div class="ai-refurb-hero__body-{{ ai_gen_id }}">
+        {{ block.settings.body_text }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_trust_points %}
+      <div class="ai-refurb-hero__trust-points-{{ ai_gen_id }}">
+        <div class="ai-refurb-hero__trust-point-{{ ai_gen_id }}">
+          <div class="ai-refurb-hero__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </div>
+          <div class="ai-refurb-hero__trust-text-{{ ai_gen_id }}">
+            {{ block.settings.trust_point_1 }}
+          </div>
+        </div>
+
+        <div class="ai-refurb-hero__trust-point-{{ ai_gen_id }}">
+          <div class="ai-refurb-hero__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="ai-refurb-hero__trust-text-{{ ai_gen_id }}">
+            {{ block.settings.trust_point_2 }}
+          </div>
+        </div>
+
+        <div class="ai-refurb-hero__trust-point-{{ ai_gen_id }}">
+          <div class="ai-refurb-hero__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <div class="ai-refurb-hero__trust-text-{{ ai_gen_id }}">
+            {{ block.settings.trust_point_3 }}
+          </div>
+        </div>
+
+        <div class="ai-refurb-hero__trust-point-{{ ai_gen_id }}">
+          <div class="ai-refurb-hero__icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="ai-refurb-hero__trust-text-{{ ai_gen_id }}">
+            {{ block.settings.trust_point_4 }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Refurbishment hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trademark",
+      "label": "Show trademark label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trademark_text",
+      "label": "Trademark text",
+      "default": "The Unboxed Standard™"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How We Restore, Test & Certify Every Item"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "<p>At Unboxed, every product we sell – from smartphones and laptops to fine jewellery – goes through a rigorous refurbishment and quality control process. We don't simply resell pre-owned items. Each product is professionally inspected, restored, tested, and verified to meet our performance, safety, and quality standards. Only items that pass every stage of our process are approved for sale.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Trust points"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_points",
+      "label": "Show trust points",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_point_1",
+      "label": "Trust point 1",
+      "default": "Professionally inspected & verified"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_2",
+      "label": "Trust point 2",
+      "default": "Fully tested for performance and safety"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_3",
+      "label": "Trust point 3",
+      "default": "Restored and cleaned to a high standard"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_4",
+      "label": "Trust point 4",
+      "default": "Backed by warranty & easy returns"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "trademark_size",
+      "label": "Trademark size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "trust_point_text_size",
+      "label": "Trust point text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "spacing_after_trademark",
+      "label": "After trademark",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "spacing_after_heading",
+      "label": "After heading",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "spacing_after_subheading",
+      "label": "After subheading",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "spacing_after_body",
+      "label": "After body text",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "spacing_before_trust_points",
+      "label": "Before trust points",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Trust point style"
+    },
+    {
+      "type": "range",
+      "id": "trust_point_gap",
+      "label": "Gap between points",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "trust_point_padding",
+      "label": "Padding",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "trust_point_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "trademark_color",
+      "label": "Trademark",
+      "default": "#0062ee"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "trust_point_bg",
+      "label": "Trust point background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "trust_point_color",
+      "label": "Trust point text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background",
+      "default": "#0062ee"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refurbishment hero"
+    }
+  ]
+}
+{% endschema %}
