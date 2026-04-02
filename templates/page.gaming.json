@@ -1,1 +1,617 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"custom_css":[],"settings":{"heading_size":"h0","head_align":"left","heading_color_scheme":"background-1","head_space":false,"padding_top":0,"padding_bottom":0}},"collapsible_content_eKn4UJ":{"type":"collapsible-content","blocks":{"collapsible_row_ddUBVn":{"type":"collapsible_row","settings":{"default_open":true,"heading":"Are your products brand new?","icon":"chat","row_content":"<p>No – all Unboxed products are pre-owned or refurbished. Every item is carefully inspected, professionally tested, and restored to meet our quality standards before being listed. Each product page clearly shows the condition so you know exactly what to expect.<\/p><p>Our goal is to give premium items a second life, without compromising on performance or appearance.<\/p>","page":""}},"collapsible_row_6xBxzR":{"type":"collapsible_row","settings":{"default_open":false,"heading":"What does “refurbished” actually mean?","icon":"chat","row_content":"<p>Refurbished means the product has been checked, cleaned, tested, and restored to full working order. This may include replacing worn parts, repairing faults, and ensuring the device functions exactly as it should. All refurbished tech sold by Unboxed is:<\/p><ul><li>Fully tested<br\/><\/li><li>Professionally cleaned<br\/><\/li><li>Verified for performance<br\/><\/li><li>Ready to use out of the box<\/li><\/ul>","page":""}},"collapsible_row_xYqPpa":{"type":"collapsible_row","settings":{"default_open":false,"heading":"Do all products come with a warranty?","icon":"chat","row_content":"<p>Yes. Every purchase includes a <strong>6-month Unboxed Warranty<\/strong> for peace of mind.<\/p><p>If your item develops a fault within this period that isn’t caused by damage or misuse, we’ll repair, replace, or refund it in line with your rights under UK consumer law. Full details are available on our <em>Warranty & Your Rights<\/em> page.<\/p>","page":""}},"collapsible_row_MjJztG":{"type":"collapsible_row","settings":{"default_open":false,"heading":"Can I return an item if I change my mind?","icon":"chat","row_content":"<p>Yes. Because all orders are placed online, you have <strong>14 days from delivery<\/strong> to change your mind.<\/p><p>If you decide an item isn’t right for you, simply reach out to us at <a><strong>contact@unboxed.store<\/strong><\/a> within 14 days and return the item in the same condition. Once received, we’ll issue a refund in line with our <em>Refunds & Returns<\/em> policy.<\/p>","page":""}},"collapsible_row_tgnW6z":{"type":"collapsible_row","settings":{"default_open":false,"heading":"Are your gaming products ready to use?","icon":"chat","row_content":"<p>Yes. All gaming products sold by Unboxed are fully tested, reset where applicable, and ready to use when they arrive.<\/p><p>Any details about storage, included accessories, compatibility, or model-specific features will be clearly shown on the product page.<\/p>","page":""}},"collapsible_row_wzgYnX":{"type":"collapsible_row","settings":{"default_open":false,"heading":"How quickly will my order be dispatched?","icon":"chat","row_content":"<p>Orders are processed quickly and dispatched from the UK. You’ll receive tracking details as soon as your order ships.<\/p><p>We aim to deliver promptly and keep you informed every step of the way. If you ever have a question about your order, our UK-based support team is just an email away at <a><strong>contact@unboxed.store<\/strong><\/a>.<\/p>","page":""}}},"block_order":["collapsible_row_ddUBVn","collapsible_row_6xBxzR","collapsible_row_xYqPpa","collapsible_row_MjJztG","collapsible_row_tgnW6z","collapsible_row_wzgYnX"],"disabled":true,"name":"t:sections.collapsible_content.presets.name","settings":{"heading":"","heading_size":"h0","head_align":"left","heading_color_scheme":"","head_space":true,"description":"<p>Description<\/p>","description_style":"body","layout":"section","color_scheme":"","secondary_background":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":0,"padding_bottom":60}},"177203901855eb9466":{"type":"_blocks","blocks":{"ai_gen_block_60860b9_MDpbET":{"type":"ai_gen_block_60860b9","settings":{"title":"Refurbished Gaming","description":"<p><em>Expertly refurbished gaming tech, fully tested, guaranteed, and ready to play.<\/em><\/p>","text_alignment":"left","background_color":"#ffffff","title_color":"#000000","description_color":"#848484","title_font":"abril_fatface_n4","title_size":48,"description_font":"cabin_n4","description_size":19,"top_spacing":12,"padding_vertical":30,"padding_horizontal":15,"title_spacing":0,"corner_radius":8,"desktop_width_percent":100},"blocks":{}}},"block_order":["ai_gen_block_60860b9_MDpbET"],"settings":{}},"unboxed_refurb_guarantee_icons_3mm6Nq":{"type":"unboxed-refurb-guarantee-icons","blocks":{"item_nUDwJh":{"type":"item","settings":{"icon":"tested","title":"Fully tested","text":"Multi-point inspection on every device.","link":"","link_label":""}},"item_WtyGa4":{"type":"item","settings":{"icon":"warranty","title":"Warranty included","text":"Peace of mind with every purchase.","link":"","link_label":""}},"item_H7UWY8":{"type":"item","settings":{"icon":"returns","title":"30-day returns","text":"Change your mind? Easy returns.","link":"","link_label":""}},"item_qUJ8xV":{"type":"item","settings":{"icon":"eco","title":"Better for the planet","text":"Refurbished tech reduces waste.","link":"","link_label":""}}},"block_order":["item_nUDwJh","item_WtyGa4","item_H7UWY8","item_qUJ8xV"],"name":"Unboxed - Guarantee icons","settings":{"heading":"Refurbished. Verified. Guaranteed.","subheading":"Every gaming product is professionally tested and backed by real support.","bg":"#ffffff","text":"#111111","muted":"#6b7280","border":"#e5e7eb","radius":16,"padding":28,"icon_size":26,"columns_desktop":4,"columns_mobile":1}},"collection_list_qMYyTT":{"type":"collection-list","blocks":{"featured_collection_qmmkHX":{"type":"featured_collection","settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_bPK7Fz":{"type":"featured_collection","settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_eix7Rf":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_x6f8M9":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_h4gFPE":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_UKAm3w":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_9zRgBc":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_WjJhmh":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}},"featured_collection_XbMUEc":{"type":"featured_collection","disabled":true,"settings":{"collection":"","title":"","url":"","showtext":"","customb_style":"solid"}}},"block_order":["featured_collection_qmmkHX","featured_collection_bPK7Fz","featured_collection_eix7Rf","featured_collection_x6f8M9","featured_collection_h4gFPE","featured_collection_UKAm3w","featured_collection_9zRgBc","featured_collection_WjJhmh","featured_collection_XbMUEc"],"disabled":true,"name":"t:sections.collection-list.presets.name","settings":{"color_scheme":"","title":"Shop by Brand","heading_size":"h1","head_align":"left","heading_color_scheme":"background-1","head_space":true,"description":"","description_style":"body","view_button_pos":"bottom","button_label":"View all","button_url":"","view_all_style":"link","show_view_all":false,"arrow_position":"inline","image_ratio":"square","columns_desktop":9,"rows":1,"card_flex_direction":"column","design_type":"below","design_align":"center","show_circle":false,"catheading_size":"small","blockcolor_scheme":"","columns_mobile":"1","padding_top":60,"padding_bottom":60}},"blocks_9aC8in":{"type":"_blocks","blocks":{"ai_gen_block_ab50a88_bCcLE4":{"type":"ai_gen_block_ab50a88","settings":{"heading":"Shop by Brand","heading_alignment":"left","tile_1_label":"PlayStation","tile_1_image":"shopify:\/\/shop_images\/Gemini_Generated_Image_uh57x9uh57x9uh57_1.png","tile_1_collection":"playstation","tile_1_url":"","tile_2_label":"Xbox","tile_2_image":"shopify:\/\/shop_images\/Gemini_Generated_Image_3v2sze3v2sze3v2s.png","tile_2_collection":"xbox","tile_2_url":"","tile_3_label":"Nintendo","tile_3_image":"shopify:\/\/shop_images\/Gemini_Generated_Image_orowagorowagorow.png","tile_3_collection":"nintendo","tile_3_url":"","tile_4_label":"VR Headsets","tile_4_image":"shopify:\/\/shop_images\/Gemini_Generated_Image_nj714nnj714nnj71.png","tile_4_collection":"vr-headsets","tile_4_url":"","tile_5_label":"","tile_5_collection":"","tile_5_url":"","tile_6_label":"","tile_6_collection":"","tile_6_url":""},"blocks":{}}},"block_order":["ai_gen_block_ab50a88_bCcLE4"],"name":"Shop by brand","settings":{}},"featured_collection_hJzJDD":{"type":"featured-collection","blocks":{"heading_7hRA6j":{"type":"heading","disabled":true,"settings":{"icon1":"hotdeal","heading":"Heading","heading_size":"h2","subheading":""}},"date_Hj34yP":{"type":"date","disabled":true,"settings":{"wb_enddate":""}},"button_PqfqQr":{"type":"button","disabled":true,"settings":{"icon2":"flash","btntxt":"Shop the collection","link":"","view_all_style":"link"}}},"block_order":["heading_7hRA6j","date_Hj34yP","button_PqfqQr"],"name":"t:sections.featured-collection.presets.name","settings":{"color_scheme":"background-1","collection":"gaming","title":"Customer Favourites","heading_size":"h1","head_align":"left","heading_color_scheme":"","head_space":true,"description":"","show_description":false,"description_style":"body","products_to_show":9,"columns_desktop":4,"show_row_on_desktop":1,"full_width":false,"show_view_all":true,"view_all_style":"link","view_button_pos":"top","enable_desktop_slider":true,"arrow_position":"top","card_style":"standard","show_count_timer":false,"banner_position":"left","box_align":"top","text_alignment":"center","show_text_box":true,"imgcolor_scheme":"","show_banner_timer":false,"wb_bannerdate":"","text_caption":"Image text","outline_text":false,"heading":"Heading","bnrheading_size":"h1","sub_heading":"Sub Heading","button_label":"Button label","button_link":"","link_window":true,"button_style_secondary":"link","card_color_scheme":"background-1","columns_mobile":"2","swipe_on_mobile":true,"padding_top":40,"padding_bottom":40}},"unboxed_condition_grades_qJxGKb":{"type":"unboxed-condition-grades","blocks":{"grade_hVmJpN":{"type":"grade","settings":{"title":"Like New","text":"Like new with almost no signs of use.","bullets":"No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"}},"grade_PyfQ4L":{"type":"grade","settings":{"title":"Good","text":"Light cosmetic wear but fully functional.","bullets":"No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"}},"grade_RAwfRg":{"type":"grade","settings":{"title":"Fair","text":"Visible wear but fully tested and working perfectly.","bullets":"No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"}}},"block_order":["grade_hVmJpN","grade_PyfQ4L","grade_RAwfRg"],"name":"Unboxed - Condition Grades","settings":{"heading":"Refurbished Condition Grades","subheading":"All devices are fully tested and guaranteed to work perfectly. Cosmetic condition may vary.","badge_text":"Grade","bg":"#ffffff","text":"#111111","muted":"#6b7280","accent_like_new":"#16a34a","accent_good":"#2563eb","accent_fair":"#f59e0b","radius":16,"padding":30,"columns_desktop":3,"columns_mobile":1,"link":"shopify:\/\/pages\/our-refurbishment-process","link_label":"Learn about our refurbishment process","link_note":"See what’s included in testing, grading and warranty."}},"unboxed_category_faq_mMAbYd":{"type":"unboxed-category-faq","blocks":{"faq_FjUVQ7":{"type":"faq","settings":{"question":"Are refurbished gaming products reliable?","answer":"<p>Yes. Every gaming product sold by Unboxed is professionally tested, inspected, and verified to make sure it is fully functional and ready for everyday use.<\/p>","open_by_default":false}},"faq_XTRymR":{"type":"faq","settings":{"question":"Are refurbished consoles and headsets fully tested?","answer":"<p>Yes. Every refurbished gaming item we sell undergoes checks for functionality, performance, connectivity, and overall condition before it is listed for sale.<\/p>","open_by_default":false}},"faq_rcRrVe":{"type":"faq","settings":{"question":"Do gaming products come with controllers or accessories?","answer":"<p>Any included accessories will be clearly shown on the product page. Please check the listing details to see exactly what is included with your order.<\/p>","open_by_default":false}},"faq_qAf3We":{"type":"faq","settings":{"question":"What is the difference between Like New, Good, and Fair condition?","answer":"<p>The difference is purely cosmetic. All grades are fully tested and guaranteed to work properly, but the amount of visible wear varies depending on the condition selected.<\/p>","open_by_default":false}},"faq_rfnbgg":{"type":"faq","settings":{"question":"Do refurbished gaming products come with a warranty?","answer":"<p>Yes. Our refurbished gaming products are backed by warranty for added peace of mind. Full warranty details can be found on the product page or in our refurbishment information.<\/p>","open_by_default":false}},"faq_hD9VW3":{"type":"faq","settings":{"question":"Can I return a refurbished gaming product if I change my mind?","answer":"<p>Yes. We offer a return period so you can shop with confidence. Please check our returns policy page for full details and eligibility.<\/p>","open_by_default":false}}},"block_order":["faq_FjUVQ7","faq_XTRymR","faq_rcRrVe","faq_qAf3We","faq_rfnbgg","faq_hD9VW3"],"name":"Unboxed Category FAQ","settings":{"heading":"Gaming FAQs","subheading":"Everything you need to know before choosing your refurbished gaming gear.","bg":"#ffffff","text":"#111111","muted":"#6b7280","border":"#e5e7eb","radius":16,"padding":32,"link":"","link_label":"Read our full refurbishment guide"}}},"order":["main","collapsible_content_eKn4UJ","177203901855eb9466","unboxed_refurb_guarantee_icons_3mm6Nq","collection_list_qMYyTT","blocks_9aC8in","featured_collection_hJzJDD","unboxed_condition_grades_qJxGKb","unboxed_category_faq_mMAbYd"]}
+{
+    "sections":  {
+                     "main":  {
+                                  "type":  "main-page",
+                                  "disabled":  true,
+                                  "custom_css":  [
+
+                                                 ],
+                                  "settings":  {
+                                                   "heading_size":  "h0",
+                                                   "head_align":  "left",
+                                                   "heading_color_scheme":  "background-1",
+                                                   "head_space":  false,
+                                                   "padding_top":  0,
+                                                   "padding_bottom":  0
+                                               }
+                              },
+                     "collapsible_content_eKn4UJ":  {
+                                                        "type":  "collapsible-content",
+                                                        "blocks":  {
+                                                                       "collapsible_row_ddUBVn":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  true,
+                                                                                                                       "heading":  "Are your products brand new?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eNo â€“ all Unboxed products are pre-owned or refurbished. Every item is carefully inspected, professionally tested, and restored to meet our quality standards before being listed. Each product page clearly shows the condition so you know exactly what to expect.\u003c/p\u003e\u003cp\u003eOur goal is to give premium items a second life, without compromising on performance or appearance.\u003c/p\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                       "collapsible_row_6xBxzR":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  false,
+                                                                                                                       "heading":  "What does â€œrefurbishedâ€ actually mean?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eRefurbished means the product has been checked, cleaned, tested, and restored to full working order. This may include replacing worn parts, repairing faults, and ensuring the device functions exactly as it should. All refurbished tech sold by Unboxed is:\u003c/p\u003e\u003cul\u003e\u003cli\u003eFully tested\u003cbr/\u003e\u003c/li\u003e\u003cli\u003eProfessionally cleaned\u003cbr/\u003e\u003c/li\u003e\u003cli\u003eVerified for performance\u003cbr/\u003e\u003c/li\u003e\u003cli\u003eReady to use out of the box\u003c/li\u003e\u003c/ul\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                       "collapsible_row_xYqPpa":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  false,
+                                                                                                                       "heading":  "Do all products come with a warranty?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eYes. Every purchase includes a \u003cstrong\u003e6-month Unboxed Warranty\u003c/strong\u003e for peace of mind.\u003c/p\u003e\u003cp\u003eIf your item develops a fault within this period that isnâ€™t caused by damage or misuse, weâ€™ll repair, replace, or refund it in line with your rights under UK consumer law. Full details are available on our \u003cem\u003eWarranty \u0026 Your Rights\u003c/em\u003e page.\u003c/p\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                       "collapsible_row_MjJztG":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  false,
+                                                                                                                       "heading":  "Can I return an item if I change my mind?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eYes. Because all orders are placed online, you have \u003cstrong\u003e14 days from delivery\u003c/strong\u003e to change your mind.\u003c/p\u003e\u003cp\u003eIf you decide an item isnâ€™t right for you, simply reach out to us at \u003ca\u003e\u003cstrong\u003econtact@unboxed.store\u003c/strong\u003e\u003c/a\u003e within 14 days and return the item in the same condition. Once received, weâ€™ll issue a refund in line with our \u003cem\u003eRefunds \u0026 Returns\u003c/em\u003e policy.\u003c/p\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                       "collapsible_row_tgnW6z":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  false,
+                                                                                                                       "heading":  "Are your gaming products ready to use?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eYes. All gaming products sold by Unboxed are fully tested, reset where applicable, and ready to use when they arrive.\u003c/p\u003e\u003cp\u003eAny details about storage, included accessories, compatibility, or model-specific features will be clearly shown on the product page.\u003c/p\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                       "collapsible_row_wzgYnX":  {
+                                                                                                      "type":  "collapsible_row",
+                                                                                                      "settings":  {
+                                                                                                                       "default_open":  false,
+                                                                                                                       "heading":  "How quickly will my order be dispatched?",
+                                                                                                                       "icon":  "chat",
+                                                                                                                       "row_content":  "\u003cp\u003eOrders are processed quickly and dispatched from the UK. Youâ€™ll receive tracking details as soon as your order ships.\u003c/p\u003e\u003cp\u003eWe aim to deliver promptly and keep you informed every step of the way. If you ever have a question about your order, our UK-based support team is just an email away at \u003ca\u003e\u003cstrong\u003econtact@unboxed.store\u003c/strong\u003e\u003c/a\u003e.\u003c/p\u003e",
+                                                                                                                       "page":  ""
+                                                                                                                   }
+                                                                                                  }
+                                                                   },
+                                                        "block_order":  [
+                                                                            "collapsible_row_ddUBVn",
+                                                                            "collapsible_row_6xBxzR",
+                                                                            "collapsible_row_xYqPpa",
+                                                                            "collapsible_row_MjJztG",
+                                                                            "collapsible_row_tgnW6z",
+                                                                            "collapsible_row_wzgYnX"
+                                                                        ],
+                                                        "disabled":  true,
+                                                        "name":  "t:sections.collapsible_content.presets.name",
+                                                        "settings":  {
+                                                                         "heading":  "",
+                                                                         "heading_size":  "h0",
+                                                                         "head_align":  "left",
+                                                                         "heading_color_scheme":  "",
+                                                                         "head_space":  true,
+                                                                         "description":  "\u003cp\u003eDescription\u003c/p\u003e",
+                                                                         "description_style":  "body",
+                                                                         "layout":  "section",
+                                                                         "color_scheme":  "",
+                                                                         "secondary_background":  false,
+                                                                         "image_ratio":  "adapt",
+                                                                         "desktop_layout":  "image_second",
+                                                                         "padding_top":  0,
+                                                                         "padding_bottom":  60
+                                                                     }
+                                                    },
+                     "177203901855eb9466":  {
+                                                "type":  "_blocks",
+                                                "blocks":  {
+                                                               "ai_gen_block_60860b9_MDpbET":  {
+                                                                                                   "type":  "ai_gen_block_60860b9",
+                                                                                                   "settings":  {
+                                                                                                                    "title":  "Refurbished Gaming",
+                                                                                                                    "description":  "\u003cp\u003eRefurbished consoles and accessories, tested for smooth play and dependable performance.\u003c/p\u003e",
+                                                                                                                    "text_alignment":  "left",
+                                                                                                                    "background_color":  "#ffffff",
+                                                                                                                    "title_color":  "#000000",
+                                                                                                                    "description_color":  "#5f6672",
+                                                                                                                    "title_font":  "carlito_n4",
+                                                                                                                    "title_size":  46,
+                                                                                                                    "description_font":  "cabin_n4",
+                                                                                                                    "description_size":  19,
+                                                                                                                    "top_spacing":  12,
+                                                                                                                    "padding_vertical":  30,
+                                                                                                                    "padding_horizontal":  15,
+                                                                                                                    "title_spacing":  0,
+                                                                                                                    "corner_radius":  8,
+                                                                                                                    "desktop_width_percent":  100
+                                                                                                                },
+                                                                                                   "blocks":  {
+
+                                                                                                              }
+                                                                                               }
+                                                           },
+                                                "block_order":  [
+                                                                    "ai_gen_block_60860b9_MDpbET"
+                                                                ],
+                                                "settings":  {
+
+                                                             }
+                                            },
+                     "unboxed_refurb_guarantee_icons_3mm6Nq":  {
+                                                                   "type":  "unboxed-refurb-guarantee-icons",
+                                                                   "blocks":  {
+                                                                                  "item_nUDwJh":  {
+                                                                                                      "type":  "item",
+                                                                                                      "settings":  {
+                                                                                                                       "icon":  "tested",
+                                                                                                                       "title":  "Fully tested",
+                                                                                                                       "text":  "Multi-point inspection on every device.",
+                                                                                                                       "link":  "",
+                                                                                                                       "link_label":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                                  "item_WtyGa4":  {
+                                                                                                      "type":  "item",
+                                                                                                      "settings":  {
+                                                                                                                       "icon":  "warranty",
+                                                                                                                       "title":  "Warranty included",
+                                                                                                                       "text":  "Peace of mind with every purchase.",
+                                                                                                                       "link":  "",
+                                                                                                                       "link_label":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                                  "item_H7UWY8":  {
+                                                                                                      "type":  "item",
+                                                                                                      "settings":  {
+                                                                                                                       "icon":  "returns",
+                                                                                                                       "title":  "30-day returns",
+                                                                                                                       "text":  "Change your mind? Easy returns.",
+                                                                                                                       "link":  "",
+                                                                                                                       "link_label":  ""
+                                                                                                                   }
+                                                                                                  },
+                                                                                  "item_qUJ8xV":  {
+                                                                                                      "type":  "item",
+                                                                                                      "settings":  {
+                                                                                                                       "icon":  "eco",
+                                                                                                                       "title":  "Better for the planet",
+                                                                                                                       "text":  "Refurbished tech reduces waste.",
+                                                                                                                       "link":  "",
+                                                                                                                       "link_label":  ""
+                                                                                                                   }
+                                                                                                  }
+                                                                              },
+                                                                   "block_order":  [
+                                                                                       "item_nUDwJh",
+                                                                                       "item_WtyGa4",
+                                                                                       "item_H7UWY8",
+                                                                                       "item_qUJ8xV"
+                                                                                   ],
+                                                                   "name":  "Unboxed - Guarantee icons",
+                                                                   "settings":  {
+                                                                                    "heading":  "Refurbished. Verified. Guaranteed.",
+                                                                                    "subheading":  "Every gaming product is professionally tested and backed by real support.",
+                                                                                    "bg":  "#ffffff",
+                                                                                    "text":  "#111111",
+                                                                                    "muted":  "#6b7280",
+                                                                                    "border":  "#e5e7eb",
+                                                                                    "radius":  16,
+                                                                                    "padding":  28,
+                                                                                    "icon_size":  26,
+                                                                                    "columns_desktop":  4,
+                                                                                    "columns_mobile":  1
+                                                                                }
+                                                               },
+                     "collection_list_qMYyTT":  {
+                                                    "type":  "collection-list",
+                                                    "blocks":  {
+                                                                   "featured_collection_qmmkHX":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_bPK7Fz":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_eix7Rf":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_x6f8M9":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_h4gFPE":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_UKAm3w":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_9zRgBc":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_WjJhmh":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  },
+                                                                   "featured_collection_XbMUEc":  {
+                                                                                                      "type":  "featured_collection",
+                                                                                                      "disabled":  true,
+                                                                                                      "settings":  {
+                                                                                                                       "collection":  "",
+                                                                                                                       "title":  "",
+                                                                                                                       "url":  "",
+                                                                                                                       "showtext":  "",
+                                                                                                                       "customb_style":  "solid"
+                                                                                                                   }
+                                                                                                  }
+                                                               },
+                                                    "block_order":  [
+                                                                        "featured_collection_qmmkHX",
+                                                                        "featured_collection_bPK7Fz",
+                                                                        "featured_collection_eix7Rf",
+                                                                        "featured_collection_x6f8M9",
+                                                                        "featured_collection_h4gFPE",
+                                                                        "featured_collection_UKAm3w",
+                                                                        "featured_collection_9zRgBc",
+                                                                        "featured_collection_WjJhmh",
+                                                                        "featured_collection_XbMUEc"
+                                                                    ],
+                                                    "disabled":  true,
+                                                    "name":  "t:sections.collection-list.presets.name",
+                                                    "settings":  {
+                                                                     "color_scheme":  "",
+                                                                     "title":  "Shop by Brand",
+                                                                     "heading_size":  "h1",
+                                                                     "head_align":  "left",
+                                                                     "heading_color_scheme":  "background-1",
+                                                                     "head_space":  true,
+                                                                     "description":  "",
+                                                                     "description_style":  "body",
+                                                                     "view_button_pos":  "bottom",
+                                                                     "button_label":  "View all",
+                                                                     "button_url":  "",
+                                                                     "view_all_style":  "link",
+                                                                     "show_view_all":  false,
+                                                                     "arrow_position":  "inline",
+                                                                     "image_ratio":  "square",
+                                                                     "columns_desktop":  9,
+                                                                     "rows":  1,
+                                                                     "card_flex_direction":  "column",
+                                                                     "design_type":  "below",
+                                                                     "design_align":  "center",
+                                                                     "show_circle":  false,
+                                                                     "catheading_size":  "small",
+                                                                     "blockcolor_scheme":  "",
+                                                                     "columns_mobile":  "1",
+                                                                     "padding_top":  60,
+                                                                     "padding_bottom":  60
+                                                                 }
+                                                },
+                     "blocks_9aC8in":  {
+                                           "type":  "_blocks",
+                                           "blocks":  {
+                                                          "ai_gen_block_ab50a88_bCcLE4":  {
+                                                                                              "type":  "ai_gen_block_ab50a88",
+                                                                                              "settings":  {
+                                                                                                               "heading":  "Shop by Brand",
+                                                                                                               "heading_alignment":  "left",
+                                                                                                               "tile_1_label":  "PlayStation",
+                                                                                                               "tile_1_image":  "shopify://shop_images/Gemini_Generated_Image_uh57x9uh57x9uh57_1.png",
+                                                                                                               "tile_1_collection":  "playstation",
+                                                                                                               "tile_1_url":  "",
+                                                                                                               "tile_2_label":  "Xbox",
+                                                                                                               "tile_2_image":  "shopify://shop_images/Gemini_Generated_Image_3v2sze3v2sze3v2s.png",
+                                                                                                               "tile_2_collection":  "xbox",
+                                                                                                               "tile_2_url":  "",
+                                                                                                               "tile_3_label":  "Nintendo",
+                                                                                                               "tile_3_image":  "shopify://shop_images/Gemini_Generated_Image_orowagorowagorow.png",
+                                                                                                               "tile_3_collection":  "nintendo",
+                                                                                                               "tile_3_url":  "",
+                                                                                                               "tile_4_label":  "VR Headsets",
+                                                                                                               "tile_4_image":  "shopify://shop_images/Gemini_Generated_Image_nj714nnj714nnj71.png",
+                                                                                                               "tile_4_collection":  "vr-headsets",
+                                                                                                               "tile_4_url":  "",
+                                                                                                               "tile_5_label":  "",
+                                                                                                               "tile_5_collection":  "",
+                                                                                                               "tile_5_url":  "",
+                                                                                                               "tile_6_label":  "",
+                                                                                                               "tile_6_collection":  "",
+                                                                                                               "tile_6_url":  ""
+                                                                                                           },
+                                                                                              "blocks":  {
+
+                                                                                                         }
+                                                                                          }
+                                                      },
+                                           "block_order":  [
+                                                               "ai_gen_block_ab50a88_bCcLE4"
+                                                           ],
+                                           "name":  "Shop by brand",
+                                           "settings":  {
+
+                                                        }
+                                       },
+                     "featured_collection_hJzJDD":  {
+                                                        "type":  "featured-collection",
+                                                        "blocks":  {
+                                                                       "heading_7hRA6j":  {
+                                                                                              "type":  "heading",
+                                                                                              "disabled":  true,
+                                                                                              "settings":  {
+                                                                                                               "icon1":  "hotdeal",
+                                                                                                               "heading":  "Heading",
+                                                                                                               "heading_size":  "h2",
+                                                                                                               "subheading":  ""
+                                                                                                           }
+                                                                                          },
+                                                                       "date_Hj34yP":  {
+                                                                                           "type":  "date",
+                                                                                           "disabled":  true,
+                                                                                           "settings":  {
+                                                                                                            "wb_enddate":  ""
+                                                                                                        }
+                                                                                       },
+                                                                       "button_PqfqQr":  {
+                                                                                             "type":  "button",
+                                                                                             "disabled":  true,
+                                                                                             "settings":  {
+                                                                                                              "icon2":  "flash",
+                                                                                                              "btntxt":  "Shop the collection",
+                                                                                                              "link":  "",
+                                                                                                              "view_all_style":  "link"
+                                                                                                          }
+                                                                                         }
+                                                                   },
+                                                        "block_order":  [
+                                                                            "heading_7hRA6j",
+                                                                            "date_Hj34yP",
+                                                                            "button_PqfqQr"
+                                                                        ],
+                                                        "name":  "t:sections.featured-collection.presets.name",
+                                                        "settings":  {
+                                                                         "color_scheme":  "background-1",
+                                                                         "collection":  "gaming",
+                                                                         "title":  "Customer Favourites",
+                                                                         "heading_size":  "h1",
+                                                                         "head_align":  "left",
+                                                                         "heading_color_scheme":  "",
+                                                                         "head_space":  true,
+                                                                         "description":  "",
+                                                                         "show_description":  false,
+                                                                         "description_style":  "body",
+                                                                         "products_to_show":  9,
+                                                                         "columns_desktop":  4,
+                                                                         "show_row_on_desktop":  1,
+                                                                         "full_width":  false,
+                                                                         "show_view_all":  true,
+                                                                         "view_all_style":  "link",
+                                                                         "view_button_pos":  "top",
+                                                                         "enable_desktop_slider":  true,
+                                                                         "arrow_position":  "top",
+                                                                         "card_style":  "standard",
+                                                                         "show_count_timer":  false,
+                                                                         "banner_position":  "left",
+                                                                         "box_align":  "top",
+                                                                         "text_alignment":  "center",
+                                                                         "show_text_box":  true,
+                                                                         "imgcolor_scheme":  "",
+                                                                         "show_banner_timer":  false,
+                                                                         "wb_bannerdate":  "",
+                                                                         "text_caption":  "Image text",
+                                                                         "outline_text":  false,
+                                                                         "heading":  "Heading",
+                                                                         "bnrheading_size":  "h1",
+                                                                         "sub_heading":  "Sub Heading",
+                                                                         "button_label":  "Button label",
+                                                                         "button_link":  "",
+                                                                         "link_window":  true,
+                                                                         "button_style_secondary":  "link",
+                                                                         "card_color_scheme":  "background-1",
+                                                                         "columns_mobile":  "2",
+                                                                         "swipe_on_mobile":  true,
+                                                                         "padding_top":  40,
+                                                                         "padding_bottom":  40
+                                                                     }
+                                                    },
+                     "unboxed_condition_grades_qJxGKb":  {
+                                                             "type":  "unboxed-condition-grades",
+                                                             "blocks":  {
+                                                                            "grade_hVmJpN":  {
+                                                                                                 "type":  "grade",
+                                                                                                 "settings":  {
+                                                                                                                  "title":  "Like New",
+                                                                                                                  "text":  "Like new with almost no signs of use.",
+                                                                                                                  "bullets":  "No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"
+                                                                                                              }
+                                                                                             },
+                                                                            "grade_PyfQ4L":  {
+                                                                                                 "type":  "grade",
+                                                                                                 "settings":  {
+                                                                                                                  "title":  "Good",
+                                                                                                                  "text":  "Light cosmetic wear but fully functional.",
+                                                                                                                  "bullets":  "No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"
+                                                                                                              }
+                                                                                             },
+                                                                            "grade_RAwfRg":  {
+                                                                                                 "type":  "grade",
+                                                                                                 "settings":  {
+                                                                                                                  "title":  "Fair",
+                                                                                                                  "text":  "Visible wear but fully tested and working perfectly.",
+                                                                                                                  "bullets":  "No visible scratches or marks\nMay have very minor micro-scratches under direct light\nIdeal for gifts or premium use"
+                                                                                                              }
+                                                                                             }
+                                                                        },
+                                                             "block_order":  [
+                                                                                 "grade_hVmJpN",
+                                                                                 "grade_PyfQ4L",
+                                                                                 "grade_RAwfRg"
+                                                                             ],
+                                                             "name":  "Unboxed - Condition Grades",
+                                                             "settings":  {
+                                                                              "heading":  "Refurbished Condition Grades",
+                                                                              "subheading":  "All devices are fully tested and guaranteed to work perfectly. Cosmetic condition may vary.",
+                                                                              "badge_text":  "Grade",
+                                                                              "bg":  "#ffffff",
+                                                                              "text":  "#111111",
+                                                                              "muted":  "#6b7280",
+                                                                              "accent_like_new":  "#16a34a",
+                                                                              "accent_good":  "#2563eb",
+                                                                              "accent_fair":  "#f59e0b",
+                                                                              "radius":  16,
+                                                                              "padding":  30,
+                                                                              "columns_desktop":  3,
+                                                                              "columns_mobile":  1,
+                                                                              "link":  "shopify://pages/our-refurbishment-process",
+                                                                              "link_label":  "Learn about our refurbishment process",
+                                                                              "link_note":  "See whatâ€™s included in testing, grading and warranty."
+                                                                          }
+                                                         },
+                     "unboxed_category_faq_mMAbYd":  {
+                                                         "type":  "unboxed-category-faq",
+                                                         "blocks":  {
+                                                                        "faq_FjUVQ7":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "Are refurbished gaming products reliable?",
+                                                                                                            "answer":  "\u003cp\u003eYes. Every gaming product sold by Unboxed is professionally tested, inspected, and verified to make sure it is fully functional and ready for everyday use.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       },
+                                                                        "faq_XTRymR":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "Are refurbished consoles and headsets fully tested?",
+                                                                                                            "answer":  "\u003cp\u003eYes. Every refurbished gaming item we sell undergoes checks for functionality, performance, connectivity, and overall condition before it is listed for sale.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       },
+                                                                        "faq_rcRrVe":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "Do gaming products come with controllers or accessories?",
+                                                                                                            "answer":  "\u003cp\u003eAny included accessories will be clearly shown on the product page. Please check the listing details to see exactly what is included with your order.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       },
+                                                                        "faq_qAf3We":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "What is the difference between Like New, Good, and Fair condition?",
+                                                                                                            "answer":  "\u003cp\u003eThe difference is purely cosmetic. All grades are fully tested and guaranteed to work properly, but the amount of visible wear varies depending on the condition selected.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       },
+                                                                        "faq_rfnbgg":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "Do refurbished gaming products come with a warranty?",
+                                                                                                            "answer":  "\u003cp\u003eYes. Our refurbished gaming products are backed by warranty for added peace of mind. Full warranty details can be found on the product page or in our refurbishment information.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       },
+                                                                        "faq_hD9VW3":  {
+                                                                                           "type":  "faq",
+                                                                                           "settings":  {
+                                                                                                            "question":  "Can I return a refurbished gaming product if I change my mind?",
+                                                                                                            "answer":  "\u003cp\u003eYes. We offer a return period so you can shop with confidence. Please check our returns policy page for full details and eligibility.\u003c/p\u003e",
+                                                                                                            "open_by_default":  false
+                                                                                                        }
+                                                                                       }
+                                                                    },
+                                                         "block_order":  [
+                                                                             "faq_FjUVQ7",
+                                                                             "faq_XTRymR",
+                                                                             "faq_rcRrVe",
+                                                                             "faq_qAf3We",
+                                                                             "faq_rfnbgg",
+                                                                             "faq_hD9VW3"
+                                                                         ],
+                                                         "name":  "Unboxed Category FAQ",
+                                                         "settings":  {
+                                                                          "heading":  "Gaming FAQs",
+                                                                          "subheading":  "Everything you need to know before choosing your refurbished gaming gear.",
+                                                                          "bg":  "#ffffff",
+                                                                          "text":  "#111111",
+                                                                          "muted":  "#6b7280",
+                                                                          "border":  "#e5e7eb",
+                                                                          "radius":  16,
+                                                                          "padding":  32,
+                                                                          "link":  "",
+                                                                          "link_label":  "Read our full refurbishment guide"
+                                                                      }
+                                                     }
+                 },
+    "order":  [
+                  "main",
+                  "collapsible_content_eKn4UJ",
+                  "177203901855eb9466",
+                  "unboxed_refurb_guarantee_icons_3mm6Nq",
+                  "collection_list_qMYyTT",
+                  "blocks_9aC8in",
+                  "featured_collection_hJzJDD",
+                  "unboxed_condition_grades_qJxGKb",
+                  "unboxed_category_faq_mMAbYd"
+              ]
+}

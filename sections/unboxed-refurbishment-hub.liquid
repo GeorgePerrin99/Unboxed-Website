@@ -1,0 +1,1294 @@
+{% liquid
+  assign default_condition = section.settings.default_condition
+  assign initial_item = blank
+  assign initial_label = ''
+  assign initial_summary = ''
+  assign initial_category_name = 'Refurbished tech'
+  assign initial_explorer_note = section.settings.tech_explorer_note
+  assign initial_quality_note = section.settings.tech_quality_note
+  assign initial_condition_label = 'Fair'
+  assign initial_image = ''
+  assign aspect_1_value = ''
+  assign aspect_2_value = ''
+  assign aspect_3_value = ''
+  assign aspect_4_value = ''
+
+  for block in section.blocks
+    if block.type == 'item' and block.settings.category == 'tech' and initial_item == blank
+      assign initial_item = block
+    endif
+  endfor
+
+  if initial_item == blank
+    for block in section.blocks
+      if block.type == 'item' and block.settings.category == 'tech'
+        assign initial_item = block
+        break
+      endif
+    endfor
+  endif
+
+  if initial_item != blank
+    assign initial_label = initial_item.settings.label
+    assign initial_summary = initial_item.settings.fair_summary
+    assign aspect_1_value = initial_item.settings.aspect_1_fair
+    assign aspect_2_value = initial_item.settings.aspect_2_fair
+    assign aspect_3_value = initial_item.settings.aspect_3_fair
+    assign aspect_4_value = initial_item.settings.aspect_4_fair
+
+    if default_condition == 'good'
+      assign initial_summary = initial_item.settings.good_summary
+      assign aspect_1_value = initial_item.settings.aspect_1_good
+      assign aspect_2_value = initial_item.settings.aspect_2_good
+      assign aspect_3_value = initial_item.settings.aspect_3_good
+      assign aspect_4_value = initial_item.settings.aspect_4_good
+      assign initial_condition_label = 'Good'
+    elsif default_condition == 'like_new'
+      assign initial_summary = initial_item.settings.like_new_summary
+      assign aspect_1_value = initial_item.settings.aspect_1_like_new
+      assign aspect_2_value = initial_item.settings.aspect_2_like_new
+      assign aspect_3_value = initial_item.settings.aspect_3_like_new
+      assign aspect_4_value = initial_item.settings.aspect_4_like_new
+      assign initial_condition_label = 'Like New'
+    endif
+
+    if default_condition == 'good' and initial_item.settings.good_image != blank
+      assign initial_image = initial_item.settings.good_image | image_url: width: 1600
+    elsif default_condition == 'like_new' and initial_item.settings.like_new_image != blank
+      assign initial_image = initial_item.settings.like_new_image | image_url: width: 1600
+    elsif initial_item.settings.fair_image != blank
+      assign initial_image = initial_item.settings.fair_image | image_url: width: 1600
+    elsif initial_item.settings.display_image != blank
+      assign initial_image = initial_item.settings.display_image | image_url: width: 1600
+    elsif initial_item.settings.thumbnail != blank
+      assign initial_image = initial_item.settings.thumbnail | image_url: width: 1600
+    endif
+  endif
+
+%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.65 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.65 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="UnboxedRefurb-{{ section.id }}"
+  class="ub-refurbishment section color-{{ section.settings.color_scheme }} gradient"
+  data-initial-condition="{{ default_condition }}"
+  {% if initial_item != blank %}
+    data-initial-item="{{ initial_item.id }}"
+  {% endif %}
+>
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="ub-refurbishment__hero">
+      <div class="ub-refurbishment__hero-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="ub-refurbishment__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h1 class="ub-refurbishment__heading">{{ section.settings.heading | escape }}</h1>
+        {% endif %}
+
+        {% if section.settings.intro != blank %}
+          <div class="ub-refurbishment__intro rte">
+            {{ section.settings.intro }}
+          </div>
+        {% endif %}
+
+        <div class="ub-refurbishment__trust-list" role="list">
+          <div class="ub-refurbishment__trust-pill" role="listitem">Professionally checked</div>
+          <div class="ub-refurbishment__trust-pill" role="listitem">Individually assessed</div>
+          <div class="ub-refurbishment__trust-pill" role="listitem">Ready for everyday use</div>
+          <div class="ub-refurbishment__trust-pill" role="listitem">Shop with confidence</div>
+        </div>
+      </div>
+
+      <div class="ub-refurbishment__hero-cards">
+        <article class="ub-refurbishment__spotlight-card">
+          <div class="ub-refurbishment__spotlight-media">
+            {% if section.settings.tech_card_image != blank %}
+              {{
+                section.settings.tech_card_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '480, 720, 960, 1200',
+                  alt: section.settings.tech_card_heading
+              }}
+            {% endif %}
+          </div>
+          <div class="ub-refurbishment__spotlight-body">
+            <p class="ub-refurbishment__spotlight-kicker">Refurbished tech</p>
+            <h2 class="ub-refurbishment__spotlight-title">{{ section.settings.tech_card_heading | escape }}</h2>
+            {% if section.settings.tech_card_text != blank %}
+              <div class="ub-refurbishment__spotlight-text rte">
+                {{ section.settings.tech_card_text }}
+              </div>
+            {% endif %}
+            {% if section.settings.tech_card_link != blank and section.settings.tech_card_link_label != blank %}
+              <a class="ub-refurbishment__spotlight-link" href="{{ section.settings.tech_card_link }}">
+                {{ section.settings.tech_card_link_label | escape }}
+              </a>
+            {% endif %}
+          </div>
+        </article>
+
+        <article class="ub-refurbishment__spotlight-card">
+          <div class="ub-refurbishment__spotlight-media">
+            {% if section.settings.jewellery_card_image != blank %}
+              {{
+                section.settings.jewellery_card_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '480, 720, 960, 1200',
+                  alt: section.settings.jewellery_card_heading
+              }}
+            {% endif %}
+          </div>
+          <div class="ub-refurbishment__spotlight-body">
+            <p class="ub-refurbishment__spotlight-kicker">Refurbished jewellery</p>
+            <h2 class="ub-refurbishment__spotlight-title">{{ section.settings.jewellery_card_heading | escape }}</h2>
+            {% if section.settings.jewellery_card_text != blank %}
+              <div class="ub-refurbishment__spotlight-text rte">
+                {{ section.settings.jewellery_card_text }}
+              </div>
+            {% endif %}
+            {% if section.settings.jewellery_card_link != blank and section.settings.jewellery_card_link_label != blank %}
+              <a class="ub-refurbishment__spotlight-link" href="{{ section.settings.jewellery_card_link }}">
+                {{ section.settings.jewellery_card_link_label | escape }}
+              </a>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="ub-refurbishment__process">
+      <div class="ub-refurbishment__section-head">
+        {% if section.settings.process_heading != blank %}
+          <h2 class="ub-refurbishment__section-title">{{ section.settings.process_heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.process_copy != blank %}
+          <div class="ub-refurbishment__section-copy rte">
+            {{ section.settings.process_copy }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ub-refurbishment__process-grid">
+        <article class="ub-refurbishment__lane">
+          <div class="ub-refurbishment__lane-head">
+            <p class="ub-refurbishment__lane-kicker">Refurbished tech</p>
+            <h3 class="ub-refurbishment__lane-title">Tested from battery health to final setup</h3>
+            <p class="ub-refurbishment__lane-copy">Phones, laptops and wearables go through detailed diagnostics, restoration and final QC before they go live.</p>
+          </div>
+          <div class="ub-refurbishment__steps" role="list">
+            {% assign tech_step_index = 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'step' and block.settings.category == 'tech' %}
+                {% assign tech_step_index = tech_step_index | plus: 1 %}
+                <article class="ub-refurbishment__step" role="listitem" {{ block.shopify_attributes }}>
+                  <span class="ub-refurbishment__step-number">{{ tech_step_index }}</span>
+                  <div class="ub-refurbishment__step-copy">
+                    <h4>{{ block.settings.title | escape }}</h4>
+                    <p>{{ block.settings.text | escape }}</p>
+                  </div>
+                </article>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </article>
+
+        <article class="ub-refurbishment__lane">
+          <div class="ub-refurbishment__lane-head">
+            <p class="ub-refurbishment__lane-kicker">Refurbished jewellery</p>
+            <h3 class="ub-refurbishment__lane-title">Restored for presentation, security and peace of mind</h3>
+            <p class="ub-refurbishment__lane-copy">Each piece is checked for authenticity, finish, structure and wearability before it is approved for sale.</p>
+          </div>
+          <div class="ub-refurbishment__steps" role="list">
+            {% assign jewellery_step_index = 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'step' and block.settings.category == 'jewellery' %}
+                {% assign jewellery_step_index = jewellery_step_index | plus: 1 %}
+                <article class="ub-refurbishment__step" role="listitem" {{ block.shopify_attributes }}>
+                  <span class="ub-refurbishment__step-number">{{ jewellery_step_index }}</span>
+                  <div class="ub-refurbishment__step-copy">
+                    <h4>{{ block.settings.title | escape }}</h4>
+                    <p>{{ block.settings.text | escape }}</p>
+                  </div>
+                </article>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="compare-tech-grades" class="ub-refurbishment__explorer">
+      <div class="ub-refurbishment__section-head ub-refurbishment__section-head--compact">
+        {% if section.settings.explorer_heading != blank %}
+          <h2 class="ub-refurbishment__section-title">{{ section.settings.explorer_heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.explorer_copy != blank %}
+          <div class="ub-refurbishment__section-copy rte">
+            {{ section.settings.explorer_copy }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ub-refurbishment__explorer-shell">
+        <div class="ub-refurbishment__explorer-intro">
+          <div class="ub-refurbishment__explorer-note-card">
+            <p class="ub-refurbishment__explorer-note-eyebrow">Tech condition guide</p>
+            <p class="ub-refurbishment__explorer-note-text">{{ section.settings.tech_explorer_note | escape }}</p>
+          </div>
+          <div class="ub-refurbishment__explorer-note-card ub-refurbishment__explorer-note-card--soft">
+            <p class="ub-refurbishment__explorer-note-eyebrow">Jewellery is one of one</p>
+            <p class="ub-refurbishment__explorer-note-text">{{ section.settings.jewellery_one_of_one_text | escape }}</p>
+          </div>
+        </div>
+
+        <div class="ub-refurbishment__toolbar">
+          <div class="ub-refurbishment__toolbar-head">
+            <p class="ub-refurbishment__toolbar-kicker">Refurbished tech</p>
+            <h3 class="ub-refurbishment__toolbar-title">Compare finish across our graded tech categories</h3>
+          </div>
+
+          <div class="ub-refurbishment__toggle-group ub-refurbishment__toggle-group--conditions" role="group" aria-label="Condition grade">
+            <button class="ub-refurbishment__toggle {% if default_condition == 'fair' %}is-active{% endif %}" type="button" data-condition-button data-condition="fair" aria-pressed="{% if default_condition == 'fair' %}true{% else %}false{% endif %}">Fair</button>
+            <button class="ub-refurbishment__toggle {% if default_condition == 'good' %}is-active{% endif %}" type="button" data-condition-button data-condition="good" aria-pressed="{% if default_condition == 'good' %}true{% else %}false{% endif %}">Good</button>
+            <button class="ub-refurbishment__toggle {% if default_condition == 'like_new' %}is-active{% endif %}" type="button" data-condition-button data-condition="like_new" aria-pressed="{% if default_condition == 'like_new' %}true{% else %}false{% endif %}">Like New</button>
+          </div>
+        </div>
+
+        <div class="ub-refurbishment__item-rail" role="group" aria-label="Items to compare">
+          {% for block in section.blocks %}
+            {% if block.type == 'item' and block.settings.category == 'tech' %}
+              {% assign item_thumb = '' %}
+              {% if block.settings.thumbnail != blank %}
+                {% assign item_thumb = block.settings.thumbnail | image_url: width: 240 %}
+              {% elsif block.settings.display_image != blank %}
+                {% assign item_thumb = block.settings.display_image | image_url: width: 240 %}
+              {% endif %}
+              <button
+                class="ub-refurbishment__item-chip{% if initial_item != blank and block.id == initial_item.id %} is-active{% endif %}"
+                type="button"
+                data-item-button
+                data-item-id="{{ block.id }}"
+                aria-pressed="{% if initial_item != blank and block.id == initial_item.id %}true{% else %}false{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="ub-refurbishment__item-thumb{% if item_thumb == '' %} is-empty{% endif %}">
+                  {% if item_thumb != '' %}
+                    <img src="{{ item_thumb }}" alt="" loading="lazy" width="72" height="72">
+                  {% else %}
+                    <span>{{ block.settings.label | slice: 0 }}</span>
+                  {% endif %}
+                </span>
+                <span class="ub-refurbishment__item-label">{{ block.settings.label | escape }}</span>
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="ub-refurbishment__viewer">
+          <div class="ub-refurbishment__viewer-stage">
+            <div class="ub-refurbishment__viewer-card">
+              <div class="ub-refurbishment__viewer-copy">
+                <p class="ub-refurbishment__viewer-kicker" data-viewer-category>{{ initial_category_name }}</p>
+                <h3 class="ub-refurbishment__viewer-item" data-viewer-item>{{ initial_label | escape }}</h3>
+                <p class="ub-refurbishment__viewer-note" data-viewer-note>{{ initial_explorer_note | escape }}</p>
+              </div>
+
+              <div class="ub-refurbishment__viewer-image-wrap{% if initial_image == '' %} is-empty{% endif %}" data-viewer-image-wrap>
+                <img
+                  {% if initial_image != '' %}
+                    src="{{ initial_image }}"
+                  {% endif %}
+                  alt="{{ initial_label | escape }}"
+                  loading="lazy"
+                  width="960"
+                  height="960"
+                  data-viewer-image
+                  {% if initial_image == '' %}
+                    hidden
+                  {% endif %}
+                >
+                <div class="ub-refurbishment__viewer-placeholder" data-viewer-placeholder {% if initial_image != '' %}hidden{% endif %}>
+                  Preview image coming soon
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ub-refurbishment__viewer-panel">
+            <div class="ub-refurbishment__summary-card">
+              <p class="ub-refurbishment__condition-badge" data-viewer-condition>{{ initial_condition_label }}</p>
+              <h3 class="ub-refurbishment__summary-title">What this condition looks like</h3>
+              <p class="ub-refurbishment__summary-text" data-viewer-summary>{{ initial_summary | escape }}</p>
+              <p class="ub-refurbishment__summary-note" data-viewer-quality-note>{{ initial_quality_note | escape }}</p>
+            </div>
+
+            <div class="ub-refurbishment__aspect-grid" data-aspect-grid>
+              {% if initial_item != blank %}
+                <article class="ub-refurbishment__aspect-card">
+                  <p class="ub-refurbishment__aspect-label">{{ initial_item.settings.aspect_1_label | escape }}</p>
+                  <p class="ub-refurbishment__aspect-text">{{ aspect_1_value | escape }}</p>
+                </article>
+                <article class="ub-refurbishment__aspect-card">
+                  <p class="ub-refurbishment__aspect-label">{{ initial_item.settings.aspect_2_label | escape }}</p>
+                  <p class="ub-refurbishment__aspect-text">{{ aspect_2_value | escape }}</p>
+                </article>
+                <article class="ub-refurbishment__aspect-card">
+                  <p class="ub-refurbishment__aspect-label">{{ initial_item.settings.aspect_3_label | escape }}</p>
+                  <p class="ub-refurbishment__aspect-text">{{ aspect_3_value | escape }}</p>
+                </article>
+                <article class="ub-refurbishment__aspect-card">
+                  <p class="ub-refurbishment__aspect-label">{{ initial_item.settings.aspect_4_label | escape }}</p>
+                  <p class="ub-refurbishment__aspect-text">{{ aspect_4_value | escape }}</p>
+                </article>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-refurb-data>
+    {
+      "defaultCondition": {{ default_condition | json }},
+      "techExplorerNote": {{ section.settings.tech_explorer_note | json }},
+      "techQualityNote": {{ section.settings.tech_quality_note | json }},
+      "items": [
+        {% assign item_index = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'item' and block.settings.category == 'tech' %}
+            {% assign thumb_src = '' %}
+            {% assign display_src = '' %}
+            {% assign fair_image_src = '' %}
+            {% assign good_image_src = '' %}
+            {% assign like_new_image_src = '' %}
+            {% if block.settings.thumbnail != blank %}
+              {% assign thumb_src = block.settings.thumbnail | image_url: width: 240 %}
+            {% elsif block.settings.display_image != blank %}
+              {% assign thumb_src = block.settings.display_image | image_url: width: 240 %}
+            {% endif %}
+            {% if block.settings.display_image != blank %}
+              {% assign display_src = block.settings.display_image | image_url: width: 1600 %}
+            {% elsif block.settings.thumbnail != blank %}
+              {% assign display_src = block.settings.thumbnail | image_url: width: 1600 %}
+            {% endif %}
+            {% if block.settings.fair_image != blank %}
+              {% assign fair_image_src = block.settings.fair_image | image_url: width: 1600 %}
+            {% elsif display_src != '' %}
+              {% assign fair_image_src = display_src %}
+            {% endif %}
+            {% if block.settings.good_image != blank %}
+              {% assign good_image_src = block.settings.good_image | image_url: width: 1600 %}
+            {% elsif display_src != '' %}
+              {% assign good_image_src = display_src %}
+            {% endif %}
+            {% if block.settings.like_new_image != blank %}
+              {% assign like_new_image_src = block.settings.like_new_image | image_url: width: 1600 %}
+            {% elsif display_src != '' %}
+              {% assign like_new_image_src = display_src %}
+            {% endif %}
+            {% if item_index > 0 %},{% endif %}
+            {
+              "id": {{ block.id | json }},
+              "category": {{ block.settings.category | json }},
+              "label": {{ block.settings.label | json }},
+              "thumbnail": {{ thumb_src | json }},
+              "image": {{ display_src | json }},
+              "conditions": {
+                "fair": {
+                  "summary": {{ block.settings.fair_summary | json }},
+                  "image": {{ fair_image_src | json }}
+                },
+                "good": {
+                  "summary": {{ block.settings.good_summary | json }},
+                  "image": {{ good_image_src | json }}
+                },
+                "like_new": {
+                  "summary": {{ block.settings.like_new_summary | json }},
+                  "image": {{ like_new_image_src | json }}
+                }
+              },
+              "aspects": [
+                {
+                  "label": {{ block.settings.aspect_1_label | json }},
+                  "fair": {{ block.settings.aspect_1_fair | json }},
+                  "good": {{ block.settings.aspect_1_good | json }},
+                  "like_new": {{ block.settings.aspect_1_like_new | json }}
+                },
+                {
+                  "label": {{ block.settings.aspect_2_label | json }},
+                  "fair": {{ block.settings.aspect_2_fair | json }},
+                  "good": {{ block.settings.aspect_2_good | json }},
+                  "like_new": {{ block.settings.aspect_2_like_new | json }}
+                },
+                {
+                  "label": {{ block.settings.aspect_3_label | json }},
+                  "fair": {{ block.settings.aspect_3_fair | json }},
+                  "good": {{ block.settings.aspect_3_good | json }},
+                  "like_new": {{ block.settings.aspect_3_like_new | json }}
+                },
+                {
+                  "label": {{ block.settings.aspect_4_label | json }},
+                  "fair": {{ block.settings.aspect_4_fair | json }},
+                  "good": {{ block.settings.aspect_4_good | json }},
+                  "like_new": {{ block.settings.aspect_4_like_new | json }}
+                }
+              ]
+            }
+            {% assign item_index = item_index | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      ]
+    }
+  </script>
+
+  <style>
+    .ub-refurbishment {
+      overflow: clip;
+    }
+
+    .ub-refurbishment__hero,
+    .ub-refurbishment__process,
+    .ub-refurbishment__explorer {
+      position: relative;
+    }
+
+    .ub-refurbishment__hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .ub-refurbishment__eyebrow,
+    .ub-refurbishment__spotlight-kicker,
+    .ub-refurbishment__lane-kicker,
+    .ub-refurbishment__viewer-kicker {
+      margin: 0 0 0.9rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(var(--color-foreground), 0.64);
+    }
+
+    .ub-refurbishment__heading {
+      max-width: 13ch;
+      margin: 0 0 1.4rem;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-size: clamp(3.2rem, 5vw, 5.8rem);
+    }
+
+    .ub-refurbishment__intro {
+      max-width: 58rem;
+      margin-bottom: 1.8rem;
+      color: rgba(var(--color-foreground), 0.78);
+    }
+
+    .ub-refurbishment__intro p:last-child,
+    .ub-refurbishment__spotlight-text p:last-child,
+    .ub-refurbishment__section-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ub-refurbishment__trust-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .ub-refurbishment__trust-pill {
+      padding: 0.9rem 1.2rem;
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: 999px;
+      background: rgba(var(--color-foreground), 0.03);
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .ub-refurbishment__hero-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 1.6rem;
+      align-items: stretch;
+    }
+
+    .ub-refurbishment__spotlight-card,
+    .ub-refurbishment__lane,
+    .ub-refurbishment__explorer-shell {
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: 2.4rem;
+      background: rgb(var(--color-background));
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.06);
+    }
+
+    .ub-refurbishment__spotlight-card {
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      height: 100%;
+    }
+
+    .ub-refurbishment__spotlight-media {
+      aspect-ratio: 1 / 1;
+      background:
+        radial-gradient(circle at top right, rgba(var(--color-foreground), 0.07), transparent 42%),
+        linear-gradient(180deg, rgba(var(--color-foreground), 0.02), rgba(var(--color-foreground), 0.04));
+    }
+
+    .ub-refurbishment__spotlight-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ub-refurbishment__spotlight-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 2rem;
+    }
+
+    .ub-refurbishment__spotlight-title {
+      margin: 0 0 0.9rem;
+      min-height: 3.5em;
+      font-size: 2.2rem;
+      line-height: 1.15;
+    }
+
+    .ub-refurbishment__spotlight-text {
+      flex: 1 1 auto;
+      color: rgba(var(--color-foreground), 0.76);
+    }
+
+    .ub-refurbishment__spotlight-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .ub-refurbishment__spotlight-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+    }
+
+    .ub-refurbishment__section-head {
+      max-width: 72rem;
+      margin: 0 auto 2.2rem;
+      text-align: center;
+    }
+
+    .ub-refurbishment__section-head--compact {
+      margin-bottom: 2rem;
+    }
+
+    .ub-refurbishment__section-title {
+      margin: 0 0 1rem;
+      font-size: clamp(2.8rem, 3vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .ub-refurbishment__section-copy {
+      color: rgba(var(--color-foreground), 0.74);
+    }
+
+    .ub-refurbishment__process {
+      margin-bottom: 4rem;
+    }
+
+    .ub-refurbishment__process-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.8rem;
+    }
+
+    .ub-refurbishment__lane {
+      padding: 2.4rem;
+    }
+
+    .ub-refurbishment__lane-title {
+      margin: 0 0 0.8rem;
+      font-size: 2.4rem;
+      line-height: 1.15;
+    }
+
+    .ub-refurbishment__lane-copy {
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.7);
+    }
+
+    .ub-refurbishment__steps {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .ub-refurbishment__step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+      padding: 1.4rem;
+      border-radius: 1.8rem;
+      background: rgba(var(--color-foreground), 0.03);
+    }
+
+    .ub-refurbishment__step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 999px;
+      background: rgb(var(--color-foreground));
+      color: rgb(var(--color-background));
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .ub-refurbishment__step-copy h4 {
+      margin: 0 0 0.4rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .ub-refurbishment__step-copy p {
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.72);
+    }
+
+    .ub-refurbishment__explorer-shell {
+      padding: 2.2rem;
+    }
+
+    .ub-refurbishment__explorer-intro {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .ub-refurbishment__explorer-note-card {
+      padding: 1.5rem 1.7rem;
+      border-radius: 1.8rem;
+      background: rgba(var(--color-foreground), 0.05);
+    }
+
+    .ub-refurbishment__explorer-note-card--soft {
+      background: rgba(var(--color-foreground), 0.025);
+      box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.07);
+    }
+
+    .ub-refurbishment__explorer-note-eyebrow,
+    .ub-refurbishment__toolbar-kicker {
+      margin: 0 0 0.6rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(var(--color-foreground), 0.6);
+    }
+
+    .ub-refurbishment__explorer-note-text {
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.74);
+    }
+
+    .ub-refurbishment__toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .ub-refurbishment__toolbar-head {
+      flex: 1 1 28rem;
+      min-width: 0;
+    }
+
+    .ub-refurbishment__toolbar-title {
+      margin: 0;
+      font-size: 2.4rem;
+      line-height: 1.14;
+    }
+
+    .ub-refurbishment__toggle-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding: 0.8rem;
+      border-radius: 999px;
+      background: rgba(var(--color-foreground), 0.04);
+    }
+
+    .ub-refurbishment__toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 4.4rem;
+      padding: 1rem 1.8rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-weight: 700;
+      line-height: 1;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .ub-refurbishment__toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .ub-refurbishment__toggle.is-active {
+      border-color: rgba(var(--color-foreground), 0.12);
+      background: rgb(var(--color-background));
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .ub-refurbishment__item-rail {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.8rem;
+      scroll-snap-type: x proximity;
+    }
+
+    .ub-refurbishment__item-rail::-webkit-scrollbar {
+      height: 0.6rem;
+    }
+
+    .ub-refurbishment__item-rail::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(var(--color-foreground), 0.15);
+    }
+
+    .ub-refurbishment__item-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 0 0 auto;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: 1.8rem;
+      background: rgba(var(--color-foreground), 0.02);
+      color: inherit;
+      text-align: left;
+      font: inherit;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      scroll-snap-align: start;
+    }
+
+    .ub-refurbishment__item-chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .ub-refurbishment__item-chip.is-active {
+      border-color: rgba(var(--color-foreground), 0.16);
+      background: rgba(var(--color-foreground), 0.06);
+    }
+
+    .ub-refurbishment__item-thumb {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 5.2rem;
+      height: 5.2rem;
+      border-radius: 1.4rem;
+      background: rgb(var(--color-background));
+      overflow: hidden;
+      font-weight: 700;
+    }
+
+    .ub-refurbishment__item-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ub-refurbishment__item-thumb.is-empty {
+      background: rgba(var(--color-foreground), 0.06);
+    }
+
+    .ub-refurbishment__item-label {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ub-refurbishment__viewer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 1.6rem;
+      align-items: start;
+    }
+
+    .ub-refurbishment__viewer-card,
+    .ub-refurbishment__summary-card,
+    .ub-refurbishment__aspect-card {
+      border-radius: 2rem;
+      background:
+        radial-gradient(circle at top right, rgba(var(--color-foreground), 0.05), transparent 38%),
+        linear-gradient(180deg, rgba(var(--color-foreground), 0.02), rgba(var(--color-foreground), 0.04));
+    }
+
+    .ub-refurbishment__viewer-card {
+      padding: 2rem;
+    }
+
+    .ub-refurbishment__viewer-item {
+      margin: 0 0 0.8rem;
+      font-size: clamp(2.8rem, 3vw, 3.8rem);
+      line-height: 1.08;
+    }
+
+    .ub-refurbishment__viewer-note {
+      max-width: 48rem;
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.72);
+    }
+
+    .ub-refurbishment__viewer-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42rem;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 1.8rem;
+      background: rgb(var(--color-background));
+      box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.06);
+    }
+
+    .ub-refurbishment__viewer-image-wrap img {
+      display: block;
+      width: 100%;
+      max-width: 40rem;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .ub-refurbishment__viewer-image-wrap.is-empty {
+      background: rgba(var(--color-foreground), 0.03);
+    }
+
+    .ub-refurbishment__viewer-placeholder {
+      color: rgba(var(--color-foreground), 0.56);
+      font-weight: 600;
+    }
+
+    .ub-refurbishment__viewer-panel {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .ub-refurbishment__summary-card {
+      padding: 2rem;
+    }
+
+    .ub-refurbishment__condition-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 3.6rem;
+      padding: 0.6rem 1.2rem;
+      margin: 0 0 1.2rem;
+      border-radius: 999px;
+      background: rgb(var(--color-background));
+      box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.08);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .ub-refurbishment__summary-title {
+      margin: 0 0 0.8rem;
+      font-size: 2.2rem;
+    }
+
+    .ub-refurbishment__summary-text,
+    .ub-refurbishment__summary-note {
+      color: rgba(var(--color-foreground), 0.74);
+    }
+
+    .ub-refurbishment__summary-text {
+      margin: 0 0 1rem;
+    }
+
+    .ub-refurbishment__summary-note {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .ub-refurbishment__aspect-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .ub-refurbishment__aspect-card {
+      padding: 1.6rem;
+    }
+
+    .ub-refurbishment__aspect-label {
+      margin: 0 0 0.6rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(var(--color-foreground), 0.62);
+    }
+
+    .ub-refurbishment__aspect-text {
+      margin: 0;
+      color: rgba(var(--color-foreground), 0.78);
+    }
+
+    @media screen and (max-width: 1199px) {
+      .ub-refurbishment__hero,
+      .ub-refurbishment__viewer {
+        grid-template-columns: 1fr;
+      }
+
+      .ub-refurbishment__heading {
+        max-width: none;
+      }
+    }
+
+    @media screen and (max-width: 989px) {
+      .ub-refurbishment__explorer-intro,
+      .ub-refurbishment__hero-cards,
+      .ub-refurbishment__process-grid,
+      .ub-refurbishment__aspect-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ub-refurbishment__lane,
+      .ub-refurbishment__explorer-shell,
+      .ub-refurbishment__viewer-card,
+      .ub-refurbishment__summary-card {
+        padding: 1.8rem;
+      }
+
+      .ub-refurbishment__toolbar {
+        align-items: stretch;
+      }
+
+      .ub-refurbishment__toggle-group {
+        width: 100%;
+      }
+
+      .ub-refurbishment__toggle {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+
+      .ub-refurbishment__viewer-image-wrap {
+        min-height: 28rem;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      .ub-refurbishment__hero,
+      .ub-refurbishment__process {
+        margin-bottom: 3.2rem;
+      }
+
+      .ub-refurbishment__trust-list {
+        gap: 0.7rem;
+      }
+
+      .ub-refurbishment__trust-pill {
+        font-size: 1.25rem;
+      }
+
+      .ub-refurbishment__item-chip {
+        min-width: 15rem;
+      }
+    }
+  </style>
+  <script>
+    (() => {
+      const root = document.getElementById('UnboxedRefurb-{{ section.id }}');
+      if (!root) return;
+
+      const dataNode = root.querySelector('[data-refurb-data]');
+      if (!dataNode) return;
+
+      let payload;
+      try {
+        payload = JSON.parse(dataNode.textContent);
+      } catch (error) {
+        console.error('Unboxed refurbishment hub data could not be parsed.', error);
+        return;
+      }
+
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      if (!items.length) return;
+
+      const labels = {
+        fair: 'Fair',
+        good: 'Good',
+        like_new: 'Like New'
+      };
+
+      const itemButtons = Array.from(root.querySelectorAll('[data-item-button]'));
+      const conditionButtons = Array.from(root.querySelectorAll('[data-condition-button]'));
+      const viewerCategory = root.querySelector('[data-viewer-category]');
+      const viewerItem = root.querySelector('[data-viewer-item]');
+      const viewerNote = root.querySelector('[data-viewer-note]');
+      const viewerCondition = root.querySelector('[data-viewer-condition]');
+      const viewerSummary = root.querySelector('[data-viewer-summary]');
+      const viewerQualityNote = root.querySelector('[data-viewer-quality-note]');
+      const viewerImageWrap = root.querySelector('[data-viewer-image-wrap]');
+      const viewerImage = root.querySelector('[data-viewer-image]');
+      const viewerPlaceholder = root.querySelector('[data-viewer-placeholder]');
+      const aspectGrid = root.querySelector('[data-aspect-grid]');
+
+      const state = {
+        condition: root.dataset.initialCondition || payload.defaultCondition || 'good',
+        itemId: root.dataset.initialItem || items[0].id
+      };
+
+      const getActiveItem = () => items.find(item => item.id === state.itemId) || items[0];
+
+      const createAspectCard = (label, value) => {
+        const card = document.createElement('article');
+        card.className = 'ub-refurbishment__aspect-card';
+
+        const labelNode = document.createElement('p');
+        labelNode.className = 'ub-refurbishment__aspect-label';
+        labelNode.textContent = label || 'Detail';
+
+        const valueNode = document.createElement('p');
+        valueNode.className = 'ub-refurbishment__aspect-text';
+        valueNode.textContent = value || '';
+
+        card.appendChild(labelNode);
+        card.appendChild(valueNode);
+        return card;
+      };
+
+      const syncButtonStates = activeItem => {
+        itemButtons.forEach(button => {
+          const isActive = button.dataset.itemId === activeItem.id;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        conditionButtons.forEach(button => {
+          const isActive = button.dataset.condition === state.condition;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      };
+
+      const render = () => {
+        const activeItem = getActiveItem();
+        if (!activeItem) return;
+
+        state.itemId = activeItem.id;
+
+        const activeCondition = activeItem.conditions[state.condition] || activeItem.conditions.good || activeItem.conditions.fair;
+        const conditionImage = activeCondition && activeCondition.image ? activeCondition.image : activeItem.image;
+
+        if (viewerCategory) viewerCategory.textContent = 'Refurbished tech';
+        if (viewerItem) viewerItem.textContent = activeItem.label || '';
+        if (viewerNote) viewerNote.textContent = payload.techExplorerNote || '';
+        if (viewerCondition) viewerCondition.textContent = labels[state.condition] || 'Fair';
+        if (viewerSummary) viewerSummary.textContent = activeCondition && activeCondition.summary ? activeCondition.summary : '';
+        if (viewerQualityNote) viewerQualityNote.textContent = payload.techQualityNote || '';
+
+        if (viewerImage && conditionImage) {
+          viewerImage.src = conditionImage;
+          viewerImage.alt = activeItem.label || '';
+          viewerImage.hidden = false;
+          if (viewerPlaceholder) viewerPlaceholder.hidden = true;
+          if (viewerImageWrap) viewerImageWrap.classList.remove('is-empty');
+        } else if (viewerImage) {
+          viewerImage.hidden = true;
+          if (viewerPlaceholder) viewerPlaceholder.hidden = false;
+          if (viewerImageWrap) viewerImageWrap.classList.add('is-empty');
+        }
+
+        if (aspectGrid) {
+          aspectGrid.innerHTML = '';
+          (activeItem.aspects || []).forEach(aspect => {
+            const value = aspect ? aspect[state.condition] : '';
+            if (!aspect || (!aspect.label && !value)) return;
+            aspectGrid.appendChild(createAspectCard(aspect.label, value));
+          });
+        }
+
+        syncButtonStates(activeItem);
+      };
+
+      itemButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          state.itemId = button.dataset.itemId;
+          render();
+        });
+      });
+
+      conditionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          state.condition = button.dataset.condition;
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Unboxed Refurbishment Hub",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "background-1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Refurbishment Process" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How we restore, grade and present every item" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Unboxed restores both everyday tech and pre-loved jewellery with the same careful approach: inspect, test, clean, grade and approve only what meets our standards.</p>" },
+
+    { "type": "text", "id": "tech_card_heading", "label": "Tech card heading", "default": "Phones, laptops and wearables that feel ready again" },
+    { "type": "richtext", "id": "tech_card_text", "label": "Tech card text", "default": "<p>Every tech item is checked for performance, cleaned, reset and condition graded so customers know exactly what to expect before they buy.</p>" },
+    { "type": "image_picker", "id": "tech_card_image", "label": "Tech card image" },
+    { "type": "url", "id": "tech_card_link", "label": "Tech card link" },
+    { "type": "text", "id": "tech_card_link_label", "label": "Tech card link label", "default": "Browse refurbished tech" },
+
+    { "type": "text", "id": "jewellery_card_heading", "label": "Jewellery card heading", "default": "Refurbished jewellery with finish, security and presentation in mind" },
+    { "type": "richtext", "id": "jewellery_card_text", "label": "Jewellery card text", "default": "<p>Each piece is authenticated, cleaned and checked for structure, wearability and visual finish before it is approved for sale.</p>" },
+    { "type": "image_picker", "id": "jewellery_card_image", "label": "Jewellery card image" },
+    { "type": "url", "id": "jewellery_card_link", "label": "Jewellery card link" },
+    { "type": "text", "id": "jewellery_card_link_label", "label": "Jewellery card link label", "default": "Explore refurbished jewellery" },
+
+    { "type": "text", "id": "process_heading", "label": "Process heading", "default": "Two categories, one quality standard" },
+    { "type": "richtext", "id": "process_copy", "label": "Process copy", "default": "<p>Tech and jewellery need different specialist checks, but both are cleaned, reviewed and graded carefully before they are listed on site.</p>" },
+
+    { "type": "text", "id": "explorer_heading", "label": "Explorer heading", "default": "Compare our refurbished tech conditions" },
+    { "type": "richtext", "id": "explorer_copy", "label": "Explorer copy", "default": "<p>Use the guide below to compare Fair, Good and Like New across smartphones, tablets, laptops, gaming and smartwatches. Jewellery is sold one piece at a time and described individually instead of being grouped into standard grades.</p>" },
+    { "type": "text", "id": "tech_explorer_note", "label": "Tech explorer note", "default": "Use this guide to compare cosmetic finish across our tech categories." },
+    { "type": "text", "id": "tech_quality_note", "label": "Tech quality note", "default": "Every tech grade is fully tested, reset and approved before sale. The difference is cosmetic wear only." },
+    { "type": "text", "id": "jewellery_one_of_one_text", "label": "Jewellery one-of-one note", "default": "Every jewellery piece is listed as its own one-off item, with its finish and details described individually rather than assigned to Fair, Good or Like New." },
+    {
+      "type": "select",
+      "id": "default_condition",
+      "label": "Default condition",
+      "default": "good",
+      "options": [
+        { "value": "fair", "label": "Fair" },
+        { "value": "good", "label": "Good" },
+        { "value": "like_new", "label": "Like New" }
+      ]
+    },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "tech",
+          "options": [
+            { "value": "tech", "label": "Refurbished tech" },
+            { "value": "jewellery", "label": "Refurbished jewellery" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Inspection" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Describe what happens at this stage of the process." }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Explorer item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "tech",
+          "options": [
+            { "value": "tech", "label": "Refurbished tech" },
+            { "value": "jewellery", "label": "Refurbished jewellery" }
+          ]
+        },
+        { "type": "text", "id": "label", "label": "Item label", "default": "Smartphones" },
+        { "type": "image_picker", "id": "thumbnail", "label": "Thumbnail image" },
+        { "type": "image_picker", "id": "display_image", "label": "Main display image" },
+        { "type": "image_picker", "id": "fair_image", "label": "Fair image" },
+        { "type": "image_picker", "id": "good_image", "label": "Good image" },
+        { "type": "image_picker", "id": "like_new_image", "label": "Like New image" },
+
+        { "type": "textarea", "id": "fair_summary", "label": "Fair summary", "default": "Visible wear and signs of use, but fully checked and ready for dependable use." },
+        { "type": "textarea", "id": "good_summary", "label": "Good summary", "default": "Light signs of use with a clean overall presentation and strong day-to-day value." },
+        { "type": "textarea", "id": "like_new_summary", "label": "Like New summary", "default": "Very minimal visible wear with a polished, close-to-new overall finish." },
+
+        { "type": "text", "id": "aspect_1_label", "label": "Aspect 1 label", "default": "Finish" },
+        { "type": "text", "id": "aspect_1_fair", "label": "Aspect 1 - Fair", "default": "Noticeable cosmetic wear." },
+        { "type": "text", "id": "aspect_1_good", "label": "Aspect 1 - Good", "default": "Light visible wear." },
+        { "type": "text", "id": "aspect_1_like_new", "label": "Aspect 1 - Like New", "default": "Very minimal visible wear." },
+
+        { "type": "text", "id": "aspect_2_label", "label": "Aspect 2 label", "default": "Detail" },
+        { "type": "text", "id": "aspect_2_fair", "label": "Aspect 2 - Fair", "default": "Budget-first cosmetic finish." },
+        { "type": "text", "id": "aspect_2_good", "label": "Aspect 2 - Good", "default": "Balanced finish and value." },
+        { "type": "text", "id": "aspect_2_like_new", "label": "Aspect 2 - Like New", "default": "Premium presentation." },
+
+        { "type": "text", "id": "aspect_3_label", "label": "Aspect 3 label", "default": "Quality" },
+        { "type": "text", "id": "aspect_3_fair", "label": "Aspect 3 - Fair", "default": "Fully checked and reliable." },
+        { "type": "text", "id": "aspect_3_good", "label": "Aspect 3 - Good", "default": "Fully checked and reliable." },
+        { "type": "text", "id": "aspect_3_like_new", "label": "Aspect 3 - Like New", "default": "Fully checked and reliable." },
+
+        { "type": "text", "id": "aspect_4_label", "label": "Aspect 4 label", "default": "Best for" },
+        { "type": "text", "id": "aspect_4_fair", "label": "Aspect 4 - Fair", "default": "Shoppers focused on value." },
+        { "type": "text", "id": "aspect_4_good", "label": "Aspect 4 - Good", "default": "Most everyday shoppers." },
+        { "type": "text", "id": "aspect_4_like_new", "label": "Aspect 4 - Like New", "default": "Buyers wanting the cleanest finish." }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "Unboxed Refurbishment Hub"
+    }
+  ]
+}
+{% endschema %}

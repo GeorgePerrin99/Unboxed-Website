@@ -1,0 +1,78 @@
+{%- liquid
+  assign target_collection = collection_object | default: collection
+  assign fallback_text = ''
+  assign handle = target_collection.handle | default: ''
+
+  if target_collection.description != blank
+    echo target_collection.description
+  else
+    case handle
+      when 'smartphones', 'iphones'
+        assign fallback_text = 'Fully tested, condition-graded smartphones with dependable everyday performance.'
+      when 'samsung-galaxy'
+        assign fallback_text = 'Fully tested Samsung Galaxy phones with dependable performance and clear condition grading.'
+      when 'google-pixel'
+        assign fallback_text = 'Fully tested Google Pixel phones with dependable performance and clear condition grading.'
+      when 'tablets', 'ipads', 'samsung-galaxy-tab'
+        assign fallback_text = 'Fully tested tablets with dependable performance for work, streaming and everyday use.'
+      when 'laptops', 'macbooks'
+        assign fallback_text = 'Refurbished laptops with dependable performance for work, study and everyday use.'
+      when 'gaming', 'playstation', 'xbox', 'nintendo-switch'
+        assign fallback_text = 'Refurbished gaming gear, tested for smooth play and dependable performance.'
+      when 'smartwatches', 'apple-watch'
+        assign fallback_text = 'Tested smartwatches with dependable battery life and ready-to-wear performance.'
+      when 'audio', 'airpods', 'beats-by-dr-dre'
+        assign fallback_text = 'Fully tested audio gear with clean sound and dependable everyday performance.'
+      when 'jewellery'
+        assign fallback_text = 'Carefully restored jewellery chosen for finish, authenticity and everyday wearability.'
+      when 'rings'
+        assign fallback_text = 'Carefully restored rings selected for finish, authenticity and ready-to-wear presentation.'
+      when 'necklaces'
+        assign fallback_text = 'Carefully restored necklaces selected for finish, authenticity and everyday wearability.'
+      when 'bracelets'
+        assign fallback_text = 'Carefully restored bracelets selected for finish, authenticity and everyday wearability.'
+      when 'earrings'
+        assign fallback_text = 'Carefully restored earrings selected for finish, authenticity and ready-to-wear presentation.'
+      when 'pendants'
+        assign fallback_text = 'Carefully restored pendants selected for finish, authenticity and everyday wearability.'
+      when 'bangles'
+        assign fallback_text = 'Carefully restored bangles selected for finish, authenticity and ready-to-wear presentation.'
+    endcase
+
+    if fallback_text == blank
+      if handle contains 'iphone' or handle contains 'galaxy' or handle contains 'pixel' or handle contains 'phone'
+        assign fallback_text = 'Fully tested, condition-graded smartphones with dependable everyday performance.'
+      elsif handle contains 'tablet' or handle contains 'ipad'
+        assign fallback_text = 'Fully tested tablets with dependable performance for work, streaming and everyday use.'
+      elsif handle contains 'laptop' or handle contains 'macbook'
+        assign fallback_text = 'Refurbished laptops with dependable performance for work, study and everyday use.'
+      elsif handle contains 'watch'
+        assign fallback_text = 'Tested smartwatches with dependable battery life and ready-to-wear performance.'
+      elsif handle contains 'audio' or handle contains 'airpod' or handle contains 'beat' or handle contains 'headphone' or handle contains 'earbud'
+        assign fallback_text = 'Fully tested audio gear with clean sound and dependable everyday performance.'
+      elsif handle contains 'gaming' or handle contains 'playstation' or handle contains 'xbox' or handle contains 'nintendo'
+        assign fallback_text = 'Refurbished gaming gear, tested for smooth play and dependable performance.'
+      elsif handle contains 'ring'
+        assign fallback_text = 'Carefully restored rings selected for finish, authenticity and ready-to-wear presentation.'
+      elsif handle contains 'necklace'
+        assign fallback_text = 'Carefully restored necklaces selected for finish, authenticity and everyday wearability.'
+      elsif handle contains 'bracelet'
+        assign fallback_text = 'Carefully restored bracelets selected for finish, authenticity and everyday wearability.'
+      elsif handle contains 'earring'
+        assign fallback_text = 'Carefully restored earrings selected for finish, authenticity and ready-to-wear presentation.'
+      elsif handle contains 'pendant'
+        assign fallback_text = 'Carefully restored pendants selected for finish, authenticity and everyday wearability.'
+      elsif handle contains 'bangle'
+        assign fallback_text = 'Carefully restored bangles selected for finish, authenticity and ready-to-wear presentation.'
+      elsif handle contains 'jewellery' or handle contains 'jewelry'
+        assign fallback_text = 'Carefully restored jewellery chosen for finish, authenticity and everyday wearability.'
+      else
+        assign fallback_text = 'Carefully checked pieces with dependable quality, clear presentation and ready-to-shop confidence.'
+      endif
+    endif
+
+    echo '<p>'
+    echo fallback_text
+    echo '</p>'
+  endif
+-%}

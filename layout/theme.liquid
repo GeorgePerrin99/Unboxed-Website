@@ -47,6 +47,10 @@
       assign body_font_medium = settings.type_body_font | font_modify: 'weight', '500'
       assign body_font_semibold = settings.type_body_font | font_modify: 'weight', '600'
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', '700'
+      assign header_font_display = settings.type_header_font | font_modify: 'weight', '600'
+      if header_font_display == blank
+        assign header_font_display = settings.type_header_font
+      endif
 
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
@@ -62,6 +66,7 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ header_font_display | font_face: font_display: 'swap' }}
 
 
       {% for scheme in settings.color_schemes -%}
@@ -131,9 +136,9 @@
       --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
 
 
-      --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-      --font-heading-style: {{ settings.type_header_font.style }};
-      --font-heading-weight: {{ settings.type_header_font.weight }}; 
+      --font-heading-family: {{ header_font_display.family }}, {{ header_font_display.fallback_families }};
+      --font-heading-style: {{ header_font_display.style }};
+      --font-heading-weight: {{ header_font_display.weight }}; 
       --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
       --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
@@ -293,8 +298,8 @@
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+    {%- unless header_font_display.system? -%}
+      <link rel="preload" as="font" href="{{ header_font_display | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>

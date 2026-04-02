@@ -14,6 +14,8 @@
 {%- style -%}
     .footer {
         margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+        background: {{ settings.bg_color }};
+        border-top: 1px solid rgba(18, 18, 18, 0.08);
     }
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -30,6 +32,256 @@
             margin-top: {{ section.settings.margin_top }}px;
         }
     }
+{%- endstyle -%}
+{%- style -%}
+  .footer .footer__content-topbar-main {
+    border-bottom: 1px solid rgba(18, 18, 18, 0.08);
+  }
+
+  .footer .footer__content-topbar-wrapper {
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .footer .footer__content-topbar-wrapper--count-1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer .footer__content-topbar-wrapper--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer .footer__content-topbar-wrapper--count-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer .topbar_item.call {
+    justify-self: end;
+  }
+
+  .footer .contact_number,
+  .footer .contact_info span,
+  .footer .contact_info a {
+    color: rgba(var(--color-foreground), 0.78);
+    text-decoration: none;
+  }
+
+  .footer .contact_info a:hover,
+  .footer .footer-block__details-content a:hover,
+  .footer .copyright__content a:hover,
+  .footer .policies a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .footer .footer__content-top {
+    padding-top: 2.8rem;
+  }
+
+  .footer .footer__blocks-wrapper {
+    align-items: start;
+    display: grid !important;
+    gap: 2.8rem 3rem;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .footer .footer__blocks-wrapper .footer-block.grid__item,
+  .footer .footer__content-top .grid--4-col-desktop.custom-newsletter .grid__item,
+  .footer .footer__content-top .grid--4-col-desktop.custom-newsletter .grid__item.footer-block--newsletter {
+    margin: 0;
+    max-width: none !important;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    row-gap: 1.2rem;
+    width: auto !important;
+  }
+
+  .footer .footer-block {
+    padding-right: 0;
+  }
+
+  .footer .footer-block__heading {
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    width: auto;
+    word-break: normal;
+  }
+
+  .footer .footer-block__details-content,
+  .footer .wbfootcont,
+  .footer .footer-block__newsletter {
+    color: rgba(var(--color-foreground), 0.78);
+    max-width: 100%;
+  }
+
+  .footer .footer-block__details-content,
+  .footer .footer-block__details-content .list-menu__item--link,
+  .footer .wbfootcont,
+  .footer .wbfootcont p,
+  .footer .wbfootcont span,
+  .footer .wb_news_content,
+  .footer .footer-block__newsletter .newsletter-form small {
+    word-break: normal;
+  }
+
+  .footer .footer-block__details-content li + li,
+  .footer .contact_info li + li {
+    margin-top: 0.8rem;
+  }
+
+  .footer .fsub_cont {
+    margin-top: 1.2rem;
+    max-width: 32rem;
+  }
+
+  .footer .footer-block--newsletter {
+    background: rgba(248, 245, 238, 0.78);
+    border: 1px solid rgba(18, 18, 18, 0.06);
+    border-radius: 2rem;
+    padding: 1.8rem;
+    text-align: center;
+  }
+
+  .footer .footer-block--newsletter .footer-block__heading {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .footer .wb_news_content {
+    margin-bottom: 1.4rem;
+    max-width: none;
+    text-align: center;
+  }
+
+  .footer .footer-block--newsletter .newsletter-form {
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 0;
+    max-width: none;
+  }
+
+  .footer .footer-block--newsletter .newsletter-form__field-wrapper {
+    max-width: none;
+  }
+
+  .footer .footer-block--newsletter .newsletter-form__field-wrapper .field {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 1.6rem;
+    display: flex !important;
+    flex-wrap: nowrap;
+    padding-right: 0.4rem;
+    width: 100%;
+  }
+
+  .footer .footer-block--newsletter .newsletter-form__field-wrapper .field__input {
+    background: transparent;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-right: 1.6rem;
+    width: 100% !important;
+  }
+
+  .footer .footer-block--newsletter .field__label {
+    display: none;
+  }
+
+  .footer .footer-block--newsletter .newsletter-form__button {
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+    flex: 0 0 auto;
+    justify-content: center;
+    border-radius: 1.2rem;
+    min-width: auto;
+    padding-inline: 1.8rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    white-space: nowrap;
+    width: auto !important;
+  }
+
+  .footer .footer__content-bottom {
+    border-top: 1px solid rgba(18, 18, 18, 0.08);
+    margin-top: 2.6rem;
+    padding-top: 1.8rem;
+  }
+
+  .footer .policies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.6rem;
+  }
+
+  .footer .footer_copyright_wrapper {
+    background: rgba(255, 255, 255, 0.26);
+    border-top: 1px solid rgba(18, 18, 18, 0.08);
+    margin-top: 1.6rem;
+  }
+
+  .footer .footer__content-bottom-wrapper {
+    gap: 1.6rem;
+  }
+
+  .footer .footer-block--newsletter .bottom__text {
+    display: block;
+    line-height: 1.6;
+    margin-top: 1.2rem;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 992px) {
+    .footer .footer__blocks-wrapper.custom-newsletter {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1fr) minmax(32rem, 1.45fr) !important;
+    }
+
+    .footer .footer-block--newsletter {
+      align-self: start;
+      margin-top: 0;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .footer .footer__content-topbar-wrapper,
+    .footer .footer__content-topbar-wrapper--count-2,
+    .footer .footer__content-topbar-wrapper--count-3 {
+      grid-template-columns: 1fr;
+    }
+
+    .footer .footer__blocks-wrapper {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer .topbar_item.call {
+      justify-self: start;
+    }
+
+    .footer .footer__content-top {
+      padding-top: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .footer .footer__blocks-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .footer .newsletter-form__field-wrapper .field {
+      grid-template-columns: 1fr;
+    }
+
+    .footer .footer-block--newsletter .newsletter-form__button {
+      width: 100%;
+    }
+  }
 {%- endstyle -%}
 {%- style -%}
   .marquee .marquee_inner-{{ section.id }}.marquee-child{
@@ -92,6 +344,28 @@
         if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
             assign has_social_icons = false
         endif
+        assign show_social_column = false
+        if section.settings.show_social and has_social_icons
+            assign show_social_column = true
+        endif
+        assign show_logo_column = false
+        if section.settings.footer_logo != blank
+            assign show_logo_column = true
+        endif
+        assign show_contact_column = false
+        if section.settings.contact_number != blank
+            assign show_contact_column = true
+        endif
+        assign topbar_items = 0
+        if show_social_column
+            assign topbar_items = topbar_items | plus: 1
+        endif
+        if show_logo_column
+            assign topbar_items = topbar_items | plus: 1
+        endif
+        if show_contact_column
+            assign topbar_items = topbar_items | plus: 1
+        endif
         if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and has_social_icons == false and section.settings.enable_follow_on_shop == false
             assign only_empty_brand = true
         endif
@@ -102,19 +376,22 @@
     -%}
     <div class="footer__content-topbar-main">
     <div class="footer__content-topbar page-width">
-      {% if section.settings.show_social == true or section.settings.footer_logo != blank or section.settings.contact_number != blank %}
-      <div class="footer__content-topbar-wrapper section-{{ section.id }}-padding grid grid--1-col-tablet-down grid--3-col-desktop grid--2-col grid--3-col-tablet {{ footer_grid_class }}">
-        <div class="topbar_item grid__item">
+      {% if topbar_items > 0 %}
+      <div class="footer__content-topbar-wrapper footer__content-topbar-wrapper--count-{{ topbar_items }} section-{{ section.id }}-padding">
+        {% if show_social_column %}
+        <div class="topbar_item">
           {% if section.settings.social_heading != blank -%}
               <div class="h4 social_heading">{{ section.settings.social_heading }}</div>
             {% endif %}
-            {% if section.settings.show_social == true %}
+            {% if show_social_column %}
               <div class="footer__column footer--social">
                 {%- render 'social-icons', show_bg : section.settings.show_bg -%}
             </div>
           {% endif %}
         </div>
-      <div class="topbar_item grid__item">
+        {% endif %}
+      {% if show_logo_column %}
+      <div class="topbar_item">
         {%- if section.settings.footer_logo != blank -%}
           {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name | escape -%}
           {%- assign logo_height = section.settings.footer-logo_width | divided_by: section.settings.footer_logo.aspect_ratio | round -%}
@@ -130,11 +407,14 @@
           </a>
         {%- endif -%}
       </div>
-      <div class="topbar_item grid__item call">
+      {% endif %}
+      {% if show_contact_column %}
+      <div class="topbar_item call">
         {% if section.settings.contact_number %}
           <div class="p contact_number"> {%- if section.settings.contact_number != blank -%} {% render 'icon-fcontact' %} {% endif %} {{ section.settings.contact_number }}</div>
         {% endif %}
       </div>
+      {% endif %}
     </div>
   {% endif %}
 </div>
@@ -186,13 +466,18 @@
                                               <li>
                                                 {%- if block.settings.footer_contact_no != blank -%}
                                                   {% if block.settings.icon == true %}{% render 'icon-fcontact' %} {% endif %}
-                                                    <span>{{ block.settings.footer_contact_no }}</span>
+                                                    <a href="tel:{{ block.settings.footer_contact_no | replace: ' ', '' }}">{{ block.settings.footer_contact_no }}</a>
                                                 {%- endif -%}
                                               </li>
                                               <li>
                                                 {%- if block.settings.footer_contact_id != blank -%}
+                                                  {%- assign footer_email = block.settings.footer_contact_id | remove: 'Email:' | strip -%}
                                                   {% if block.settings.icon == true %}{% render 'icon-fmail' %}{% endif %}
-                                                   <span>{{ block.settings.footer_contact_id }}</span>
+                                                   {% if footer_email contains '@' %}
+                                                     <a href="mailto:{{ footer_email }}">{{ footer_email }}</a>
+                                                   {% else %}
+                                                     <span>{{ block.settings.footer_contact_id }}</span>
+                                                   {% endif %}
                                                 {%- endif -%}
                                               </li>
                                               {%- if block.settings.contsubtext != blank -%}
@@ -242,17 +527,17 @@
                                                                         autofocus
                                                                         aria-invalid="true"
                                                                         aria-describedby="ContactFooter-error"
-                                                                    {% elsif form.posted_successfully? %}
+                                                            {% elsif form.posted_successfully? %}
                                                                         aria-describedby="ContactFooter-success"
                                                                     {% endif %}
-                                                                    placeholder="{{ 'newsletter.label' | t }}"
+                                                                    placeholder="Email address"
                                                                     required
                                                             >
                                                             <label class="field__label"
                                                                    for="NewsletterForm--{{ section.id }}">
-                                                                {{ 'newsletter.label' | t }}
+                                                                Email address
                                                             </label>
-                                                            <button type="submit" class="newsletter-form__button field__button button button--primary" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}"><span>{{ 'newsletter.button_label' | t }}</span></button>
+                                                            <button type="submit" class="newsletter-form__button field__button button button--primary" name="commit" id="Subscribe" aria-label="Get discount"><span>Get discount</span></button>
                                                         </div>
                                                         {% if block.settings.news_bottom_text %}
                                                           <small class="bottom__text">{{ block.settings.news_bottom_text }}</small>
@@ -269,7 +554,7 @@
                                                     {%- if form.posted_successfully? -%}
                                                         <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>
                                                           {% render 'icon-success' -%}
-                                                          {{- 'newsletter.success' | t }}
+                                                          Check your email for your welcome discount.
                                                         </h3>
                                                     {%- endif -%}
                                                 {%- endform -%}
@@ -402,7 +687,6 @@
               <small class="copyright__content"
               ><span>&copy; {{ 'now' | date: '%Y' }},</span> {{ shop.name | link_to: routes.root_url }}&nbsp;
               </small>
-              <small class="copyright__content">{{ powered_by_link }}</small>
             </div>
             {%- endif -%}
             {%- if section.settings.payment_enable -%}

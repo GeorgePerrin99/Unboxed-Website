@@ -1,0 +1,611 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .home-showcase-{{ section.id }} {
+    --showcase-card-radius: 2.8rem;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__grid {
+    display: grid;
+    gap: clamp(1.6rem, 2vw, 2.4rem);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: minmax(30rem, auto) minmax(25rem, auto);
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card {
+    border: 1px solid rgba(18, 18, 18, 0.08);
+    border-radius: var(--showcase-card-radius);
+    display: grid;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card:hover {
+    box-shadow: 0 2.2rem 5rem rgba(15, 16, 16, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--jewellery {
+    background: linear-gradient(180deg, #fbf4e8 0%, #f6ead4 100%);
+    grid-column: span 6;
+    grid-row: span 2;
+    grid-template-rows: auto minmax(28rem, 1fr);
+    min-height: auto;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--tech {
+    background: linear-gradient(135deg, #f5f7f6 0%, #e7ece8 100%);
+    grid-column: span 6;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    min-height: auto;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--promise {
+    background: linear-gradient(180deg, #fcfcfa 0%, #eef2ef 100%);
+    grid-column: span 3;
+    grid-template-rows: auto minmax(13.5rem, 1fr);
+    min-height: auto;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--gaming {
+    background: linear-gradient(180deg, #f3f5f7 0%, #e3e8ed 100%);
+    grid-column: span 3;
+    grid-template-rows: auto minmax(13.5rem, 1fr);
+    min-height: auto;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: clamp(2.2rem, 2.6vw, 3.6rem);
+    z-index: 1;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__content--tech {
+    justify-content: center;
+    max-width: 46rem;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__eyebrow {
+    color: rgba(15, 16, 16, 0.7);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    line-height: 1.2;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__title {
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    margin: 0;
+    max-width: 14ch;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--jewellery .home-showcase__title {
+    font-size: clamp(3.2rem, 3.9vw, 5.4rem);
+    max-width: 12ch;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--tech .home-showcase__title {
+    font-size: clamp(2.8rem, 3vw, 4.2rem);
+    max-width: 12ch;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__card--promise .home-showcase__title,
+  .home-showcase-{{ section.id }} .home-showcase__card--gaming .home-showcase__title {
+    font-size: clamp(2.3rem, 2vw, 3.2rem);
+    max-width: 13ch;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__text {
+    color: rgba(15, 16, 16, 0.76);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 54ch;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__text p {
+    margin: 0;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__actions {
+    margin-top: auto;
+    padding-top: 0.6rem;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__button.button,
+  .home-showcase-{{ section.id }} .home-showcase__button.button.button--secondary {
+    min-width: 0;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media {
+    min-height: 18rem;
+    position: relative;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--jewellery {
+    min-height: 30rem;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--tech {
+    min-height: 100%;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media img,
+  .home-showcase-{{ section.id }} .home-showcase__media .placeholder-svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--tech img {
+    object-fit: contain;
+    object-position: center bottom;
+    padding: clamp(1rem, 2vw, 2rem);
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--promise img {
+    object-position: center bottom;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--promise,
+  .home-showcase-{{ section.id }} .home-showcase__media--gaming {
+    min-height: 13.5rem;
+  }
+
+  .home-showcase-{{ section.id }} .home-showcase__media--gaming img {
+    object-position: center bottom;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .home-showcase-{{ section.id }} .home-showcase__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: none;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--jewellery,
+    .home-showcase-{{ section.id }} .home-showcase__card--tech {
+      grid-column: 1 / -1;
+      min-height: auto;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--jewellery {
+      grid-row: auto;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--promise,
+    .home-showcase-{{ section.id }} .home-showcase__card--gaming {
+      grid-column: span 1;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--tech {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(24rem, 1fr);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--tech .home-showcase__title,
+    .home-showcase-{{ section.id }} .home-showcase__card--jewellery .home-showcase__title {
+      max-width: 12ch;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__media--jewellery {
+      min-height: 30rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.65 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.65 | round: 0 }}px;
+    }
+
+    .home-showcase-{{ section.id }} {
+      --showcase-card-radius: 2rem;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card,
+    .home-showcase-{{ section.id }} .home-showcase__card--promise,
+    .home-showcase-{{ section.id }} .home-showcase__card--gaming {
+      grid-column: 1 / -1;
+      min-height: auto;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--jewellery {
+      grid-template-rows: auto minmax(24rem, 1fr);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--promise,
+    .home-showcase-{{ section.id }} .home-showcase__card--gaming {
+      grid-template-rows: auto minmax(20rem, 1fr);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__content {
+      padding: 2rem 1.8rem;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__title {
+      max-width: none;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--jewellery .home-showcase__title {
+      font-size: clamp(2.8rem, 8vw, 3.8rem);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--tech .home-showcase__title {
+      font-size: clamp(2.4rem, 7vw, 3.2rem);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__card--promise .home-showcase__title,
+    .home-showcase-{{ section.id }} .home-showcase__card--gaming .home-showcase__title {
+      font-size: clamp(2rem, 6vw, 2.8rem);
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__media--jewellery {
+      min-height: 24rem;
+    }
+
+    .home-showcase-{{ section.id }} .home-showcase__media--tech {
+      min-height: 22rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="home-showcase-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="home-showcase__grid">
+      <article class="home-showcase__card home-showcase__card--jewellery">
+        <div class="home-showcase__content">
+          {%- if section.settings.jewellery_eyebrow != blank -%}
+            <p class="home-showcase__eyebrow">{{ section.settings.jewellery_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.jewellery_heading != blank -%}
+            <h2 class="home-showcase__title">{{ section.settings.jewellery_heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.jewellery_text != blank -%}
+            <div class="home-showcase__text rte">{{ section.settings.jewellery_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.jewellery_button_label != blank -%}
+            <div class="home-showcase__actions">
+              <a
+                {% if section.settings.jewellery_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.jewellery_link }}"
+                {% endif %}
+                class="home-showcase__button button"
+              >
+                <span>{{ section.settings.jewellery_button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="home-showcase__media home-showcase__media--jewellery">
+          {%- if section.settings.jewellery_image != blank -%}
+            {{ section.settings.jewellery_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1100px) 50vw, 100vw', alt: section.settings.jewellery_heading | escape }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </article>
+
+      <article class="home-showcase__card home-showcase__card--tech">
+        <div class="home-showcase__content home-showcase__content--tech">
+          {%- if section.settings.tech_eyebrow != blank -%}
+            <p class="home-showcase__eyebrow">{{ section.settings.tech_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.tech_heading != blank -%}
+            <h2 class="home-showcase__title">{{ section.settings.tech_heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.tech_text != blank -%}
+            <div class="home-showcase__text rte">{{ section.settings.tech_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.tech_button_label != blank -%}
+            <div class="home-showcase__actions">
+              <a
+                {% if section.settings.tech_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.tech_link }}"
+                {% endif %}
+                class="home-showcase__button button"
+              >
+                <span>{{ section.settings.tech_button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="home-showcase__media home-showcase__media--tech">
+          {%- if section.settings.tech_image != blank -%}
+            {{ section.settings.tech_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1100px) 33vw, 100vw', alt: section.settings.tech_heading | escape }}
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </article>
+
+      <article class="home-showcase__card home-showcase__card--promise">
+        <div class="home-showcase__content">
+          {%- if section.settings.promise_eyebrow != blank -%}
+            <p class="home-showcase__eyebrow">{{ section.settings.promise_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.promise_heading != blank -%}
+            <h3 class="home-showcase__title">{{ section.settings.promise_heading }}</h3>
+          {%- endif -%}
+          {%- if section.settings.promise_text != blank -%}
+            <div class="home-showcase__text rte">{{ section.settings.promise_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.promise_button_label != blank -%}
+            <div class="home-showcase__actions">
+              <a
+                {% if section.settings.promise_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.promise_link }}"
+                {% endif %}
+                class="home-showcase__button button button--secondary"
+              >
+                <span>{{ section.settings.promise_button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="home-showcase__media home-showcase__media--promise">
+          {%- if section.settings.promise_image != blank -%}
+            {{ section.settings.promise_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 1100px) 25vw, 100vw', alt: section.settings.promise_heading | escape }}
+          {%- else -%}
+            {{ 'collection-3' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </article>
+
+      <article class="home-showcase__card home-showcase__card--gaming">
+        <div class="home-showcase__content">
+          {%- if section.settings.gaming_eyebrow != blank -%}
+            <p class="home-showcase__eyebrow">{{ section.settings.gaming_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.gaming_heading != blank -%}
+            <h3 class="home-showcase__title">{{ section.settings.gaming_heading }}</h3>
+          {%- endif -%}
+          {%- if section.settings.gaming_text != blank -%}
+            <div class="home-showcase__text rte">{{ section.settings.gaming_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.gaming_button_label != blank -%}
+            <div class="home-showcase__actions">
+              <a
+                {% if section.settings.gaming_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.gaming_link }}"
+                {% endif %}
+                class="home-showcase__button button"
+              >
+                <span>{{ section.settings.gaming_button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="home-showcase__media home-showcase__media--gaming">
+          {%- if section.settings.gaming_image != blank -%}
+            {{ section.settings.gaming_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 1100px) 25vw, 100vw', alt: section.settings.gaming_heading | escape }}
+          {%- else -%}
+            {{ 'collection-4' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Jewellery card"
+    },
+    {
+      "type": "image_picker",
+      "id": "jewellery_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "jewellery_eyebrow",
+      "label": "Eyebrow",
+      "default": "Refurbished jewellery"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "jewellery_heading",
+      "label": "Heading",
+      "default": "Restored jewellery with standout finish"
+    },
+    {
+      "type": "richtext",
+      "id": "jewellery_text",
+      "label": "Text",
+      "default": "<p>Beautiful pieces, professionally cleaned, polished and checked so they feel ready to wear, gift and keep.</p>"
+    },
+    {
+      "type": "text",
+      "id": "jewellery_button_label",
+      "label": "Button label",
+      "default": "Shop jewellery"
+    },
+    {
+      "type": "url",
+      "id": "jewellery_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tech card"
+    },
+    {
+      "type": "image_picker",
+      "id": "tech_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tech_eyebrow",
+      "label": "Eyebrow",
+      "default": "Refurbished tech"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tech_heading",
+      "label": "Heading",
+      "default": "Tested devices, ready for everyday use"
+    },
+    {
+      "type": "richtext",
+      "id": "tech_text",
+      "label": "Text",
+      "default": "<p>Shop phones, tablets, laptops and more with clear condition grading and dependable everyday performance.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tech_button_label",
+      "label": "Button label",
+      "default": "Shop tech"
+    },
+    {
+      "type": "url",
+      "id": "tech_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Promise card"
+    },
+    {
+      "type": "image_picker",
+      "id": "promise_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "promise_eyebrow",
+      "label": "Eyebrow",
+      "default": "Quality promise"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "promise_heading",
+      "label": "Heading",
+      "default": "See how we inspect, restore and grade"
+    },
+    {
+      "type": "richtext",
+      "id": "promise_text",
+      "label": "Text",
+      "default": "<p>Understand the checks behind every item before it goes live on the site.</p>"
+    },
+    {
+      "type": "text",
+      "id": "promise_button_label",
+      "label": "Button label",
+      "default": "See our process"
+    },
+    {
+      "type": "url",
+      "id": "promise_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Gaming card"
+    },
+    {
+      "type": "image_picker",
+      "id": "gaming_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "gaming_eyebrow",
+      "label": "Eyebrow",
+      "default": "Refurbished gaming"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gaming_heading",
+      "label": "Heading",
+      "default": "Consoles and accessories, ready to play"
+    },
+    {
+      "type": "richtext",
+      "id": "gaming_text",
+      "label": "Text",
+      "default": "<p>Save on professionally tested gaming gear without losing the excitement.</p>"
+    },
+    {
+      "type": "text",
+      "id": "gaming_button_label",
+      "label": "Button label",
+      "default": "Shop gaming"
+    },
+    {
+      "type": "url",
+      "id": "gaming_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home showcase"
+    }
+  ]
+}
+{% endschema %}

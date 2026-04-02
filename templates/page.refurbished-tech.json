@@ -1,0 +1,372 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "heading_size": "h0",
+        "head_align": "left",
+        "heading_color_scheme": "background-1",
+        "head_space": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "unboxed_tech_landing_Pb7YwL": {
+      "type": "unboxed-tech-landing",
+      "blocks": {
+        "category_7wLMQm": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/make-the-screen-just-a-generic-wavey-background-that-they-have-for-apple.png",
+            "title": "Smartphones",
+            "text": "Shop refurbished iPhone, Samsung and Google phones with clear Fair, Good or Like New grading.",
+            "link": "shopify:\/\/pages\/smartphones",
+            "link_label": "Shop smartphones"
+          }
+        },
+        "category_9eXQfp": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ultra-high-resolution-product-photography-for-ecommerce-category-tile-subject-modern-tablet-style-minimal-premium-modern-light-concrete-or-soft-stone-background-clean-studio-lighting.png",
+            "title": "Tablets",
+            "text": "Portable, tested and ready for streaming, reading and everyday work on the go.",
+            "link": "shopify:\/\/collections\/tablets",
+            "link_label": "Shop tablets"
+          }
+        },
+        "category_jD3kRr": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ultra-high-resolution-product-photography-for-ecommerce-category-tile-subject-modern-laptop-with-the-screen-on-with-a-regular-waved-background-style-minimal-premium-modern-light-concr.png",
+            "title": "Laptops",
+            "text": "Refurbished laptops for work, study and home setup, all tested before they go live.",
+            "link": "shopify:\/\/collections\/laptops",
+            "link_label": "Shop laptops"
+          }
+        },
+        "category_mB2zNf": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ultra-high-resolution-product-photo-of-a-modern-ps5-gaming-console-and-controller-minimal-premium-style-on-a-light-concrete-or-soft-stone-background-clean-studio-lighting-soft-shadow.png",
+            "title": "Gaming",
+            "text": "Browse refurbished gaming tech that has been checked, cleaned and graded before sale.",
+            "link": "shopify:\/\/collections\/gaming",
+            "link_label": "Shop gaming"
+          }
+        },
+        "category_qV4xLp": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ultra-high-resolution-product-photography-for-ecommerce-category-tile-subject-smartwatch-style-minimal-premium-modern-light-concrete-or-soft-stone-background-clean-studio-lighting-no.png",
+            "title": "Smartwatches",
+            "text": "Wearable tech that is performance checked, clearly graded and ready for daily use.",
+            "link": "shopify:\/\/collections\/smartwatches",
+            "link_label": "Shop smartwatches"
+          }
+        }
+      },
+      "block_order": [
+        "category_7wLMQm",
+        "category_9eXQfp",
+        "category_jD3kRr",
+        "category_mB2zNf",
+        "category_qV4xLp"
+      ],
+      "settings": {
+        "eyebrow": "Refurbished tech",
+        "heading": "Shop refurbished tech with clear condition grading",
+        "intro": "<p>Browse smartphones, tablets, laptops, gaming and smartwatches that have been tested, cleaned and listed with a clear Fair, Good or Like New cosmetic grade before they go live.</p>",
+        "hero_image": "shopify:\/\/shop_images\/Gemini_Generated_Image_wyhd65wyhd65wyhd_1_-_Edited.png",
+        "primary_button_label": "Browse categories",
+        "primary_button_link": "",
+        "secondary_button_label": "See grading guide",
+        "secondary_button_link": "shopify:\/\/pages\/our-refurbishment-process",
+        "badge_one": "5 tech categories",
+        "badge_two": "Fair, Good and Like New",
+        "hero_note_title": "Every device is checked for",
+        "hero_note_items": "Performance and hardware testing\nBattery and charging checks\nSecure reset and deep clean\nClear Fair, Good or Like New grading",
+        "categories_eyebrow": "Browse by category",
+        "categories_heading": "Choose the tech you want to shop",
+        "categories_copy": "<p>Every tech category follows the same refurbishment standards, ready-to-use setup and condition grading so customers know what to expect before they buy.</p>",
+        "callout_eyebrow": "Condition guide",
+        "callout_heading": "Fair, Good and Like New all work properly.",
+        "callout_text": "The difference is cosmetic. We keep grading clear so customers can choose the finish and price point that suits them best.",
+        "callout_button_label": "Compare condition grades",
+        "callout_button_link": "shopify:\/\/pages\/our-refurbishment-process",
+        "padding_top": 72,
+        "padding_bottom": 56
+      }
+    },
+    "unboxed_refurb_guarantee_icons_g4QpLm": {
+      "type": "unboxed-refurb-guarantee-icons",
+      "blocks": {
+        "item_kQ2mLp": {
+          "type": "item",
+          "settings": {
+            "icon": "tested",
+            "title": "Fully tested",
+            "text": "Core functions, hardware and performance checks before listing.",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "item_tN8bWr": {
+          "type": "item",
+          "settings": {
+            "icon": "warranty",
+            "title": "Warranty included",
+            "text": "Peace of mind built into every refurbished tech order.",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "item_yR5dKc": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy returns",
+            "text": "Shop with confidence knowing returns are straightforward.",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "item_uP3mXd": {
+          "type": "item",
+          "settings": {
+            "icon": "support",
+            "title": "Real support",
+            "text": "UK-based help when you need advice before or after your order.",
+            "link": "",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_kQ2mLp",
+        "item_tN8bWr",
+        "item_yR5dKc",
+        "item_uP3mXd"
+      ],
+      "settings": {
+        "heading": "Why shop refurbished tech with Unboxed?",
+        "subheading": "Clear grading, reliable testing and real support across every category.",
+        "bg": "#FFFFFF",
+        "text": "#111111",
+        "muted": "#6B7280",
+        "border": "#E5E7EB",
+        "radius": 16,
+        "padding": 24,
+        "icon_size": 26,
+        "columns_desktop": 4,
+        "columns_mobile": 1
+      }
+    },
+    "featured_collection_h2LdQv": {
+      "type": "featured-collection",
+      "blocks": {
+        "heading_Kf4mPd": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "icon1": "hotdeal",
+            "heading": "Heading",
+            "heading_size": "h2",
+            "subheading": ""
+          }
+        },
+        "date_fN7rTc": {
+          "type": "date",
+          "disabled": true,
+          "settings": {
+            "wb_enddate": ""
+          }
+        },
+        "button_Qs2nLb": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "icon2": "flash",
+            "btntxt": "Shop the collection",
+            "link": "",
+            "view_all_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Kf4mPd",
+        "date_fN7rTc",
+        "button_Qs2nLb"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "collection": "smartphones",
+        "title": "Popular refurbished smartphones",
+        "heading_size": "h1",
+        "head_align": "left",
+        "heading_color_scheme": "",
+        "head_space": true,
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_row_on_desktop": 1,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "enable_desktop_slider": true,
+        "arrow_position": "top",
+        "card_style": "standard",
+        "show_count_timer": false,
+        "banner_position": "left",
+        "box_align": "top",
+        "text_alignment": "center",
+        "show_text_box": true,
+        "imgcolor_scheme": "",
+        "show_banner_timer": false,
+        "wb_bannerdate": "",
+        "text_caption": "Image text",
+        "outline_text": false,
+        "heading": "Heading",
+        "bnrheading_size": "h1",
+        "sub_heading": "Sub Heading",
+        "button_label": "Button label",
+        "button_link": "",
+        "link_window": true,
+        "button_style_secondary": "link",
+        "card_color_scheme": "background-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 12,
+        "padding_bottom": 24
+      }
+    },
+    "unboxed_condition_grades_b6VxQj": {
+      "type": "unboxed-condition-grades",
+      "blocks": {
+        "grade_wY2mKn": {
+          "type": "grade",
+          "settings": {
+            "title": "Like New",
+            "text": "Very clean finish with barely noticeable signs of previous use.",
+            "bullets": "Minimal visible wear at normal viewing distance\nIdeal if you want the cleanest presentation\nFully tested and ready to use"
+          }
+        },
+        "grade_cR8pMv": {
+          "type": "grade",
+          "settings": {
+            "title": "Good",
+            "text": "Light cosmetic wear with strong overall presentation and value.",
+            "bullets": "Light scratches or minor scuffs from normal use\nA strong balance of condition and price\nFully tested and ready to use"
+          }
+        },
+        "grade_aT5nQz": {
+          "type": "grade",
+          "settings": {
+            "title": "Fair",
+            "text": "More noticeable signs of wear while staying fully functional and dependable.",
+            "bullets": "Visible scratches or scuffs from previous use\nBest value for budget-focused buyers\nFully tested and ready to use"
+          }
+        }
+      },
+      "block_order": [
+        "grade_wY2mKn",
+        "grade_cR8pMv",
+        "grade_aT5nQz"
+      ],
+      "settings": {
+        "heading": "Choose the condition that suits you",
+        "subheading": "Every refurbished tech device is tested and guaranteed to work properly. The grade only changes the amount of cosmetic wear you should expect.",
+        "badge_text": "Grade",
+        "bg": "#FFFFFF",
+        "text": "#111111",
+        "muted": "#6B7280",
+        "accent_like_new": "#16A34A",
+        "accent_good": "#2563EB",
+        "accent_fair": "#F59E0B",
+        "radius": 16,
+        "padding": 24,
+        "columns_desktop": 3,
+        "columns_mobile": 1,
+        "link": "shopify:\/\/pages\/our-refurbishment-process",
+        "link_label": "Learn about our refurbishment process",
+        "link_note": "See what is included in testing, grading and warranty."
+      }
+    },
+    "unboxed_category_faq_g7LmPr": {
+      "type": "unboxed-category-faq",
+      "blocks": {
+        "faq_tR3mNx": {
+          "type": "faq",
+          "settings": {
+            "question": "Is your refurbished tech brand new?",
+            "answer": "<p>No. Unboxed refurbished tech is pre-owned, but every device is carefully inspected, tested, cleaned and approved before it is listed for sale.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_pL8vQm": {
+          "type": "faq",
+          "settings": {
+            "question": "Does Fair, Good or Like New affect performance?",
+            "answer": "<p>No. The grade is cosmetic. All devices are fully tested and expected to work properly, but the amount of visible wear changes between grades.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_bD4kTs": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you only sell smartphones?",
+            "answer": "<p>No. Our refurbished tech range also includes tablets, laptops, gaming products and smartwatches, each listed with clear condition grading.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_mN6qLp": {
+          "type": "faq",
+          "settings": {
+            "question": "Do devices arrive reset and ready to use?",
+            "answer": "<p>Yes. Devices are cleaned, reset where applicable and prepared so they are ready for setup when they arrive.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_zC9wRv": {
+          "type": "faq",
+          "settings": {
+            "question": "Do refurbished tech orders come with support and returns?",
+            "answer": "<p>Yes. Orders include support and a clear returns process so you can shop with confidence. Any warranty or returns details are available on the relevant policy pages.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_tR3mNx",
+        "faq_pL8vQm",
+        "faq_bD4kTs",
+        "faq_mN6qLp",
+        "faq_zC9wRv"
+      ],
+      "settings": {
+        "heading": "Refurbished tech FAQs",
+        "subheading": "A quick overview of how our tech range is checked, graded and prepared before sale.",
+        "bg": "#FFFFFF",
+        "text": "#111111",
+        "muted": "#6B7280",
+        "border": "#E5E7EB",
+        "radius": 16,
+        "padding": 24,
+        "link": "shopify:\/\/pages\/our-refurbishment-process",
+        "link_label": "Read our full refurbishment guide"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "unboxed_tech_landing_Pb7YwL",
+    "unboxed_refurb_guarantee_icons_g4QpLm",
+    "featured_collection_h2LdQv",
+    "unboxed_condition_grades_b6VxQj",
+    "unboxed_category_faq_g7LmPr"
+  ]
+}

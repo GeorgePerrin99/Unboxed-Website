@@ -195,6 +195,7 @@
           assign tile_image = block.settings[image_key]
           assign tile_collection = block.settings[collection_key]
           assign tile_custom_url = block.settings[url_key]
+          assign tile_image_class = 'ai-brand-tile__image-' | append: ai_gen_id
 
           assign tile_url = tile_custom_url
           if tile_collection != blank
@@ -211,14 +212,16 @@
             >
               <div class="ai-brand-tile__image-wrapper-{{ ai_gen_id }}">
                 {% if tile_image != blank %}
-                  <img
-                    src="{{ tile_image | image_url: width: 400 }}"
-                    alt="{{ tile_label | escape }}"
-                    class="ai-brand-tile__image-{{ ai_gen_id }}"
-                    loading="lazy"
-                    width="400"
-                    height="400"
-                  >
+                  {{
+                    tile_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      class: tile_image_class,
+                      loading: 'lazy',
+                      alt: tile_label,
+                      sizes: '(min-width: 1400px) 206px, (min-width: 990px) calc((100vw - 100px) / 6), (min-width: 750px) calc((100vw - 64px) / 3), calc((100vw - 48px) / 2)',
+                      widths: '320, 480, 640, 800, 960, 1200'
+                  }}
                 {% else %}
                   <div class="ai-brand-tile__placeholder-{{ ai_gen_id }}">
                     {{ 'image' | placeholder_svg_tag }}

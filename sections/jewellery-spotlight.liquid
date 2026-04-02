@@ -1,0 +1,667 @@
+<link rel="preload" as="style" href="{{ 'component-card.css' | asset_url }}">
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+<link rel="preload" as="style" href="{{ 'component-price.css' | asset_url }}">
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<link rel="preload" as="style" href="{{ 'component-slider.css' | asset_url }}">
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+<link rel="preload" as="style" href="{{ 'template-collection.css' | asset_url }}">
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{%- if settings.show_rating -%}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+{%- if settings.enable_quick_add or settings.enable_addtocart -%}
+  <link rel="preload" as="style" href="{{ 'quick-add.css' | asset_url }}">
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- liquid
+  assign manual_count = 0
+  assign fallback_collection = section.settings.fallback_collection
+  assign ring_collection = collections['rings']
+  assign necklace_collection = collections['necklaces']
+  assign bracelet_collection = collections['bracelets']
+  assign curated_count = 0
+
+  for block in section.blocks
+    if block.settings.product != blank
+      assign manual_count = manual_count | plus: 1
+    endif
+  endfor
+
+  if manual_count == 0
+    if ring_collection != blank and ring_collection.products_count > 0
+      assign curated_count = curated_count | plus: 1
+      if ring_collection.products_count > 1
+        assign curated_count = curated_count | plus: 1
+      endif
+    endif
+
+    if necklace_collection != blank and necklace_collection.products_count > 0
+      assign curated_count = curated_count | plus: 1
+    endif
+
+    if bracelet_collection != blank and bracelet_collection.products_count > 0
+      assign curated_count = curated_count | plus: 1
+    endif
+
+    if curated_count > section.settings.products_to_show
+      assign curated_count = section.settings.products_to_show
+    endif
+  endif
+
+  if manual_count > 0
+    assign products_to_display = manual_count
+  elsif curated_count > 0
+    assign products_to_display = curated_count
+  elsif fallback_collection != blank
+    assign products_to_display = fallback_collection.all_products_count
+    if products_to_display > section.settings.products_to_show
+      assign products_to_display = section.settings.products_to_show
+    endif
+  else
+    assign products_to_display = 0
+  endif
+
+  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+  assign show_mobile_slider = false
+  if section.settings.swipe_on_mobile and products_to_display > columns_mobile_int
+    assign show_mobile_slider = true
+  endif
+
+  assign show_desktop_slider = false
+  if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
+    assign show_desktop_slider = true
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .unboxed-jewellery-spotlight__panel-{{ section.id }} {
+    background: linear-gradient(180deg, #fbf4e8 0%, #fffdf8 100%);
+    border: 1px solid rgba(145, 107, 62, 0.14);
+    border-radius: 2.8rem;
+    box-shadow: 0 2.4rem 6rem rgba(92, 68, 38, 0.08);
+    overflow: hidden;
+    padding: clamp(2.4rem, 3vw, 4rem);
+  }
+
+  .unboxed-jewellery-spotlight__header-{{ section.id }} {
+    align-items: end;
+    display: flex;
+    gap: 2.4rem;
+    justify-content: space-between;
+    margin-bottom: 2.8rem;
+  }
+
+  .unboxed-jewellery-spotlight__copy-{{ section.id }} {
+    max-width: 70rem;
+  }
+
+  .unboxed-jewellery-spotlight__eyebrow-{{ section.id }} {
+    color: #7d5a34;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+  }
+
+  .unboxed-jewellery-spotlight__copy-{{ section.id }} h2 {
+    margin: 0;
+  }
+
+  .unboxed-jewellery-spotlight__copy-{{ section.id }} .description {
+    color: rgba(var(--color-foreground), 0.78);
+    margin-top: 1.2rem;
+    max-width: 58rem;
+  }
+
+  .unboxed-jewellery-spotlight__controls-{{ section.id }} {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 1.4rem;
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} {
+    margin: 0;
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .grid__item {
+    display: flex;
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .card-wrapper {
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .grid__item:hover .card-wrapper {
+    transform: translateY(-4px);
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .card.card--standard .card__inner,
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .card.card--standard .card__inner .card__media {
+    background: rgba(255, 255, 255, 0.74);
+    border-radius: calc(var(--border-radius) + 4px);
+  }
+
+  .unboxed-jewellery-spotlight__products-{{ section.id }} .wbproductdes {
+    padding-top: 1.2rem;
+  }
+
+  .unboxed-jewellery-spotlight__empty-{{ section.id }} {
+    border: 1px dashed rgba(145, 107, 62, 0.24);
+    border-radius: 2rem;
+    color: rgba(var(--color-foreground), 0.7);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 991px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+    }
+
+    .unboxed-jewellery-spotlight__header-{{ section.id }} {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 2.2rem;
+    }
+
+    .unboxed-jewellery-spotlight__controls-{{ section.id }} {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .unboxed-jewellery-spotlight__panel-{{ section.id }} {
+      border-radius: 2rem;
+      padding: 2rem 1.6rem;
+    }
+
+    .unboxed-jewellery-spotlight__controls-{{ section.id }} {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="unboxed-jewellery-spotlight__panel-{{ section.id }}">
+      <slider-component class="slider-mobile-gutter {% if show_desktop_slider %}slider-component-desktop{% endif %}">
+        <div class="unboxed-jewellery-spotlight__header-{{ section.id }}">
+          <div class="unboxed-jewellery-spotlight__copy-{{ section.id }}">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="unboxed-jewellery-spotlight__eyebrow-{{ section.id }}">{{ section.settings.eyebrow }}</p>
+            {%- endif -%}
+            {%- if section.settings.title != blank -%}
+              <h2 class="{{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+            {%- endif -%}
+            {%- if section.settings.description != blank -%}
+              <div class="description {{ section.settings.description_style }} rte">{{ section.settings.description }}</div>
+            {%- endif -%}
+          </div>
+
+          <div class="unboxed-jewellery-spotlight__controls-{{ section.id }}">
+            {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+              <div class="wb_home_sbtn">
+                <a href="{{ section.settings.button_link }}" class="link underlined-link">
+                  <span>{{ section.settings.button_label }}</span>
+                </a>
+              </div>
+            {%- endif -%}
+
+            <div class="wb_home_sbtn slider-buttons no-js-hidden {% unless show_desktop_slider %}desktop-arrows-hide{% endunless %}{% unless show_mobile_slider %} mobile-arrows-hide{% endunless %}">
+              <button
+                type="button"
+                class="slider-button slider-button--prev button"
+                name="previous"
+                aria-label="{{ 'general.slider.previous_slide' | t }}"
+                id="slider-button--prev-{{ section.id }}"
+                aria-controls="Slider-{{ section.id }}"
+              >
+                <span>{% render 'icon-caret' %}</span>
+              </button>
+              <button
+                type="button"
+                class="slider-button slider-button--next button"
+                name="next"
+                aria-label="{{ 'general.slider.next_slide' | t }}"
+                id="slider-button--next-{{ section.id }}"
+                aria-controls="Slider-{{ section.id }}"
+              >
+                <span>{% render 'icon-caret' %}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {%- if products_to_display > 0 -%}
+          <ul
+            id="Slider-{{ section.id }}"
+            class="unboxed-jewellery-spotlight__products-{{ section.id }} over_scroll grid product-grid contains-card contains-card--product contains-card--standard grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet{% endif %}{% endif %} grid--3-col-tablet{% if section.settings.columns_desktop == 2 %} grid--2-col-tablet{% endif %}"
+            aria-label="{{ section.settings.title | strip_html | escape }}"
+          >
+            {%- if manual_count > 0 -%}
+              {%- for block in section.blocks -%}
+                {%- assign spotlight_product = block.settings.product -%}
+                {%- if spotlight_product != blank -%}
+                  <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide" {{ block.shopify_attributes }}>
+                    {% render 'card-product',
+                      card_product: spotlight_product,
+                      card_style: 'standard',
+                      show_quantity: settings.show_quantity,
+                      media_aspect_ratio: 'square',
+                      media_fit: 'contain',
+                      show_secondary_image: settings.show_secondary_image,
+                      show_vendor: settings.show_vendor,
+                      show_colorswatch: settings.show_colorswatch,
+                      show_rating: settings.show_rating,
+                      show_quick_add: settings.enable_quick_add,
+                      show_variants: settings.show_variants,
+                      show_variant_label: settings.show_variant_label,
+                      picker_type: settings.picker_type,
+                      cardstock_bar: settings.cardstock_bar,
+                      show_count_timer: false,
+                      max_stock: settings.max_stock,
+                      limited_stock_cut_off: settings.limited_stock_cut_off,
+                      limited_stock_message: settings.limited_stock_message,
+                      instock_message: settings.instock_message,
+                      continue_selling_message: settings.continue_selling_message,
+                      limited_stock_color: settings.limited_stock_color,
+                      in_stock_color: settings.in_stock_color,
+                      continue_selling_color: settings.continue_selling_color,
+                      quicklook_style: settings.quicklook_style,
+                      color_swatchhover: settings.color_swatchhover,
+                      enable_addtocart: settings.enable_addtocart,
+                      stock_inventory: settings.stock_inventory,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- elsif curated_count > 0 -%}
+              {%- liquid
+                assign rendered_count = 0
+                assign rendered_handles = '|'
+              -%}
+
+              {%- for product in ring_collection.products limit: 2 -%}
+                {%- if rendered_count >= section.settings.products_to_show -%}{% break %}{%- endif -%}
+                {%- liquid
+                  assign product_token = '|' | append: product.handle | append: '|'
+                -%}
+                {%- unless rendered_handles contains product_token -%}
+                  {%- liquid
+                    assign rendered_handles = rendered_handles | append: product.handle | append: '|'
+                    assign rendered_count = rendered_count | plus: 1
+                  -%}
+                  <li id="Slide-{{ section.id }}-{{ rendered_count }}" class="grid__item slider__slide">
+                    {% render 'card-product',
+                      card_product: product,
+                      card_style: 'standard',
+                      show_quantity: settings.show_quantity,
+                      media_aspect_ratio: 'square',
+                      media_fit: 'contain',
+                      show_secondary_image: settings.show_secondary_image,
+                      show_vendor: settings.show_vendor,
+                      show_colorswatch: settings.show_colorswatch,
+                      show_rating: settings.show_rating,
+                      show_quick_add: settings.enable_quick_add,
+                      show_variants: settings.show_variants,
+                      show_variant_label: settings.show_variant_label,
+                      picker_type: settings.picker_type,
+                      cardstock_bar: settings.cardstock_bar,
+                      show_count_timer: false,
+                      max_stock: settings.max_stock,
+                      limited_stock_cut_off: settings.limited_stock_cut_off,
+                      limited_stock_message: settings.limited_stock_message,
+                      instock_message: settings.instock_message,
+                      continue_selling_message: settings.continue_selling_message,
+                      limited_stock_color: settings.limited_stock_color,
+                      in_stock_color: settings.in_stock_color,
+                      continue_selling_color: settings.continue_selling_color,
+                      quicklook_style: settings.quicklook_style,
+                      color_swatchhover: settings.color_swatchhover,
+                      enable_addtocart: settings.enable_addtocart,
+                      stock_inventory: settings.stock_inventory,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endunless -%}
+              {%- endfor -%}
+
+              {%- for product in necklace_collection.products limit: 1 -%}
+                {%- if rendered_count >= section.settings.products_to_show -%}{% break %}{%- endif -%}
+                {%- liquid
+                  assign product_token = '|' | append: product.handle | append: '|'
+                -%}
+                {%- unless rendered_handles contains product_token -%}
+                  {%- liquid
+                    assign rendered_handles = rendered_handles | append: product.handle | append: '|'
+                    assign rendered_count = rendered_count | plus: 1
+                  -%}
+                  <li id="Slide-{{ section.id }}-{{ rendered_count }}" class="grid__item slider__slide">
+                    {% render 'card-product',
+                      card_product: product,
+                      card_style: 'standard',
+                      show_quantity: settings.show_quantity,
+                      media_aspect_ratio: 'square',
+                      media_fit: 'contain',
+                      show_secondary_image: settings.show_secondary_image,
+                      show_vendor: settings.show_vendor,
+                      show_colorswatch: settings.show_colorswatch,
+                      show_rating: settings.show_rating,
+                      show_quick_add: settings.enable_quick_add,
+                      show_variants: settings.show_variants,
+                      show_variant_label: settings.show_variant_label,
+                      picker_type: settings.picker_type,
+                      cardstock_bar: settings.cardstock_bar,
+                      show_count_timer: false,
+                      max_stock: settings.max_stock,
+                      limited_stock_cut_off: settings.limited_stock_cut_off,
+                      limited_stock_message: settings.limited_stock_message,
+                      instock_message: settings.instock_message,
+                      continue_selling_message: settings.continue_selling_message,
+                      limited_stock_color: settings.limited_stock_color,
+                      in_stock_color: settings.in_stock_color,
+                      continue_selling_color: settings.continue_selling_color,
+                      quicklook_style: settings.quicklook_style,
+                      color_swatchhover: settings.color_swatchhover,
+                      enable_addtocart: settings.enable_addtocart,
+                      stock_inventory: settings.stock_inventory,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endunless -%}
+              {%- endfor -%}
+
+              {%- for product in bracelet_collection.products limit: 1 -%}
+                {%- if rendered_count >= section.settings.products_to_show -%}{% break %}{%- endif -%}
+                {%- liquid
+                  assign product_token = '|' | append: product.handle | append: '|'
+                -%}
+                {%- unless rendered_handles contains product_token -%}
+                  {%- liquid
+                    assign rendered_handles = rendered_handles | append: product.handle | append: '|'
+                    assign rendered_count = rendered_count | plus: 1
+                  -%}
+                  <li id="Slide-{{ section.id }}-{{ rendered_count }}" class="grid__item slider__slide">
+                    {% render 'card-product',
+                      card_product: product,
+                      card_style: 'standard',
+                      show_quantity: settings.show_quantity,
+                      media_aspect_ratio: 'square',
+                      media_fit: 'contain',
+                      show_secondary_image: settings.show_secondary_image,
+                      show_vendor: settings.show_vendor,
+                      show_colorswatch: settings.show_colorswatch,
+                      show_rating: settings.show_rating,
+                      show_quick_add: settings.enable_quick_add,
+                      show_variants: settings.show_variants,
+                      show_variant_label: settings.show_variant_label,
+                      picker_type: settings.picker_type,
+                      cardstock_bar: settings.cardstock_bar,
+                      show_count_timer: false,
+                      max_stock: settings.max_stock,
+                      limited_stock_cut_off: settings.limited_stock_cut_off,
+                      limited_stock_message: settings.limited_stock_message,
+                      instock_message: settings.instock_message,
+                      continue_selling_message: settings.continue_selling_message,
+                      limited_stock_color: settings.limited_stock_color,
+                      in_stock_color: settings.in_stock_color,
+                      continue_selling_color: settings.continue_selling_color,
+                      quicklook_style: settings.quicklook_style,
+                      color_swatchhover: settings.color_swatchhover,
+                      enable_addtocart: settings.enable_addtocart,
+                      stock_inventory: settings.stock_inventory,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for product in fallback_collection.products limit: section.settings.products_to_show -%}
+                <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide">
+                  {% render 'card-product',
+                    card_product: product,
+                    card_style: 'standard',
+                    show_quantity: settings.show_quantity,
+                    media_aspect_ratio: 'square',
+                    media_fit: 'contain',
+                    show_secondary_image: settings.show_secondary_image,
+                    show_vendor: settings.show_vendor,
+                    show_colorswatch: settings.show_colorswatch,
+                    show_rating: settings.show_rating,
+                    show_quick_add: settings.enable_quick_add,
+                    show_variants: settings.show_variants,
+                    show_variant_label: settings.show_variant_label,
+                    picker_type: settings.picker_type,
+                    cardstock_bar: settings.cardstock_bar,
+                    show_count_timer: false,
+                    max_stock: settings.max_stock,
+                    limited_stock_cut_off: settings.limited_stock_cut_off,
+                    limited_stock_message: settings.limited_stock_message,
+                    instock_message: settings.instock_message,
+                    continue_selling_message: settings.continue_selling_message,
+                    limited_stock_color: settings.limited_stock_color,
+                    in_stock_color: settings.in_stock_color,
+                    continue_selling_color: settings.continue_selling_color,
+                    quicklook_style: settings.quicklook_style,
+                    color_swatchhover: settings.color_swatchhover,
+                    enable_addtocart: settings.enable_addtocart,
+                    stock_inventory: settings.stock_inventory,
+                    section_id: section.id
+                  %}
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        {%- else -%}
+          <div class="unboxed-jewellery-spotlight__empty-{{ section.id }}">
+            Add spotlight products in the theme editor to feature handpicked jewellery pieces here.
+          </div>
+        {%- endif -%}
+      </slider-component>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Jewellery spotlight",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Jewellery spotlight"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Handpicked jewellery pieces"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h1",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A curated edit of standout pieces, selected for finish, character and gift appeal.</p>"
+    },
+    {
+      "type": "select",
+      "id": "description_style",
+      "label": "Description style",
+      "default": "body",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Fallback collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Fallback products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Desktop columns"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile columns",
+      "default": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_desktop_slider",
+      "label": "Enable desktop slider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "Enable mobile swipe",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Link label",
+      "default": "Shop all jewellery"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spotlight_product",
+      "name": "Spotlight product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Jewellery spotlight",
+      "blocks": [
+        {
+          "type": "spotlight_product"
+        },
+        {
+          "type": "spotlight_product"
+        },
+        {
+          "type": "spotlight_product"
+        },
+        {
+          "type": "spotlight_product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

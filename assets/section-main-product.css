@@ -2105,3 +2105,34 @@ product-recommendations .wbvariantbadges{
     display: inline-flex;
   }
 }
+
+/* Unboxed product title polish */
+.product__info-container .product__title {
+  font-size: calc(var(--font-heading-scale) * 30px);
+  line-height: 1.15;
+}
+
+.product__info-container .wbpricetax {
+  margin-top: 8px;
+}
+
+@media (max-width: 1199px) {
+  .product__info-container .product__title {
+    font-size: calc(var(--font-heading-scale) * 24px);
+  }
+}
+
+@media (max-width: 767px) {
+  .product__info-container .product__title {
+    font-size: calc(var(--font-heading-scale) * 21px);
+    margin-bottom: 4px;
+  }
+
+  .product__info-container .price .price-item {
+    font-size: calc(var(--font-body-scale) * 19px);
+  }
+
+  .product__info-container .price--on-sale .price-item--regular {
+    font-size: calc(var(--font-body-scale) * 15px);
+  }
+}

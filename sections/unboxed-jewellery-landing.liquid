@@ -1,0 +1,893 @@
+{%- liquid
+  assign category_anchor = '#UnboxedJewelleryRouteCategories-' | append: section.id
+  assign primary_link = section.settings.primary_button_link
+
+  if primary_link == blank
+    assign primary_link = category_anchor
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.72 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.72 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="UnboxedJewelleryRoute-{{ section.id }}" class="ub-jewellery-route section" {{ section.shopify_attributes }}>
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="ub-jewellery-route__hero">
+      <div class="ub-jewellery-route__hero-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="ub-jewellery-route__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h1 class="ub-jewellery-route__heading">{{ section.settings.heading | escape }}</h1>
+        {% endif %}
+
+        {% if section.settings.intro != blank %}
+          <div class="ub-jewellery-route__intro rte">
+            {{ section.settings.intro }}
+          </div>
+        {% endif %}
+
+        <div class="ub-jewellery-route__actions">
+          {% if section.settings.primary_button_label != blank %}
+            <a class="ub-jewellery-route__button" href="{{ primary_link }}">{{ section.settings.primary_button_label | escape }}</a>
+          {% endif %}
+
+          {% if section.settings.secondary_button_label != blank and section.settings.secondary_button_link != blank %}
+            <a class="ub-jewellery-route__button ub-jewellery-route__button--secondary" href="{{ section.settings.secondary_button_link }}">
+              {{ section.settings.secondary_button_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="ub-jewellery-route__pills" role="list">
+          <span class="ub-jewellery-route__pill" role="listitem">Authenticated and checked</span>
+          <span class="ub-jewellery-route__pill" role="listitem">Professionally cleaned</span>
+          <span class="ub-jewellery-route__pill" role="listitem">Ready to wear or gift</span>
+          <span class="ub-jewellery-route__pill" role="listitem">UK-based support</span>
+        </div>
+      </div>
+
+      <div class="ub-jewellery-route__hero-visual">
+        <div class="ub-jewellery-route__hero-media">
+          {% if section.settings.hero_image != blank %}
+            {{
+              section.settings.hero_image
+              | image_url: width: 1800
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1200, 1600, 1800',
+                alt: section.settings.heading
+            }}
+          {% endif %}
+
+          <div class="ub-jewellery-route__hero-badges">
+            {% if section.settings.badge_one != blank %}
+              <span class="ub-jewellery-route__hero-badge">{{ section.settings.badge_one | escape }}</span>
+            {% endif %}
+            {% if section.settings.badge_two != blank %}
+              <span class="ub-jewellery-route__hero-badge">{{ section.settings.badge_two | escape }}</span>
+            {% endif %}
+          </div>
+
+          <div class="ub-jewellery-route__hero-note">
+            {% if section.settings.hero_note_title != blank %}
+              <p class="ub-jewellery-route__hero-note-title">{{ section.settings.hero_note_title | escape }}</p>
+            {% endif %}
+
+            {% if section.settings.hero_note_items != blank %}
+              <ul class="ub-jewellery-route__hero-note-list">
+                {% assign note_items = section.settings.hero_note_items | newline_to_br | split: '<br />' %}
+                {% for note_item in note_items %}
+                  {% assign note_text = note_item | strip %}
+                  {% if note_text != blank %}
+                    <li>{{ note_text | escape }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="UnboxedJewelleryRouteCategories-{{ section.id }}" class="ub-jewellery-route__categories">
+      <div class="ub-jewellery-route__section-head">
+        {% if section.settings.categories_eyebrow != blank %}
+          <p class="ub-jewellery-route__section-eyebrow">{{ section.settings.categories_eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.categories_heading != blank %}
+          <h2 class="ub-jewellery-route__section-title">{{ section.settings.categories_heading | escape }}</h2>
+        {% endif %}
+
+        {% if section.settings.categories_copy != blank %}
+          <div class="ub-jewellery-route__section-copy rte">
+            {{ section.settings.categories_copy }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ub-jewellery-route__category-grid" role="list">
+        {% for block in section.blocks %}
+          {% if block.type == 'category' %}
+            <article class="ub-jewellery-route__category-card" role="listitem" {{ block.shopify_attributes }}>
+              <div class="ub-jewellery-route__category-media">
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '360, 540, 720, 960, 1200',
+                      alt: block.settings.title
+                  }}
+                {% endif %}
+              </div>
+
+              <div class="ub-jewellery-route__category-body">
+                {% if block.settings.title != blank %}
+                  <h3 class="ub-jewellery-route__category-title">{{ block.settings.title | escape }}</h3>
+                {% endif %}
+
+                {% if block.settings.text != blank %}
+                  <p class="ub-jewellery-route__category-text">{{ block.settings.text | escape }}</p>
+                {% endif %}
+
+                {% if block.settings.link != blank %}
+                  <a class="ub-jewellery-route__category-link" href="{{ block.settings.link }}">
+                    {% if block.settings.link_label != blank %}
+                      {{ block.settings.link_label | escape }}
+                    {% else %}
+                      Shop now
+                    {% endif %}
+                    <span aria-hidden="true">-></span>
+                  </a>
+                {% endif %}
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="ub-jewellery-route__promise">
+      <div class="ub-jewellery-route__section-head ub-jewellery-route__section-head--narrow">
+        {% if section.settings.promise_eyebrow != blank %}
+          <p class="ub-jewellery-route__section-eyebrow">{{ section.settings.promise_eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.promise_heading != blank %}
+          <h2 class="ub-jewellery-route__section-title">{{ section.settings.promise_heading | escape }}</h2>
+        {% endif %}
+
+        {% if section.settings.promise_copy != blank %}
+          <div class="ub-jewellery-route__section-copy rte">
+            {{ section.settings.promise_copy }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ub-jewellery-route__promise-grid" role="list">
+        <article class="ub-jewellery-route__promise-card" role="listitem">
+          <p class="ub-jewellery-route__promise-step">01</p>
+          <h3 class="ub-jewellery-route__promise-title">{{ section.settings.promise_one_title | escape }}</h3>
+          <p class="ub-jewellery-route__promise-text">{{ section.settings.promise_one_text | escape }}</p>
+        </article>
+
+        <article class="ub-jewellery-route__promise-card" role="listitem">
+          <p class="ub-jewellery-route__promise-step">02</p>
+          <h3 class="ub-jewellery-route__promise-title">{{ section.settings.promise_two_title | escape }}</h3>
+          <p class="ub-jewellery-route__promise-text">{{ section.settings.promise_two_text | escape }}</p>
+        </article>
+
+        <article class="ub-jewellery-route__promise-card" role="listitem">
+          <p class="ub-jewellery-route__promise-step">03</p>
+          <h3 class="ub-jewellery-route__promise-title">{{ section.settings.promise_three_title | escape }}</h3>
+          <p class="ub-jewellery-route__promise-text">{{ section.settings.promise_three_text | escape }}</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="ub-jewellery-route__callout">
+      <div class="ub-jewellery-route__callout-copy">
+        {% if section.settings.callout_eyebrow != blank %}
+          <p class="ub-jewellery-route__section-eyebrow">{{ section.settings.callout_eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.callout_heading != blank %}
+          <h2 class="ub-jewellery-route__callout-title">{{ section.settings.callout_heading | escape }}</h2>
+        {% endif %}
+
+        {% if section.settings.callout_text != blank %}
+          <p class="ub-jewellery-route__callout-text">{{ section.settings.callout_text | escape }}</p>
+        {% endif %}
+      </div>
+
+      {% if section.settings.callout_button_label != blank and section.settings.callout_button_link != blank %}
+        <a class="ub-jewellery-route__button" href="{{ section.settings.callout_button_link }}">
+          {{ section.settings.callout_button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ub-jewellery-route {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .ub-jewellery-route__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .ub-jewellery-route__eyebrow,
+  .ub-jewellery-route__section-eyebrow {
+    margin: 0 0 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #7d5a34;
+  }
+
+  .ub-jewellery-route__heading {
+    margin: 0;
+    max-width: 11ch;
+    font-size: clamp(3.8rem, 6vw, 7.2rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+  }
+
+  .ub-jewellery-route__intro {
+    margin-top: 2.2rem;
+    max-width: 62rem;
+    font-size: 1.85rem;
+    line-height: 1.65;
+    color: #4d3d2f;
+  }
+
+  .ub-jewellery-route__intro p,
+  .ub-jewellery-route__section-copy p {
+    margin: 0;
+  }
+
+  .ub-jewellery-route__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+  }
+
+  .ub-jewellery-route__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.8rem;
+    padding: 0 2.2rem;
+    border-radius: 999px;
+    border: 1px solid #111111;
+    background: #111111;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+
+  .ub-jewellery-route__button:hover {
+    transform: translateY(-1px);
+    opacity: 0.94;
+  }
+
+  .ub-jewellery-route__button--secondary {
+    background: transparent;
+    color: #111111;
+  }
+
+  .ub-jewellery-route__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+
+  .ub-jewellery-route__pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3.8rem;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid rgba(125, 90, 52, 0.16);
+    border-radius: 999px;
+    background: #faf4ea;
+    color: #4d3d2f;
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+
+  .ub-jewellery-route__hero-media {
+    position: relative;
+    min-height: 58rem;
+    border-radius: 3rem;
+    overflow: hidden;
+    background: linear-gradient(145deg, #f8efe0 0%, #efe5d4 100%);
+    box-shadow: 0 24px 60px rgba(92, 68, 38, 0.11);
+  }
+
+  .ub-jewellery-route__hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ub-jewellery-route__hero-badges {
+    position: absolute;
+    top: 2.2rem;
+    right: 2.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: flex-end;
+    max-width: 26rem;
+  }
+
+  .ub-jewellery-route__hero-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3.6rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(17, 17, 17, 0.86);
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ub-jewellery-route__hero-note {
+    position: absolute;
+    left: 2.2rem;
+    right: 2.2rem;
+    bottom: 2.2rem;
+    max-width: 38rem;
+    padding: 2rem 2.2rem;
+    border-radius: 2.4rem;
+    background: rgba(255, 252, 246, 0.94);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 35px rgba(92, 68, 38, 0.1);
+  }
+
+  .ub-jewellery-route__hero-note-title {
+    margin: 0 0 1rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7d5a34;
+  }
+
+  .ub-jewellery-route__hero-note-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .ub-jewellery-route__hero-note-list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: #111111;
+    font-size: 1.5rem;
+    line-height: 1.45;
+  }
+
+  .ub-jewellery-route__hero-note-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: #7d5a34;
+  }
+
+  .ub-jewellery-route__categories,
+  .ub-jewellery-route__promise {
+    margin-top: 7.2rem;
+  }
+
+  .ub-jewellery-route__section-head {
+    max-width: 72rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .ub-jewellery-route__section-head--narrow {
+    max-width: 68rem;
+  }
+
+  .ub-jewellery-route__section-title,
+  .ub-jewellery-route__callout-title {
+    margin: 0;
+    font-size: clamp(2.8rem, 4.2vw, 4.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .ub-jewellery-route__section-copy {
+    margin-top: 1.4rem;
+    color: #5d4a3b;
+    line-height: 1.7;
+  }
+
+  .ub-jewellery-route__category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.8rem;
+  }
+
+  .ub-jewellery-route__category-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    border: 1px solid rgba(125, 90, 52, 0.13);
+    border-radius: 2.4rem;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 18px 36px rgba(92, 68, 38, 0.06);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .ub-jewellery-route__category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 44px rgba(92, 68, 38, 0.1);
+  }
+
+  .ub-jewellery-route__category-media {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(180deg, #fbf4e8 0%, #f7efe0 100%);
+  }
+
+  .ub-jewellery-route__category-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ub-jewellery-route__category-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2rem;
+  }
+
+  .ub-jewellery-route__category-title,
+  .ub-jewellery-route__promise-title {
+    margin: 0;
+    font-size: 2.2rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .ub-jewellery-route__category-text,
+  .ub-jewellery-route__promise-text,
+  .ub-jewellery-route__callout-text {
+    margin: 0;
+    color: #5d4a3b;
+    line-height: 1.65;
+  }
+
+  .ub-jewellery-route__category-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: auto;
+    color: #111111;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ub-jewellery-route__promise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem;
+  }
+
+  .ub-jewellery-route__promise-card {
+    min-height: 100%;
+    padding: 2.4rem;
+    border-radius: 2.4rem;
+    border: 1px solid rgba(125, 90, 52, 0.13);
+    background: linear-gradient(180deg, #fffaf2 0%, #fffdf8 100%);
+    box-shadow: 0 18px 40px rgba(92, 68, 38, 0.05);
+  }
+
+  .ub-jewellery-route__promise-step {
+    margin: 0 0 1.4rem;
+    color: #7d5a34;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+  }
+
+  .ub-jewellery-route__callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 5.2rem;
+    padding: 2.6rem 2.8rem;
+    border-radius: 2.8rem;
+    background: linear-gradient(135deg, #faf4e8 0%, #f4ece1 100%);
+    border: 1px solid rgba(125, 90, 52, 0.12);
+  }
+
+  @media screen and (max-width: 1199px) {
+    .ub-jewellery-route__hero {
+      gap: 3rem;
+    }
+
+    .ub-jewellery-route__hero-media {
+      min-height: 50rem;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .ub-jewellery-route__hero,
+    .ub-jewellery-route__promise-grid,
+    .ub-jewellery-route__callout {
+      grid-template-columns: 1fr;
+    }
+
+    .ub-jewellery-route__heading {
+      max-width: 100%;
+    }
+
+    .ub-jewellery-route__hero-media {
+      min-height: 48rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ub-jewellery-route__intro {
+      font-size: 1.65rem;
+      line-height: 1.6;
+    }
+
+    .ub-jewellery-route__hero-media {
+      min-height: 38rem;
+      border-radius: 2.4rem;
+    }
+
+    .ub-jewellery-route__hero-badges {
+      position: static;
+      padding: 1.6rem 1.6rem 0;
+      max-width: none;
+      justify-content: flex-start;
+    }
+
+    .ub-jewellery-route__hero-note {
+      position: static;
+      max-width: none;
+      margin: 1.6rem;
+      padding: 1.8rem;
+    }
+
+    .ub-jewellery-route__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .ub-jewellery-route__button {
+      width: 100%;
+    }
+
+    .ub-jewellery-route__category-body,
+    .ub-jewellery-route__promise-card,
+    .ub-jewellery-route__callout {
+      padding: 2rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jewellery landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Refurbished jewellery"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop restored jewellery with confidence"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>Browse rings, necklaces, bracelets, earrings, pendants and bangles that have been authenticated, cleaned and prepared for secure everyday wear and presentation.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Browse categories"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "See our process"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "badge_one",
+      "label": "Badge one",
+      "default": "6 jewellery categories"
+    },
+    {
+      "type": "text",
+      "id": "badge_two",
+      "label": "Badge two",
+      "default": "Individual restored pieces"
+    },
+    {
+      "type": "text",
+      "id": "hero_note_title",
+      "label": "Hero note title",
+      "default": "Every piece is reviewed for"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_note_items",
+      "label": "Hero note items",
+      "default": "Authenticity and hallmark checks\nFinish, cleaning and presentation\nClasp, setting and structure checks\nReady-to-wear confidence"
+    },
+    {
+      "type": "text",
+      "id": "categories_eyebrow",
+      "label": "Categories eyebrow",
+      "default": "Browse by category"
+    },
+    {
+      "type": "text",
+      "id": "categories_heading",
+      "label": "Categories heading",
+      "default": "Choose the jewellery you want to shop"
+    },
+    {
+      "type": "richtext",
+      "id": "categories_copy",
+      "label": "Categories copy",
+      "default": "<p>Each jewellery category is presented as individual pieces, with the product page showing the exact item, finish and details you can expect to receive.</p>"
+    },
+    {
+      "type": "text",
+      "id": "promise_eyebrow",
+      "label": "Promise eyebrow",
+      "default": "How we prepare jewellery"
+    },
+    {
+      "type": "text",
+      "id": "promise_heading",
+      "label": "Promise heading",
+      "default": "Restored for trust, presentation and wearability"
+    },
+    {
+      "type": "richtext",
+      "id": "promise_copy",
+      "label": "Promise copy",
+      "default": "<p>Unlike tech, refurbished jewellery is not grouped into Fair, Good or Like New grades. We review each piece individually so customers can shop the exact finish and character shown on the listing.</p>"
+    },
+    {
+      "type": "text",
+      "id": "promise_one_title",
+      "label": "Promise card one title",
+      "default": "Authenticity first"
+    },
+    {
+      "type": "textarea",
+      "id": "promise_one_text",
+      "label": "Promise card one text",
+      "default": "We review hallmarking, materials and identifying details before a piece is approved for sale."
+    },
+    {
+      "type": "text",
+      "id": "promise_two_title",
+      "label": "Promise card two title",
+      "default": "Presentation and finish"
+    },
+    {
+      "type": "textarea",
+      "id": "promise_two_text",
+      "label": "Promise card two text",
+      "default": "Pieces are cleaned and refreshed carefully so they feel ready to wear, gift and keep."
+    },
+    {
+      "type": "text",
+      "id": "promise_three_title",
+      "label": "Promise card three title",
+      "default": "Secure to wear"
+    },
+    {
+      "type": "textarea",
+      "id": "promise_three_text",
+      "label": "Promise card three text",
+      "default": "Clasps, settings, links and other key wear points are checked so the piece feels dependable."
+    },
+    {
+      "type": "text",
+      "id": "callout_eyebrow",
+      "label": "Callout eyebrow",
+      "default": "What customers can expect"
+    },
+    {
+      "type": "text",
+      "id": "callout_heading",
+      "label": "Callout heading",
+      "default": "Each piece is shown individually, not grouped into generic grades."
+    },
+    {
+      "type": "text",
+      "id": "callout_text",
+      "label": "Callout text",
+      "default": "That means the product page shows the exact jewellery piece, presentation and details you are buying, so the decision feels clearer and more personal."
+    },
+    {
+      "type": "text",
+      "id": "callout_button_label",
+      "label": "Callout button label",
+      "default": "Browse all jewellery"
+    },
+    {
+      "type": "url",
+      "id": "callout_button_link",
+      "label": "Callout button link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Rings"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Restored jewellery pieces with clear presentation and finish."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Shop category"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Jewellery landing",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Rings",
+            "text": "Standout restored rings selected for finish, authenticity and ready-to-wear appeal."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Necklaces",
+            "text": "Restored necklaces prepared for presentation, layering and gifting."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bracelets",
+            "text": "Bracelets and chain pieces checked for secure wear and everyday confidence."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Earrings",
+            "text": "Refreshed earrings presented with attention to detail, finish and wearability."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Pendants",
+            "text": "Restored pendants that balance character, finish and gifting appeal."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bangles",
+            "text": "Statement bangles and simple pieces prepared for secure, polished wear."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

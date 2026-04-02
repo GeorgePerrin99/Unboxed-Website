@@ -472,12 +472,37 @@
                       {%- endif -%}
                     {%- endfor -%}
                   {%- endif -%}
+                  {% liquid
+                    assign collection_card_ratio = settings.image_ratio
+                    assign collection_media_fit = 'cover'
+                    assign show_condition_summary = false
+                    assign active_condition_summary = ''
+                    case collection.handle
+                      when 'jewellery', 'rings', 'necklaces', 'bracelets', 'earrings', 'pendants', 'bangles'
+                        assign collection_card_ratio = 'square'
+                        assign collection_media_fit = 'contain'
+                      when 'smartphones', 'iphones', 'samsung-galaxy', 'google-pixel', 'tablets', 'ipads', 'samsung-galaxy-tab', 'laptops', 'macbooks', 'gaming', 'playstation', 'xbox', 'nintendo-switch', 'smartwatches', 'apple-watch', 'audio', 'airpods', 'beats-by-dr-dre'
+                        assign show_condition_summary = true
+                    endcase
+                    if show_condition_summary
+                      for collection_filter in collection.filters
+                        assign filter_label = collection_filter.label | downcase
+                        if filter_label contains 'condition' or filter_label contains 'grade' or filter_label contains 'cosmetic'
+                          if collection_filter.active_values.size > 0
+                            assign active_condition_summary = collection_filter.active_values.first.label
+                            break
+                          endif
+                        endif
+                      endfor
+                    endif
+                  %}
                   <li class="grid__item">
                     {% render 'card-product',
                       card_product: product,
                       card_style: section.settings.card_style,
                       show_quantity: settings.show_quantity,
-                      media_aspect_ratio: settings.image_ratio,
+                      media_aspect_ratio: collection_card_ratio,
+                      media_fit: collection_media_fit,
                       picker_type: settings.picker_type,
                       show_secondary_image: settings.show_secondary_image,
                       show_vendor: settings.show_vendor,
@@ -502,6 +527,8 @@
                       enable_addtocart: settings.enable_addtocart,
                       color_swatchhover: settings.color_swatchhover,
                       stock_inventory: settings.stock_inventory,
+                      show_condition_summary: show_condition_summary,
+                      active_condition_summary: active_condition_summary,
                       section_id: section.id
                     %}
                   </li>

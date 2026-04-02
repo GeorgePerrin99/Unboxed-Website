@@ -61,11 +61,66 @@
     margin: 0;
   }
 
-  @media screen and (max-width: 749px) {
-  .ai-collection-banner-title-{{ ai_gen_id }} {
-    white-space: nowrap;
+  .ai-collection-banner-description-{{ ai_gen_id }} *,
+  .ai-collection-banner-description-{{ ai_gen_id }} p,
+  .ai-collection-banner-description-{{ ai_gen_id }} span,
+  .ai-collection-banner-description-{{ ai_gen_id }} strong,
+  .ai-collection-banner-description-{{ ai_gen_id }} em,
+  .ai-collection-banner-description-{{ ai_gen_id }} a,
+  .ai-collection-banner-description-{{ ai_gen_id }} li {
+    color: {{ block.settings.description_color }} !important;
   }
 
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(14, 14, 14, 0.12);
+    border-radius: 999px;
+    color: {{ block.settings.title_color }};
+    display: inline-flex;
+    font-family: {{ block.settings.description_font.family }}, {{ block.settings.description_font.fallback_families }};
+    font-size: 14px;
+    font-style: {{ block.settings.description_font.style }};
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1;
+    min-height: 40px;
+    padding: 0 16px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip:hover {
+    background: rgba(14, 14, 14, 0.05);
+    border-color: rgba(14, 14, 14, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip--condition {
+    background: rgba(239, 244, 241, 0.95);
+  }
+
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip--process {
+    background: rgba(14, 14, 14, 0.96);
+    border-color: rgba(14, 14, 14, 0.96);
+    color: #ffffff;
+  }
+
+  .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip--process:hover {
+    background: rgba(14, 14, 14, 0.86);
+    border-color: rgba(14, 14, 14, 0.86);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-collection-banner-title-{{ ai_gen_id }} {
+      white-space: nowrap;
     }
 
     .ai-collection-banner-description-{{ ai_gen_id }} {
@@ -75,24 +130,39 @@
     .ai-collection-banner-content-{{ ai_gen_id }} {
       padding: {{ block.settings.padding_vertical | times: 0.7 }}px {{ block.settings.padding_horizontal | times: 0.7 }}px;
     }
+
+    .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-quick-links {
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .ai-collection-banner-content-{{ ai_gen_id }} .unboxed-collection-chip {
+      font-size: 13px;
+      min-height: 36px;
+      padding: 0 13px;
+    }
   }
 {% endstyle %}
 
 <div class="ai-collection-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-collection-banner-content-{{ ai_gen_id }}">
     {% if collection %}
-    <h2 class="ai-collection-banner-title-{{ ai_gen_id }}" data-fit-title>
+      {%- capture collection_intro -%}
+        {% render 'unboxed-collection-description', collection_object: collection %}
+      {%- endcapture -%}
+    <h1 class="ai-collection-banner-title-{{ ai_gen_id }}" data-fit-title>
 
         <a href="{{ collection.url }}" class="ai-collection-banner-title-link-{{ ai_gen_id }}">
           {{ collection.title }}
         </a>
-      </h2>
+      </h1>
 
-      {% if collection.description != blank %}
+      {% if collection_intro != blank %}
         <div class="ai-collection-banner-description-{{ ai_gen_id }}">
-          {{ collection.description }}
+          {{ collection_intro }}
         </div>
       {% endif %}
+      {% render 'unboxed-collection-quick-links', collection_object: collection %}
     {% endif %}
   </div>
 </div>

@@ -262,15 +262,11 @@
                               {% if assignsubmenu %}
                                 <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                                   <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
-                                    {% if section.settings.show_menu_link == true %}
-                                      <a href="{{ link.url }}" class="">
-                                    {% endif %}
-                                      {{ link.title | escape }}
-                                    {% if section.settings.show_menu_link == true %}
-                                      </a>
-                                    {% endif %}
-                                    {% render 'icon-arrow' %}
-                                    {% render 'icon-caret' %}
+                                    <span class="menu-drawer__item-label">{{ link.title | escape }}</span>
+                                    <span class="menu-drawer__item-icons">
+                                      {% render 'icon-arrow' %}
+                                      {% render 'icon-caret' %}
+                                    </span>
                                   </summary>
                                   <div id="link-{{ link.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
                                     <div class="menu-drawer__inner-submenu">
@@ -279,6 +275,13 @@
                                         {{ link.title | escape }}
                                       </button>
                                       <ul class="menu-drawer__menu list-menu" tabindex="-1">
+                                        {% if link.url != blank %}
+                                          <li class="menu-drawer__submenu-feature">
+                                            <a href="{{ link.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--primary link link--text focus-inset">
+                                              Shop all {{ link.title | escape }}
+                                            </a>
+                                          </li>
+                                        {% endif %}
                                         {% if assignsubmenu %}
                                           {%- for childlink in link.links -%}
                                             <li>
@@ -289,9 +292,11 @@
                                               {%- else -%}
                                                 <details>
                                                   <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                                                    {{ childlink.title | escape }}
-                                                    {% render 'icon-arrow' %}
-                                                    {% render 'icon-caret' %}
+                                                    <span class="menu-drawer__item-label">{{ childlink.title | escape }}</span>
+                                                    <span class="menu-drawer__item-icons">
+                                                      {% render 'icon-arrow' %}
+                                                      {% render 'icon-caret' %}
+                                                    </span>
                                                   </summary>
                                                   <div id="childlink-{{ childlink.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce">
                                                     <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
@@ -299,6 +304,13 @@
                                                       {{ childlink.title | escape }}
                                                     </button>
                                                     <ul class="menu-drawer__menu list-menu" tabindex="-1">
+                                                      {% if childlink.url != blank %}
+                                                        <li class="menu-drawer__submenu-feature">
+                                                          <a href="{{ childlink.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--secondary link link--text focus-inset">
+                                                            Shop all {{ childlink.title | escape }}
+                                                          </a>
+                                                        </li>
+                                                      {% endif %}
                                                       {%- for grandchildlink in childlink.links -%}
                                                         <li>
                                                           <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
@@ -332,15 +344,11 @@
                                 {% if assignsubmenu %}
                                   <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                                       <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
-                                        {% if section.settings.show_menu_link == true %}
-                                          <a href="{{ link.url }}" class="">
-                                        {% endif %}
-                                          {{ link.title | escape }}
-                                        {% if section.settings.show_menu_link == true %}
-                                          </a>
-                                        {% endif %}
-                                        {% render 'icon-arrow' %}
-                                        {% render 'icon-caret' %}
+                                        <span class="menu-drawer__item-label">{{ link.title | escape }}</span>
+                                        <span class="menu-drawer__item-icons">
+                                          {% render 'icon-arrow' %}
+                                          {% render 'icon-caret' %}
+                                        </span>
                                       </summary>
                                       <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
                                         <div class="menu-drawer__inner-submenu">
@@ -348,6 +356,11 @@
                                               {% render 'icon-arrow' %}
                                               {{ link.title | escape }}
                                             </button>
+                                            {% if link.url != blank %}
+                                              <a href="{{ link.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--primary link link--text focus-inset">
+                                                Shop all {{ link.title | escape }}
+                                              </a>
+                                            {% endif %}
                                             <div class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                                               <div class="container mega_menu_banner">
                                                 {% render 'menu_single_banner', blocks: section.blocks, title: link.title %}
@@ -428,9 +441,11 @@
                                             <span class="mega_menusvg">{{ iconBlock.settings[iconSvg] }}</span>
                                           {% endif %}
                                         </span>
-                                        {{ link.title | escape }}
-                                        {% render 'icon-arrow' %}
-                                        {% render 'icon-caret' %}
+                                        <span class="menu-drawer__item-label">{{ link.title | escape }}</span>
+                                        <span class="menu-drawer__item-icons">
+                                          {% render 'icon-arrow' %}
+                                          {% render 'icon-caret' %}
+                                        </span>
                                       </summary>
                                       <div id="link-{{ link.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
                                         <div class="menu-drawer__inner-submenu">
@@ -439,6 +454,13 @@
                                             {{ link.title | escape }}
                                           </button>
                                           <ul class="menu-drawer__menu list-menu" tabindex="-1">
+                                            {% if link.url != blank %}
+                                              <li class="menu-drawer__submenu-feature">
+                                                <a href="{{ link.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--primary link link--text focus-inset">
+                                                  Shop all {{ link.title | escape }}
+                                                </a>
+                                              </li>
+                                            {% endif %}
                                             {% if assignsubmenu %}
                                               {%- for childlink in link.links -%}
                                                 <li>
@@ -449,9 +471,11 @@
                                                   {%- else -%}
                                                     <details>
                                                       <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                                                        {{ childlink.title | escape }}
-                                                        {% render 'icon-arrow' %}
-                                                        {% render 'icon-caret' %}
+                                                        <span class="menu-drawer__item-label">{{ childlink.title | escape }}</span>
+                                                        <span class="menu-drawer__item-icons">
+                                                          {% render 'icon-arrow' %}
+                                                          {% render 'icon-caret' %}
+                                                        </span>
                                                       </summary>
                                                       <div id="childlink-{{ childlink.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce">
                                                         <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
@@ -459,6 +483,13 @@
                                                           {{ childlink.title | escape }}
                                                         </button>
                                                         <ul class="menu-drawer__menu list-menu" tabindex="-1">
+                                                          {% if childlink.url != blank %}
+                                                            <li class="menu-drawer__submenu-feature">
+                                                              <a href="{{ childlink.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--secondary link link--text focus-inset">
+                                                                Shop all {{ childlink.title | escape }}
+                                                              </a>
+                                                            </li>
+                                                          {% endif %}
                                                           {%- for grandchildlink in childlink.links -%}
                                                             <li>
                                                               <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
@@ -510,9 +541,11 @@
                                                 <span class="mega_menusvg">{{ iconBlock.settings[iconSvg] }}</span>
                                               {% endif %}
                                             </span>
-                                            {{ link.title | escape }}
-                                            {% render 'icon-arrow' %}
-                                            {% render 'icon-caret' %}
+                                            <span class="menu-drawer__item-label">{{ link.title | escape }}</span>
+                                            <span class="menu-drawer__item-icons">
+                                              {% render 'icon-arrow' %}
+                                              {% render 'icon-caret' %}
+                                            </span>
                                           </summary>
                                           <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
                                             <div class="menu-drawer__inner-submenu">
@@ -520,6 +553,11 @@
                                                   {% render 'icon-arrow' %}
                                                   {{ link.title | escape }}
                                                 </button>
+                                                {% if link.url != blank %}
+                                                  <a href="{{ link.url }}" class="menu-drawer__submenu-link menu-drawer__submenu-link--primary link link--text focus-inset">
+                                                    Shop all {{ link.title | escape }}
+                                                  </a>
+                                                {% endif %}
                                                 <div class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                                                   <div class="container mega_menu_banner">
                                                     {% render 'menu_single_banner', blocks: section.blocks, title: link.title %}
@@ -1238,7 +1276,8 @@
                         type="search"
                         name="q"
                         value="{{ search.terms | escape }}"
-                        placeholder="{{ 'general.search.search' | t }}"
+                        placeholder="Search for 'iPhones'"
+                        data-placeholder-rotation="Search for 'iPhones'|Search for 'Rings'|Search for 'Samsung Galaxy'|Search for 'Necklaces'|Search for 'Laptops'|Search for 'Gaming'"
                         {% if settings.predictive_search_enabled %}
                           aria-haspopup="listbox"
                           aria-autocomplete="list"
@@ -1283,41 +1322,10 @@
                     <div class="default--search page-width predictive-search predictive-search--header hidden" tabindex="-1">
                       <div class="wbsearch_inner color-{{ settings.color_schemesearch }} gradient">
                         {% render 'search-quick-links' %}
-                          {% unless settings.search_collection == blank and settings.collection_list == blank and settings.search_blog == blank %}
-                        <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% elsif settings.collection_list != blank or settings.search_collection != blank or settings.search_blog != blank %} search-col-2{% endif %}">
-                            {% render 'predictive-search-default', select_collection : settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
-                          </div>
+                        <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% else %} search-col-2{% endif %}">
+                          {% render 'predictive-search-default', select_collection: settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
                         </div>
-                        {% else %}
-                        <ul class="grid product-grid grid--4-col-desktop grid--1-col-tablet-down grid--3-col-tablet contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %}">
-                          {%- for i in (1..6) -%}
-                            <li class="product__col_wrapper grid__item">
-                              <div class="card-wrapper wbproduct-container collagebg product-card-wrapper">
-                                <div class="card card--{{ settings.card_style }} default_search_placeholder card--text
-                                    {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-                                    <div class="wbimgblock card__inner">
-                                        {%- liquid
-                                          assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1
-                                          assign placeholder_image = 'product-apparel-' | append: placeholder_image_index
-                                        -%}
-                                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                                        {%- if placeholder_image -%}
-                                            {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {%- else -%}
-                                            {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {%- endif -%}
-                                    </div>
-                                    <div class="wbproductdes card__content">
-                                        <p class="product__vendor">{{ 'products.product.vendor' | t }}</p>
-                                        <h3 class="card__heading">{{ 'onboarding.product_title' | t }}</h3>
-                                        {% render 'price' %}
-                                    </div>
-                                </div>
-                            </div>  
-                            </li>
-                          {% endfor %}
-                        </ul> 
-                        {% endunless %}
+                      </div>
                     </div>
                     <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
                   {% endif %}
@@ -1361,7 +1369,8 @@
                     type="search"
                     name="q"
                     value="{{ search.terms | escape }}"
-                    placeholder="{{ 'general.search.search' | t }}"
+                    placeholder="Search for 'iPhones'"
+                    data-placeholder-rotation="Search for 'iPhones'|Search for 'Rings'|Search for 'Samsung Galaxy'|Search for 'Necklaces'|Search for 'Laptops'|Search for 'Gaming'"
                     {% if settings.predictive_search_enabled %}
                       aria-haspopup="listbox"
                       aria-autocomplete="list"
@@ -1406,41 +1415,10 @@
                 <div class="default--search page-width predictive-search predictive-search--header hidden" tabindex="-1">
                   <div class="wbsearch_inner color-{{ settings.color_schemesearch }} gradient">
                     {% render 'search-quick-links' %}
-                      {% unless settings.search_collection == blank and settings.collection_list == blank and settings.search_blog == blank %}
-                    <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% elsif settings.collection_list != blank or settings.search_collection != blank or settings.search_blog != blank %} search-col-2{% endif %}">
-                        {% render 'predictive-search-default', select_collection : settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
-                      </div>
-                      {% else %}
-                      <ul class="grid product-grid grid--4-col-desktop grid--1-col-tablet-down grid--3-col-tablet contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %}">
-                        {%- for i in (1..8) -%}
-                          <li class="product__col_wrapper grid__item">
-                            <div class="card-wrapper wbproduct-container collagebg product-card-wrapper">
-                              <div class="card card--{{ settings.card_style }} default_search_placeholder card--text
-                                  {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-                                  <div class="wbimgblock card__inner">
-                                        {%- liquid
-                                          assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1
-                                          assign placeholder_image = 'product-apparel-' | append: placeholder_image_index
-                                        -%}
-                                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                                        {%- if placeholder_image -%}
-                                            {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {%- else -%}
-                                            {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {%- endif -%}
-                                  </div>
-                                  <div class="wbproductdes card__content">
-                                      <p class="product__vendor">{{ 'products.product.vendor' | t }}</p>
-                                      <h3 class="card__heading">{{ 'onboarding.product_title' | t }}</h3>
-                                      {% render 'price' %}
-                                  </div>
-                              </div>
-                          </div>  
-                          </li>
-                        {% endfor %}
-                      </ul> 
-                    {% endunless %}
+                    <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% else %} search-col-2{% endif %}">
+                      {% render 'predictive-search-default', select_collection: settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
                     </div>
+                  </div>
                 </div>
                 <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
               {% endif %}
@@ -1539,7 +1517,8 @@
                             type="search"
                             name="q"
                             value="{{ search.terms | escape }}"
-                            placeholder="{{ 'general.search.search' | t }}"
+                            placeholder="Search for 'iPhones'"
+                            data-placeholder-rotation="Search for 'iPhones'|Search for 'Rings'|Search for 'Samsung Galaxy'|Search for 'Necklaces'|Search for 'Laptops'|Search for 'Gaming'"
                             {% if settings.predictive_search_enabled %}
                               aria-haspopup="listbox"
                               aria-autocomplete="list"
@@ -1585,43 +1564,12 @@
                         </div>
                         <div class="default--search page-width predictive-search predictive-search--header hidden" tabindex="-1">
                           <div class="wbsearch_inner color-{{ settings.color_schemesearch }} gradient">
-                              {% render 'search-quick-links' %}
-                              {% unless settings.search_collection == blank and settings.collection_list == blank and settings.search_blog == blank %}
-                              <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% elsif settings.collection_list != blank or settings.search_collection != blank or settings.search_blog != blank %} search-col-2{% endif %}">
-                                {% render 'predictive-search-default', select_collection : settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
-                              </div>
-                              {% else %}
-                              <ul class="grid product-grid grid--4-col-desktop grid--1-col-tablet-down grid--3-col-tablet contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %}">
-                                {%- for i in (1..6) -%}
-                                  <li class="product__col_wrapper grid__item">
-                                    <div class="card-wrapper wbproduct-container collagebg product-card-wrapper">
-                                      <div class="card card--{{ settings.card_style }} default_search_placeholder card--text
-                                          {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-                                          <div class="wbimgblock card__inner">
-                                              {%- liquid
-                                                assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1
-                                                assign placeholder_image = 'product-apparel-' | append: placeholder_image_index
-                                              -%}
-                                              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                                              {%- if placeholder_image -%}
-                                                  {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
-                                              {%- else -%}
-                                                  {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
-                                              {%- endif -%}
-                                          </div>
-                                          <div class="wbproductdes card__content">
-                                              <p class="product__vendor">{{ 'products.product.vendor' | t }}</p>
-                                              <h3 class="card__heading">{{ 'onboarding.product_title' | t }}</h3>
-                                              {% render 'price' %}
-                                          </div>
-                                      </div>
-                                  </div>  
-                                  </li>
-                                {% endfor %}
-                              </ul> 
-                        {% endunless %}
+                            {% render 'search-quick-links' %}
+                            <div class="search_default{% if settings.collection_list != blank and settings.search_collection != blank and settings.search_blog != blank %} search-col-3{% else %} search-col-2{% endif %}">
+                              {% render 'predictive-search-default', select_collection: settings.collection_list, coll_products: settings.search_collection, select_article: settings.search_blog %}
                             </div>
                           </div>
+                        </div>
                         <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
                       {%- endif -%}
                     </form>

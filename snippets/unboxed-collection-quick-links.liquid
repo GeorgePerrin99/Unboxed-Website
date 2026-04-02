@@ -1,0 +1,143 @@
+{%- liquid
+  assign target_collection = collection_object | default: collection
+  assign handle = target_collection.handle | default: ''
+  assign tech_group = ''
+  assign jewellery_group = false
+  assign condition_filter_param_name = ''
+  assign refurbishment_page = pages['our-refurbishment-process']
+  assign compare_grades_url = '/pages/our-refurbishment-process#compare-tech-grades'
+
+  if refurbishment_page != blank
+    assign compare_grades_url = refurbishment_page.url | append: '#compare-tech-grades'
+  endif
+
+  case handle
+    when 'smartphones', 'iphones', 'samsung-galaxy', 'google-pixel'
+      assign tech_group = 'phones'
+    when 'tablets', 'ipads', 'samsung-galaxy-tab'
+      assign tech_group = 'tablets'
+    when 'laptops', 'macbooks'
+      assign tech_group = 'laptops'
+    when 'gaming', 'playstation', 'xbox', 'nintendo-switch'
+      assign tech_group = 'gaming'
+    when 'smartwatches', 'apple-watch'
+      assign tech_group = 'smartwatches'
+    when 'audio', 'airpods', 'beats-by-dr-dre'
+      assign tech_group = 'audio'
+    when 'jewellery', 'rings', 'necklaces', 'bracelets', 'earrings', 'pendants', 'bangles'
+      assign jewellery_group = true
+  endcase
+
+  if tech_group != blank
+    for collection_filter in target_collection.filters
+      assign filter_label = collection_filter.label | downcase
+      if filter_label contains 'condition' or filter_label contains 'grade' or filter_label contains 'cosmetic'
+        assign condition_filter_param_name = collection_filter.param_name
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{% if tech_group != blank or jewellery_group %}
+  <div class="unboxed-collection-quick-links" role="list" aria-label="Quick links">
+    {% if jewellery_group %}
+      {% unless handle == 'jewellery' %}
+        <a class="unboxed-collection-chip" href="/collections/jewellery" role="listitem">All jewellery</a>
+      {% endunless %}
+      {% unless handle == 'rings' %}
+        <a class="unboxed-collection-chip" href="/collections/rings" role="listitem">Rings</a>
+      {% endunless %}
+      {% unless handle == 'necklaces' %}
+        <a class="unboxed-collection-chip" href="/collections/necklaces" role="listitem">Necklaces</a>
+      {% endunless %}
+      {% unless handle == 'bracelets' %}
+        <a class="unboxed-collection-chip" href="/collections/bracelets" role="listitem">Bracelets</a>
+      {% endunless %}
+      {% unless handle == 'earrings' %}
+        <a class="unboxed-collection-chip" href="/collections/earrings" role="listitem">Earrings</a>
+      {% endunless %}
+      {% unless handle == 'pendants' %}
+        <a class="unboxed-collection-chip" href="/collections/pendants" role="listitem">Pendants</a>
+      {% endunless %}
+      {% unless handle == 'bangles' %}
+        <a class="unboxed-collection-chip" href="/collections/bangles" role="listitem">Bangles</a>
+      {% endunless %}
+    {% else %}
+      {% case tech_group %}
+        {% when 'phones' %}
+          {% if handle == 'smartphones' %}
+            <a class="unboxed-collection-chip" href="/collections/iphones" role="listitem">iPhones</a>
+            <a class="unboxed-collection-chip" href="/collections/samsung-galaxy" role="listitem">Samsung Galaxy</a>
+            <a class="unboxed-collection-chip" href="/collections/google-pixel" role="listitem">Google Pixel</a>
+          {% else %}
+            <a class="unboxed-collection-chip" href="/collections/smartphones" role="listitem">All smartphones</a>
+          {% endif %}
+        {% when 'tablets' %}
+          {% if handle == 'tablets' %}
+            <a class="unboxed-collection-chip" href="/collections/ipads" role="listitem">iPads</a>
+            <a class="unboxed-collection-chip" href="/collections/samsung-galaxy-tab" role="listitem">Galaxy Tab</a>
+          {% else %}
+            <a class="unboxed-collection-chip" href="/collections/tablets" role="listitem">All tablets</a>
+          {% endif %}
+        {% when 'laptops' %}
+          {% unless handle == 'macbooks' %}
+            <a class="unboxed-collection-chip" href="/collections/macbooks" role="listitem">MacBooks</a>
+          {% endunless %}
+          {% unless handle == 'laptops' %}
+            <a class="unboxed-collection-chip" href="/collections/laptops" role="listitem">All laptops</a>
+          {% endunless %}
+        {% when 'gaming' %}
+          {% if handle == 'gaming' %}
+            <a class="unboxed-collection-chip" href="/collections/playstation" role="listitem">PlayStation</a>
+            <a class="unboxed-collection-chip" href="/collections/xbox" role="listitem">Xbox</a>
+            <a class="unboxed-collection-chip" href="/collections/nintendo-switch" role="listitem">Nintendo Switch</a>
+          {% else %}
+            <a class="unboxed-collection-chip" href="/collections/gaming" role="listitem">All gaming</a>
+          {% endif %}
+        {% when 'smartwatches' %}
+          {% unless handle == 'apple-watch' %}
+            <a class="unboxed-collection-chip" href="/collections/apple-watch" role="listitem">Apple Watch</a>
+          {% endunless %}
+          {% unless handle == 'smartwatches' %}
+            <a class="unboxed-collection-chip" href="/collections/smartwatches" role="listitem">All smartwatches</a>
+          {% endunless %}
+        {% when 'audio' %}
+          {% if handle == 'audio' %}
+            <a class="unboxed-collection-chip" href="/collections/airpods" role="listitem">AirPods</a>
+            <a class="unboxed-collection-chip" href="/collections/beats-by-dr-dre" role="listitem">Beats</a>
+          {% else %}
+            <a class="unboxed-collection-chip" href="/collections/audio" role="listitem">All audio</a>
+          {% endif %}
+      {% endcase %}
+
+      {% if condition_filter_param_name != blank %}
+        <a
+          class="unboxed-collection-chip unboxed-collection-chip--condition"
+          href="{{ target_collection.url }}?{{ condition_filter_param_name }}={{ 'Like New' | url_encode }}#ProductGridContainer"
+          role="listitem"
+        >
+          Like New
+        </a>
+        <a
+          class="unboxed-collection-chip unboxed-collection-chip--condition"
+          href="{{ target_collection.url }}?{{ condition_filter_param_name }}={{ 'Good' | url_encode }}#ProductGridContainer"
+          role="listitem"
+        >
+          Good
+        </a>
+        <a
+          class="unboxed-collection-chip unboxed-collection-chip--condition"
+          href="{{ target_collection.url }}?{{ condition_filter_param_name }}={{ 'Fair' | url_encode }}#ProductGridContainer"
+          role="listitem"
+        >
+          Fair
+        </a>
+      {% endif %}
+
+      <a class="unboxed-collection-chip unboxed-collection-chip--process" href="{{ compare_grades_url }}" role="listitem">
+        Compare grades
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

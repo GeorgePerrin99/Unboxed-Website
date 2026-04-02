@@ -3,13 +3,16 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
   <div class="section-{{ section.id }}-padding collection-hero {% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}">
     <div class="collection-hero__inner {% if section.settings.hero_layout == 'overlay' %}chero-overlay {% else %}chero-column {% endif %} {% unless section.settings.show_collection_image or section.settings.def_image or collection.metafields.custom.collection_image %} chero-column{% endunless %}">
+      {%- capture collection_intro -%}
+        {% render 'unboxed-collection-description', collection_object: collection %}
+      {%- endcapture -%}
       <div class="collection-hero__text-wrapper page-width">
         <h1 class="collection-hero__title">
           <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
           {{- collection.title | escape -}}
         </h1>
-        {%- if section.settings.show_collection_description and collection.description != blank -%}
-          <div class="collection-hero__description rte">{{ collection.description }}</div>
+        {%- if section.settings.show_collection_description and collection_intro != blank -%}
+          <div class="collection-hero__description rte">{{ collection_intro }}</div>
         {%- endif -%}
       </div>
       <div class="collection-hero__image-wrapper">
@@ -101,6 +104,27 @@
 .collection-hero .breadcrumb_colmun svg{
   fill: {{ section.settings.coll_color }};
 }
+.collection-hero__title {
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: clamp(3.2rem, 4.6vw, 4.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin-bottom: 0.8rem;
+}
+.collection-hero__description {
+  max-width: 72rem;
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  font-size: calc(var(--font-body-scale) * 1.9rem);
+  line-height: 1.45;
+  color: {{ section.settings.coll_color }};
+}
+.collection-hero__description p {
+  margin: 0;
+}
 .section-{{ section.id }}-padding {
   padding-top: {{ section.settings.padding_top }}px;
   padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -110,10 +134,25 @@
     padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
   }
+  .collection-hero__title {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+  }
+  .collection-hero__description {
+    font-size: calc(var(--font-body-scale) * 1.75rem);
+  }
 }
 @media screen and (max-width: 767px) {
     .collection-hero--with-image .collection-hero__inner {
       padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
+    }
+    .collection-hero__title {
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      line-height: 1.12;
+      margin-bottom: 0.6rem;
+    }
+    .collection-hero__description {
+      font-size: calc(var(--font-body-scale) * 1.6rem);
+      line-height: 1.42;
     }
   }
 {%- endstyle -%}
